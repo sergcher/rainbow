@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+  <h1>Edit Form</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="form-group">
+      <label for="{{ form.registredQt.id_for_label }}">{{ form.registredQt.label }}</label>
+      {{ form.registredQt }}
+      {{ form.registredQt.errors }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.livedQt.id_for_label }}">{{ form.livedQt.label }}</label>
+      {{ form.livedQt }}
+      {{ form.livedQt.errors }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.totalArea.id_for_label }}">{{ form.totalArea.label }}</label>
+      {{ form.totalArea }}
+      {{ form.totalArea.errors }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.personalAccount.id_for_label }}">{{ form.personalAccount.label }}</label>
+      {{ form.personalAccount }}
+      {{ form.personalAccount.errors }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.serialNumber.id_for_label }}">{{ form.serialNumber.label }}</label>
+      {{ form.serialNumber }}
+      {{ form.serialNumber.errors }}
+    </div>
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}
