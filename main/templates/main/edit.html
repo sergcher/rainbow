@@ -1,35 +1,236 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-  <h1>Edit Form</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div class="form-group">
-      <label for="{{ form.registredQt.id_for_label }}">{{ form.registredQt.label }}</label>
-      {{ form.registredQt }}
-      {{ form.registredQt.errors }}
+    <div class="row">
+        <div class="col-md-6">
+          <h1>Details Form</h1>
+          <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-group">
+              <label for="{{ form.registredQt.id_for_label }}">{{ form.registredQt.label }}</label>
+              {{ form.registredQt }}
+              {{ form.registredQt.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.livedQt.id_for_label }}">{{ form.livedQt.label }}</label>
+              {{ form.livedQt }}
+              {{ form.livedQt.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.totalArea.id_for_label }}">{{ form.totalArea.label }}</label>
+              {{ form.totalArea }}
+              {{ form.totalArea.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.personalAccount.id_for_label }}">{{ form.personalAccount.label }}</label>
+              {{ form.personalAccount }}
+              {{ form.personalAccount.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.serialNumber.id_for_label }}">{{ form.serialNumber.label }}</label>
+              {{ form.serialNumber }}
+              {{ form.serialNumber.errors }}
+            </div>
+            <label for="id_details">Details:</label>
+            <input type="text" id="id_details" name="details">
+            <input type="submit" value="Save">
+          </form>
+        </div>
+        <div class="col-md-6">
+          <h1>Counter Form</h1>
+          <form method="post">
+            {% csrf_token %}
+            {{ counterform.non_field_errors }}
+            <div class="form-group">
+                <label for="{{ counterform.hot_water_previous.id_for_label }}">Счетчики Горячей воды:</label><br>
+                <input type="number" id="{{ counterform.hot_water_previous.auto_id }}" name="{{ counterform.hot_water_previous.name }}" value="{{ counterform.hot_water_previous.value }}">
+                -
+                <input type="number" id="{{ counterform.hot_water_current.auto_id }}" name="{{ counterform.hot_water_current.name }}" value="{{ counterform.hot_water_current.value }}">
+                =
+                <input type="number" id="{{ counterform.hot_water_value.auto_id }}" name="{{ counterform.hot_water_value.name }}" value="{{ counterform.hot_water_value.value }}">
+            </div>
+            <div class="form-group">
+                <label for="{{ counterform.cold_water_previous.id_for_label }}">Счетчики Холодной воды:</label><br>
+                <input type="number" id="{{ counterform.cold_water_previous.auto_id }}" name="{{ counterform.cold_water_previous.name }}" value="{{ counterform.cold_water_previous.value }}">
+                -
+                <input type="number" id="{{ counterform.cold_water_current.auto_id }}" name="{{ counterform.cold_water_current.name }}" value="{{ counterform.cold_water_current.value }}">
+                =
+                <input type="number" id="{{ counterform.cold_water_value.auto_id }}" name="{{ counterform.cold_water_value.name }}" value="{{ counterform.cold_water_value.value }}">
+            </div>
+            <div class="form-group">
+                <label for="{{ counterform.electricity_previous.id_for_label }}">Счетчики Электричество:</label><br>
+                <input type="number" id="{{ counterform.electricity_previous.auto_id }}" name="{{ counterform.electricity_previous.name }}" value="{{ counterform.electricity_previous.value }}">
+                -
+                <input type="number" id="{{ counterform.electricity_current.auto_id }}" name="{{ counterform.electricity_current.name }}" value="{{ counterform.electricity_current.value }}">
+                =
+                <input type="number" id="{{ counterform.electricity_value.auto_id }}" name="{{ counterform.electricity_value.name }}" value="{{ counterform.electricity_value.value }}">
+            </div>
+            <div class="form-group">
+              <label for="{{ counterform.wastewater_value.id_for_label }}">Отведение сточных вод:</label><br>
+              <input type="number" id="{{ counterform.wastewater_value.auto_id }}" name="{{ counterform.wastewater_value.name }}" value="{{ counterform.wastewater_value.value }}">
+            </div>
+            <button id="transmitButton">transmit</button>
+            <div class="form-group">
+              <label>Квартира:</label><br>
+              {{ counterform.serialNumber }}
+            </div>
+            <label for="id_counters">Counters:</label>
+            <input type="text" id="id_counters" name="counters">
+            <input type="submit" value="Save">
+          </form>
+        </div>
+        <div class="col-md-6">
+          <h1>Charges Form</h1>
+          <form method="post">
+            {% csrf_token %}
+            {{ chargeform.non_field_errors }}
+            <div class="form-group">
+              <label for="{{ chargeform.electricity_odn.id_for_label }}">{{ chargeform.electricity_odn.label }}</label>
+              {{ chargeform.electricity_odn }}
+              {{ chargeform.electricity_odn.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.money_deposited.id_for_label }}">{{ chargeform.money_deposited.label }}</label>
+              {{ chargeform.money_deposited }}
+              {{ chargeform.money_deposited.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.fine.id_for_label }}">{{ chargeform.fine.label }}</label>
+              {{ chargeform.fine }}
+              {{ chargeform.fine.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.serialNumber.id_for_label }}">{{ chargeform.serialNumber.label }}</label>
+              {{ chargeform.serialNumber }}
+              {{ chargeform.serialNumber.errors }}
+            </div>
+            <label for="id_charge">charge:</label>
+            <input type="text" id="id_charge" name="charge">
+            <input type="submit" value="Save">
+          </form>
+        </div>
+        <div class="col-md-6">
+          <h1>Apartment Option Form</h1>
+          <form method="post">
+            {% csrf_token %}
+            {{ optionsform.non_field_errors }}
+            <div class="form-group">
+              <label for="{{ optionsform.is_cold_water_meter.id_for_label }}">{{ optionsform.is_cold_water_meter.label }}</label>
+              {{ optionsform.is_cold_water_meter }}
+              {{ optionsform.is_cold_water_meter.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ optionsform.is_hot_water_meter.id_for_label }}">{{ optionsform.is_hot_water_meter.label }}</label>
+              {{ optionsform.is_hot_water_meter }}
+              {{ optionsform.is_hot_water_meter.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ optionsform.is_first_floor.id_for_label }}">{{ optionsform.is_first_floor.label }}</label>
+              {{ optionsform.is_first_floor }}
+              {{ optionsform.is_first_floor.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ optionsform.is_absence_registered.id_for_label }}">{{ optionsform.is_absence_registered.label }}</label>
+              {{ optionsform.is_absence_registered }}
+              {{ optionsform.is_absence_registered.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ optionsform.serialNumber.id_for_label }}">{{ optionsform.serialNumber.label }}</label>
+              {{ optionsform.serialNumber }}
+              {{ optionsform.serialNumber.errors }}
+            </div>
+            <label for="id_options">charge:</label>
+            <input type="text" id="id_options" name="options">
+            <input type="submit" value="Save">
+          </form>
+        </div>
+        <div class="col-md-6">
+          <h1>Update Page</h1>
+          <button onclick="window.location.href = '{{ prev_url }}';">Go to Update {{ page_num|add:-1 }}</button>
+          <button onclick="window.location.href = '{{ next_url }}';">Go to Update {{ page_num|add:1 }}</button>
+        </div>
     </div>
-    <div class="form-group">
-      <label for="{{ form.livedQt.id_for_label }}">{{ form.livedQt.label }}</label>
-      {{ form.livedQt }}
-      {{ form.livedQt.errors }}
-    </div>
-    <div class="form-group">
-      <label for="{{ form.totalArea.id_for_label }}">{{ form.totalArea.label }}</label>
-      {{ form.totalArea }}
-      {{ form.totalArea.errors }}
-    </div>
-    <div class="form-group">
-      <label for="{{ form.personalAccount.id_for_label }}">{{ form.personalAccount.label }}</label>
-      {{ form.personalAccount }}
-      {{ form.personalAccount.errors }}
-    </div>
-    <div class="form-group">
-      <label for="{{ form.serialNumber.id_for_label }}">{{ form.serialNumber.label }}</label>
-      {{ form.serialNumber }}
-      {{ form.serialNumber.errors }}
-    </div>
-    <input type="submit" value="Save">
-  </form>
+
+<script>
+    const transmitButton = document.getElementById("transmitButton");
+    const electricityPrevInput = document.getElementById('{{ counterform.electricity_previous.auto_id }}');
+    const electricityCurrInput = document.getElementById('{{ counterform.electricity_current.auto_id }}');
+    const electricityValueInput = document.getElementById('{{ counterform.electricity_value.auto_id }}');
+    const coldWaterPrevInput = document.getElementById('{{ counterform.cold_water_previous.auto_id }}');
+    const coldWaterCurrInput = document.getElementById('{{ counterform.cold_water_current.auto_id }}');
+    const coldWaterValueInput = document.getElementById('{{ counterform.cold_water_value.auto_id }}');
+    const HotWaterPrevInput = document.getElementById('{{ counterform.hot_water_previous.auto_id }}');
+    const HotWaterCurrInput = document.getElementById('{{ counterform.hot_water_current.auto_id }}');
+    const HotWaterValueInput = document.getElementById('{{ counterform.hot_water_value.auto_id }}');
+    const WastewaterValueInput = document.getElementById('{{ counterform.wastewater_value.auto_id }}');
+
+    const sum = parseInt(coldWaterCurrInput.value) + parseInt(HotWaterCurrInput.value);
+
+    transmitButton.addEventListener("click", () => {
+      WastewaterValueInput.value  = (-1 * sum).toString();
+
+      HotWaterPrevInput.value = HotWaterCurrInput.value;
+      HotWaterCurrInput.value = "0";
+      HotWaterValueInput.value = (parseInt(HotWaterCurrInput.value) - parseInt(HotWaterPrevInput.value)).toString();
+
+      coldWaterPrevInput.value = coldWaterCurrInput.value;
+      coldWaterCurrInput.value = "0";
+      coldWaterValueInput.value = (parseInt(coldWaterCurrInput.value) - parseInt(coldWaterPrevInput.value)).toString();
+
+      electricityPrevInput.value = electricityCurrInput.value;
+      electricityCurrInput.value = "0";
+      electricityValueInput.value = (parseInt(electricityCurrInput.value) - parseInt(electricityPrevInput.value)).toString();
+
+      event.preventDefault();
+    });
+
+    // Add event listeners to the electricity input fields to recalculate the value whenever the user types a new value
+    electricityPrevInput.addEventListener('input', function() {
+        const prevValue = parseInt(electricityPrevInput.value);
+        const currValue = parseInt(electricityCurrInput.value);
+        const calcValue = currValue - prevValue;
+        electricityValueInput.value = calcValue;
+    });
+
+    electricityCurrInput.addEventListener('input', function() {
+        const prevValue = parseInt(electricityPrevInput.value);
+        const currValue = parseInt(electricityCurrInput.value);
+        const calcValue = currValue - prevValue;
+        electricityValueInput.value = calcValue;
+    });
+
+    // Add event listeners to the cold water input fields to recalculate the value whenever the user types a new value
+    coldWaterPrevInput.addEventListener('input', function() {
+        const prevValue = parseInt(coldWaterPrevInput.value);
+        const currValue = parseInt(coldWaterCurrInput.value);
+        const calcValue = currValue - prevValue;
+        coldWaterValueInput.value = calcValue;
+    });
+
+    coldWaterCurrInput.addEventListener('input', function() {
+        const prevValue = parseInt(coldWaterPrevInput.value);
+        const currValue = parseInt(coldWaterCurrInput.value);
+        const calcValue = currValue - prevValue;
+        coldWaterValueInput.value = calcValue;
+    });
+
+    // Add event listeners to the hot water input fields to recalculate the value whenever the user types a new value
+    HotWaterPrevInput.addEventListener('input', function() {
+        const prevValue = parseInt(HotWaterPrevInput.value);
+        const currValue = parseInt(HotWaterCurrInput.value);
+        const calcValue = currValue - prevValue;
+        HotWaterValueInput.value = calcValue;
+    });
+
+    HotWaterCurrInput.addEventListener('input', function() {
+        const prevValue = parseInt(HotWaterPrevInput.value);
+        const currValue = parseInt(HotWaterCurrInput.value);
+        const calcValue = currValue - prevValue;
+        HotWaterValueInput.value = calcValue;
+    });
+</script>
+
 {% endblock %}
+
+
