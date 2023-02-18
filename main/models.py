@@ -1,6 +1,43 @@
 from django.db import models
 
 
+class Tariff(models.Model):
+    name = models.CharField(max_length=200)
+    maintenance = models.FloatField(null=True, blank=True)
+    maintenance_over_norm = models.FloatField(null=True, blank=True)
+    heating = models.FloatField(null=True, blank=True)
+    heating_over_norm = models.FloatField(null=True, blank=True)
+    heating_rub = models.FloatField(null=True, blank=True)
+    heating_rub_over_norm = models.FloatField(null=True, blank=True)
+    hot_water = models.FloatField(null=True, blank=True)
+    hot_water_over_norm = models.FloatField(null=True, blank=True)
+    hot_water_odn = models.FloatField(null=True, blank=True)
+    hot_water_odn_over_norm = models.FloatField(null=True, blank=True)
+    cold_water = models.FloatField(null=True, blank=True)
+    cold_water_over_norm = models.FloatField(null=True, blank=True)
+    cold_water_odn = models.FloatField(null=True, blank=True)
+    cold_water_odn_over_norm = models.FloatField(null=True, blank=True)
+    sewage = models.FloatField(null=True, blank=True)
+    sewage_over_norm = models.FloatField(null=True, blank=True)
+    solid_waste = models.FloatField(null=True, blank=True)
+    solid_waste_over_norm = models.FloatField(null=True, blank=True)
+    electricity = models.FloatField(null=True, blank=True)
+    electricity_over_norm = models.FloatField(null=True, blank=True)
+    lift = models.FloatField(null=True, blank=True)
+    lift_over_norm = models.FloatField(null=True, blank=True)
+    big_repair = models.FloatField(null=True, blank=True)
+    big_repair_over_norm = models.FloatField(null=True, blank=True)
+    electricity_odn = models.FloatField(null=True, blank=True)
+    electricity_odn_over_norm = models.FloatField(null=True, blank=True)
+    drainage_no_counter_cold_water = models.FloatField(null=True, blank=True)
+    drainage_no_counter_cold_water_over_norm = models.FloatField(null=True, blank=True)
+    drainage_no_counter_hot_water = models.FloatField(null=True, blank=True)
+    drainage_no_counter_hot_water_over_norm = models.FloatField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Apartment(models.Model):
     owner = models.CharField(max_length=200)
     serialNumber = models.IntegerField()
@@ -12,6 +49,7 @@ class ApartmentDetail(models.Model):
     totalArea = models.FloatField()
     personalAccount = models.IntegerField()
     serialNumber = models.ForeignKey(to=Apartment, on_delete=models.CASCADE)
+    tariff = models.ForeignKey(to=Tariff, on_delete=models.DO_NOTHING, null=True, blank=True)
 
 
 class ApartmentCounter(models.Model):
@@ -32,6 +70,8 @@ class ApartmentCharge(models.Model):
     electricity_odn = models.FloatField()
     money_deposited = models.FloatField()
     fine = models.FloatField()
+    recalculation = models.FloatField(null=True, blank=True)
+    balance_start = models.FloatField(null=True, blank=True)
     serialNumber = models.ForeignKey(to=Apartment, on_delete=models.CASCADE)
 
 
@@ -40,4 +80,29 @@ class ApartmentOption(models.Model):
     is_hot_water_meter = models.BooleanField()
     is_first_floor = models.BooleanField()
     is_absence_registred = models.BooleanField()
+    serialNumber = models.ForeignKey(to=Apartment, on_delete=models.CASCADE)
+
+
+class ApartmentFee(models.Model):
+    maintenance = models.FloatField(null=True, blank=True)
+    electricity_odn = models.FloatField(null=True, blank=True)
+    lift = models.FloatField(null=True, blank=True)
+    maintenance_full = models.FloatField(null=True, blank=True)
+    solid_waste = models.FloatField(null=True, blank=True)
+    electricity = models.FloatField(null=True, blank=True)
+    heating = models.FloatField(null=True, blank=True)
+    heating_rub = models.FloatField(null=True, blank=True)
+    hot_water = models.FloatField(null=True, blank=True)
+    hot_water_odn = models.FloatField(null=True, blank=True)
+    cold_water = models.FloatField(null=True, blank=True)
+    cold_water_odn = models.FloatField(null=True, blank=True)
+    sewage = models.FloatField(null=True, blank=True)
+    maintenance_total = models.FloatField(null=True, blank=True)
+    accrued_expenses = models.FloatField(null=True, blank=True)
+    recalculation = models.FloatField(null=True, blank=True)
+    balance_start = models.FloatField(null=True, blank=True)
+    balance_end = models.FloatField(null=True, blank=True)
+    paid = models.FloatField(null=True, blank=True)
+    fine = models.FloatField(null=True, blank=True)
+    total = models.FloatField(null=True, blank=True)
     serialNumber = models.ForeignKey(to=Apartment, on_delete=models.CASCADE)

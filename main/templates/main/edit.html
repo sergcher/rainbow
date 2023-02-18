@@ -32,6 +32,11 @@
               {{ form.serialNumber }}
               {{ form.serialNumber.errors }}
             </div>
+            <div class="form-group">
+              <label for="{{ form.tariff.id_for_label }}">{{ form.tariff.label }}</label>
+              {{ form.tariff }}
+              {{ form.tariff.errors }}
+            </div>
             <label for="id_details">Details:</label>
             <input type="text" id="id_details" name="details">
             <input type="submit" value="Save">
@@ -101,9 +106,19 @@
               {{ chargeform.fine.errors }}
             </div>
             <div class="form-group">
+              <label for="{{ chargeform.recalculation.id_for_label }}">{{ chargeform.recalculation.label }}</label>
+              {{ chargeform.recalculation }}
+              {{ chargeform.recalculation.errors }}
+            </div>
+            <div class="form-group">
               <label for="{{ chargeform.serialNumber.id_for_label }}">{{ chargeform.serialNumber.label }}</label>
               {{ chargeform.serialNumber }}
               {{ chargeform.serialNumber.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.balance_start.id_for_label }}">{{ chargeform.balance_start.label }}</label>
+              {{ chargeform.balance_start }}
+              {{ chargeform.balance_start.errors }}
             </div>
             <label for="id_charge">charge:</label>
             <input type="text" id="id_charge" name="charge">
@@ -140,7 +155,7 @@
               {{ optionsform.serialNumber }}
               {{ optionsform.serialNumber.errors }}
             </div>
-            <label for="id_options">charge:</label>
+            <label for="id_options">options:</label>
             <input type="text" id="id_options" name="options">
             <input type="submit" value="Save">
           </form>

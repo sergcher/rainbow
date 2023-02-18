@@ -4,11 +4,32 @@
 <table>
   <thead>
     <tr>
-      <th style="text-align:center">№</th>
-      <th style="text-align:center">ФИО</th>
-      <th style="text-align:center">Кол. зарег.</th>
-      <th style="text-align:center">Кол. прожив.</th>
-      <th style="text-align:center">Общ. площ.</th>
+        <th style="text-align:center">№</th>
+        <th style="text-align:center">ФИО</th>
+        <th style="text-align:center">Кол. зарег.</th>
+        <th style="text-align:center">Кол. прожив.</th>
+        <th style="text-align:center">Общ. площ.</th>
+        <th style="text-align:center">Maintenance</th>
+        <th style="text-align:center">Electricity ODN</th>
+        <th style="text-align:center">Lift</th>
+        <th style="text-align:center">Maintenance Full</th>
+        <th style="text-align:center">Solid Waste</th>
+        <th style="text-align:center">Electricity</th>
+        <th style="text-align:center">Heating</th>
+        <th style="text-align:center">Heating Rub</th>
+        <th style="text-align:center">Hot Water</th>
+        <th style="text-align:center">Hot Water ODN</th>
+        <th style="text-align:center">Cold Water</th>
+        <th style="text-align:center">Cold Water ODN</th>
+        <th style="text-align:center">Sewage</th>
+        <th style="text-align:center">Maintenance Total</th>
+        <th style="text-align:center">Accrued Expenses</th>
+        <th style="text-align:center">Recalculation</th>
+        <th style="text-align:center">Balance Start</th>
+        <th style="text-align:center">Balance End</th>
+        <th style="text-align:center">Paid</th>
+        <th style="text-align:center">Fine</th>
+        <th style="text-align:center">Total</th>
     </tr>
   </thead>
   <tbody>
@@ -19,10 +40,34 @@
           <a href="/update/{{ apartment.serialNumber }}"><span class="glyphicon glyphicon-pencil">{{ apartment.owner }}</span></a>
         </td>
         {% for detail in apartment.apartmentdetail_set.all %}
-        <td style="text-align:center">{{ detail.registredQt }}</td>
-        <td style="text-align:center">{{ detail.livedQt }}</td>
-        <td style="text-align:center">{{ detail.totalArea }}</td>
+            <td style="text-align:center">{{ detail.registredQt }}</td>
+            <td style="text-align:center">{{ detail.livedQt }}</td>
+            <td style="text-align:center">{{ detail.totalArea }}</td>
         {% endfor %}
+        {% for apartment_fee in apartment.apartmentfee_set.all %}
+            <td style="text-align:center">{{ apartment_fee.solid_waste }}</td>
+            <td style="text-align:center">{{ apartment_fee.maintenance }}</td>
+            <td style="text-align:center">{{ apartment_fee.lift }}</td>
+            <td style="text-align:center">{{ apartment_fee.maintenance_full }}</td>
+            <td style="text-align:center">{{ apartment_fee.electricity }}</td>
+            <td style="text-align:center">{{ apartment_fee.electricity_odn }}</td>
+            <td style="text-align:center">{{ apartment_fee.heating }}</td>
+            <td style="text-align:center">{{ apartment_fee.heating_rub }}</td>
+            <td style="text-align:center">{{ apartment_fee.hot_water }}</td>
+            <td style="text-align:center">{{ apartment_fee.hot_water_odn }}</td>
+            <td style="text-align:center">{{ apartment_fee.cold_water }}</td>
+            <td style="text-align:center">{{ apartment_fee.cold_water_odn }}</td>
+            <td style="text-align:center">{{ apartment_fee.sewage }}</td>
+            <td style="text-align:center">{{ apartment_fee.maintenance_total }}</td>
+            <td style="text-align:center">{{ apartment_fee.accrued_expenses }}</td>
+            <td style="text-align:center">{{ apartment_fee.recalculation }}</td>
+            <td style="text-align:center">{{ apartment_fee.balance_start }}</td>
+            <td style="text-align:center">{{ apartment_fee.balance_end }}</td>
+            <td style="text-align:center">{{ apartment_fee.paid }}</td>
+            <td style="text-align:center">{{ apartment_fee.fine }}</td>
+            <td style="text-align:center">{{ apartment_fee.total }}</td>
+        {% endfor %}
+
       </tr>
     {% endfor %}
   </tbody>

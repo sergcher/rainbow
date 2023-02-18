@@ -33,17 +33,17 @@
 			<img src="{% static '/main_icons/capital_repair.png' %}" alt="Icon 1">
 			<p>ТСЖ Радуга</p>
 		</a>
-		<a class="icon" href="page2.html">
+		<a class="icon" href="{% url 'main:all' %}">
 			<img src="{% static '/main_icons/icon2.png' %}" alt="Icon 2">
 			<p>Капитальный ремонт</p>
 		</a>
-		<a class="icon" href="page3.html">
+		<a class="icon" href="{% url 'main:all' %}">
 			<img src="{% static '/main_icons/icon3.png' %}" alt="Icon 3">
 			<p>Расценки</p>
 		</a>
-		<a class="icon" href="page4.html">
+		<a class="icon" href="{% url 'main:update_fees' %}">
 			<img src="{% static '/main_icons/icon4.png' %}" alt="Icon 4">
-			<p>Нормативы</p>
+			<p>Перерасчитать</p>
 		</a>
 		<a class="icon" href="page5.html">
 			<img src="{% static '/main_icons/icon5.png' %}" alt="Icon 5">

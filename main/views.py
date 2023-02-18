@@ -1,6 +1,12 @@
 from django.shortcuts import render, redirect
-from main.models import Apartment, ApartmentDetail, ApartmentCounter, ApartmentCharge, ApartmentOption
-from main.forms import ApartmentDetailForm, ApartmentCounterForm, ApartmentChargeForm, ApartmentOptionsForm
+from main.models import *
+from main.forms import *
+from django.views import View
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from main.calculation import calculate_fees
 
 
 def index(request):
@@ -8,6 +14,7 @@ def index(request):
               'title': 'ТСЖ Радуга',
               'apartments': Apartment.objects.all(),
               'apartment_details': ApartmentDetail.objects.all(),
+              'apartment_fees': ApartmentFee.objects.all(),
               }
     return render(request, 'main/index.html', context)
 
@@ -58,3 +65,38 @@ def update(request, id):
         "page_num": id
     }
     return render(request, 'main/edit.html', context)
+
+
+class TariffBaseView(View):
+    model = Tariff
+    fields = '__all__'
+    success_url = reverse_lazy('main:all')
+
+
+class TariffListView(TariffBaseView, ListView):
+    """View to list all tariffs.
+    Use the 'tariff_list' variable in the template
+    to access all Tariff objects"""
+
+
+class TariffDetailView(TariffBaseView, DetailView):
+    """View to list the details from one tariff.
+    Use the 'tariff' variable in the template to access
+    the specific tariff here and in the Views below"""
+
+
+class TariffCreateView(TariffBaseView, CreateView):
+    """View to create a new tariff"""
+
+
+class TariffUpdateView(TariffBaseView, UpdateView):
+    """View to update a tariff"""
+
+
+class TariffDeleteView(TariffBaseView, DeleteView):
+    """View to delete a tariff"""
+
+
+def update_fees(request):
+    calculate_fees()
+    return redirect('index')
