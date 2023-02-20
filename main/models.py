@@ -106,3 +106,11 @@ class ApartmentFee(models.Model):
     fine = models.FloatField(null=True, blank=True)
     total = models.FloatField(null=True, blank=True)
     serialNumber = models.ForeignKey(to=Apartment, on_delete=models.CASCADE)
+
+
+class Settings(models.Model):
+    month_name = models.CharField(max_length=200)
+    month_to_pay = models.CharField(max_length=200)
+    month_to_date = models.CharField(max_length=200)
+    bill = models.CharField(max_length=200)
+    pay_up_to = models.CharField(max_length=200)

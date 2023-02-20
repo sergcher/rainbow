@@ -45,15 +45,15 @@
 			<img src="{% static '/main_icons/icon4.png' %}" alt="Icon 4">
 			<p>Перерасчитать</p>
 		</a>
-		<a class="icon" href="page5.html">
+		<a class="icon" href="{% url 'main:generate_excel' %}">
 			<img src="{% static '/main_icons/icon5.png' %}" alt="Icon 5">
 			<p>Для клиент банка</p>
 		</a>
-		<a class="icon" href="page6.html">
+		<a class="icon" href="{% url 'main:apartment_receipt' %}">
 			<img src="{% static '/main_icons/icon6.png' %}" alt="Icon 6">
 			<p>Итоги</p>
 		</a>
-		<a class="icon" href="page7.html">
+		<a class="icon" href="{% url 'main:settings' %}">
 			<img src="{% static '/main_icons/icon7.png' %}" alt="Icon 7">
 			<p>Настройки</p>
 		</a>

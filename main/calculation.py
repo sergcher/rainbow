@@ -54,6 +54,7 @@ def calculate_fees():
         balance_start = charges.balance_start
         fine = charges.fine
         balance_end = round_float(balance_start - paid)
+        recalculation = charges.recalculation
         accrued_expenses = solid_waste + maintenance + lift + electricity_odn + cold_water_odn + hot_water_odn + heating_rub + hot_water + cold_water + sewage + electricity + fine
         maintenance_full = solid_waste + maintenance + lift + electricity_odn + cold_water_odn
         maintenance_total = solid_waste + maintenance + lift + electricity_odn + cold_water_odn
@@ -80,6 +81,7 @@ def calculate_fees():
             maintenance_full=maintenance_full,
             maintenance_total=maintenance_total,
             total=total,
+            recalculation=recalculation,
             serialNumber=apartment_detail.serialNumber
         )
         fee.save()

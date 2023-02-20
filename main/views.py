@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from main.models import *
 from main.forms import *
 from django.views import View
 from django.views.generic.list import ListView
@@ -7,15 +6,17 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from main.calculation import calculate_fees
+from main.excells import generate_excel_file
+from main.pdf_generator import generate_pdf
 
 
 def index(request):
     context = {
-              'title': 'ТСЖ Радуга',
-              'apartments': Apartment.objects.all(),
-              'apartment_details': ApartmentDetail.objects.all(),
-              'apartment_fees': ApartmentFee.objects.all(),
-              }
+        'title': 'ТСЖ Радуга',
+        'apartments': Apartment.objects.all(),
+        'apartment_details': ApartmentDetail.objects.all(),
+        'apartment_fees': ApartmentFee.objects.all(),
+    }
     return render(request, 'main/index.html', context)
 
 
@@ -100,3 +101,38 @@ class TariffDeleteView(TariffBaseView, DeleteView):
 def update_fees(request):
     calculate_fees()
     return redirect('index')
+
+
+def settings(request):
+    form = SettingsForm(instance=Settings.objects.get(id=1))
+    if request.method == 'POST':
+        form = SettingsForm(request.POST, instance=Settings.objects.get(id=1))
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+        else:
+            print(form.errors)
+    context = {
+        'form': form,
+    }
+    return render(request, 'main/settings_form.html', context)
+
+
+def generate_excel(request):
+    # Get all apartment fees
+    apartment_fees = ApartmentFee.objects.all()
+
+    # Generate the Excel file and return the response
+    response = generate_excel_file(apartment_fees)
+    return response
+
+
+def apartment_receipt(request):
+    # ... your code to get the data for the PDF goes here ...
+    data = {'some': 'data'}
+
+    # generate the PDF response using the imported generate_pdf() function
+    pdf = generate_pdf(data)
+
+    # return the PDF response
+    return pdf

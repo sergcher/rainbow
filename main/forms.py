@@ -1,5 +1,5 @@
 from django import forms
-from main.models import ApartmentDetail, ApartmentCounter, ApartmentCharge, ApartmentOption
+from main.models import *
 
 
 class ApartmentDetailForm(forms.ModelForm):
@@ -23,4 +23,10 @@ class ApartmentChargeForm(forms.ModelForm):
 class ApartmentOptionsForm(forms.ModelForm):
     class Meta:
         model = ApartmentOption
+        fields = "__all__"
+
+
+class SettingsForm(forms.ModelForm):
+    class Meta:
+        model = Settings
         fields = "__all__"
