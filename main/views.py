@@ -128,11 +128,5 @@ def generate_excel(request):
 
 
 def apartment_receipt(request):
-    # ... your code to get the data for the PDF goes here ...
-    data = {'some': 'data'}
-
-    # generate the PDF response using the imported generate_pdf() function
-    pdf = generate_pdf(data)
-
-    # return the PDF response
+    pdf = generate_pdf()
     return pdf
