@@ -16,6 +16,7 @@ def index(request):
         'apartments': Apartment.objects.all(),
         'apartment_details': ApartmentDetail.objects.all(),
         'apartment_fees': ApartmentFee.objects.all(),
+        'apartment_charges': ApartmentCharge.objects.all(),
     }
     return render(request, 'main/index.html', context)
 

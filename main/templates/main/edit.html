@@ -106,11 +106,6 @@
               {{ chargeform.fine.errors }}
             </div>
             <div class="form-group">
-              <label for="{{ chargeform.recalculation.id_for_label }}">{{ chargeform.recalculation.label }}</label>
-              {{ chargeform.recalculation }}
-              {{ chargeform.recalculation.errors }}
-            </div>
-            <div class="form-group">
               <label for="{{ chargeform.serialNumber.id_for_label }}">{{ chargeform.serialNumber.label }}</label>
               {{ chargeform.serialNumber }}
               {{ chargeform.serialNumber.errors }}
@@ -119,6 +114,36 @@
               <label for="{{ chargeform.balance_start.id_for_label }}">{{ chargeform.balance_start.label }}</label>
               {{ chargeform.balance_start }}
               {{ chargeform.balance_start.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_electricity.id_for_label }}">{{ chargeform.recalculation_electricity.label }}</label>
+              {{ chargeform.recalculation_electricity }}
+              {{ chargeform.recalculation_electricity.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_heating_rub.id_for_label }}">{{ chargeform.recalculation_heating_rub.label }}</label>
+              {{ chargeform.recalculation_heating_rub }}
+              {{ chargeform.recalculation_heating_rub.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_hot_water.id_for_label }}">{{ chargeform.recalculation_hot_water.label }}</label>
+              {{ chargeform.recalculation_hot_water }}
+              {{ chargeform.recalculation_hot_water.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_cold_water.id_for_label }}">{{ chargeform.recalculation_cold_water.label }}</label>
+              {{ chargeform.recalculation_cold_water }}
+              {{ chargeform.recalculation_cold_water.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_sewage.id_for_label }}">{{ chargeform.recalculation_sewage.label }}</label>
+              {{ chargeform.recalculation_sewage }}
+              {{ chargeform.recalculation_sewage.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_solid_waste.id_for_label }}">{{ chargeform.recalculation_solid_waste.label }}</label>
+              {{ chargeform.recalculation_solid_waste }}
+              {{ chargeform.recalculation_solid_waste.errors }}
             </div>
             <label for="id_charge">charge:</label>
             <input type="text" id="id_charge" name="charge">
