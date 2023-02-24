@@ -1,49 +1,50 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+
     <div class="row">
         <div class="col-md-6">
-          <h1>Details Form</h1>
+          <button onclick="window.location.href = '{{ prev_url }}';">Перейти на квартиру {{ page_num|add:-1 }}</button>
+          <button onclick="window.location.href = '{{ next_url }}';">Перейти на квартиру {{ page_num|add:1 }}</button>
+        </div>
+        <div class="col-md-6">
           <form method="post">
             {% csrf_token %}
             {{ form.non_field_errors }}
             <div class="form-group">
               <label for="{{ form.registredQt.id_for_label }}">{{ form.registredQt.label }}</label>
               {{ form.registredQt }}
-              {{ form.registredQt.errors }}
             </div>
             <div class="form-group">
               <label for="{{ form.livedQt.id_for_label }}">{{ form.livedQt.label }}</label>
               {{ form.livedQt }}
-              {{ form.livedQt.errors }}
             </div>
             <div class="form-group">
               <label for="{{ form.totalArea.id_for_label }}">{{ form.totalArea.label }}</label>
               {{ form.totalArea }}
-              {{ form.totalArea.errors }}
             </div>
             <div class="form-group">
               <label for="{{ form.personalAccount.id_for_label }}">{{ form.personalAccount.label }}</label>
               {{ form.personalAccount }}
-              {{ form.personalAccount.errors }}
             </div>
             <div class="form-group">
+              <label for="{{ form.account_number.id_for_label }}">{{ form.account_number.label }}</label>
+              {{ form.account_number }}
+            </div>
+            <div class="form-group" style="display: none;">
               <label for="{{ form.serialNumber.id_for_label }}">{{ form.serialNumber.label }}</label>
               {{ form.serialNumber }}
-              {{ form.serialNumber.errors }}
             </div>
             <div class="form-group">
               <label for="{{ form.tariff.id_for_label }}">{{ form.tariff.label }}</label>
               {{ form.tariff }}
-              {{ form.tariff.errors }}
             </div>
-            <label for="id_details">Details:</label>
-            <input type="text" id="id_details" name="details">
-            <input type="submit" value="Save">
+            <label for="id_details" style="display: none;">Details:</label>
+            <input type="text" id="id_details" name="details" style="display: none;">
+            <input type="submit" value="Сохранить">
           </form>
         </div>
         <div class="col-md-6">
-          <h1>Counter Form</h1>
           <form method="post">
             {% csrf_token %}
             {{ counterform.non_field_errors }}
@@ -75,120 +76,64 @@
               <label for="{{ counterform.wastewater_value.id_for_label }}">Отведение сточных вод:</label><br>
               <input type="number" id="{{ counterform.wastewater_value.auto_id }}" name="{{ counterform.wastewater_value.name }}" value="{{ counterform.wastewater_value.value }}">
             </div>
-            <button id="transmitButton">transmit</button>
-            <div class="form-group">
+            <button id="transmitButton">Перенести показания</button>
+            <div class="form-group" style="display: none;">
               <label>Квартира:</label><br>
               {{ counterform.serialNumber }}
             </div>
-            <label for="id_counters">Counters:</label>
-            <input type="text" id="id_counters" name="counters">
+            <label for="id_counters" style="display: none;">Counters:</label>
+            <input type="text" id="id_counters" name="counters" style="display: none;">
             <input type="submit" value="Save">
           </form>
         </div>
         <div class="col-md-6">
-          <h1>Charges Form</h1>
           <form method="post">
             {% csrf_token %}
             {{ chargeform.non_field_errors }}
             <div class="form-group">
-              <label for="{{ chargeform.electricity_odn.id_for_label }}">{{ chargeform.electricity_odn.label }}</label>
-              {{ chargeform.electricity_odn }}
-              {{ chargeform.electricity_odn.errors }}
-            </div>
-            <div class="form-group">
               <label for="{{ chargeform.money_deposited.id_for_label }}">{{ chargeform.money_deposited.label }}</label>
               {{ chargeform.money_deposited }}
-              {{ chargeform.money_deposited.errors }}
             </div>
             <div class="form-group">
               <label for="{{ chargeform.fine.id_for_label }}">{{ chargeform.fine.label }}</label>
               {{ chargeform.fine }}
-              {{ chargeform.fine.errors }}
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none;">
               <label for="{{ chargeform.serialNumber.id_for_label }}">{{ chargeform.serialNumber.label }}</label>
               {{ chargeform.serialNumber }}
-              {{ chargeform.serialNumber.errors }}
             </div>
             <div class="form-group">
               <label for="{{ chargeform.balance_start.id_for_label }}">{{ chargeform.balance_start.label }}</label>
               {{ chargeform.balance_start }}
-              {{ chargeform.balance_start.errors }}
             </div>
             <div class="form-group">
               <label for="{{ chargeform.recalculation_electricity.id_for_label }}">{{ chargeform.recalculation_electricity.label }}</label>
               {{ chargeform.recalculation_electricity }}
-              {{ chargeform.recalculation_electricity.errors }}
             </div>
             <div class="form-group">
               <label for="{{ chargeform.recalculation_heating_rub.id_for_label }}">{{ chargeform.recalculation_heating_rub.label }}</label>
               {{ chargeform.recalculation_heating_rub }}
-              {{ chargeform.recalculation_heating_rub.errors }}
             </div>
             <div class="form-group">
               <label for="{{ chargeform.recalculation_hot_water.id_for_label }}">{{ chargeform.recalculation_hot_water.label }}</label>
               {{ chargeform.recalculation_hot_water }}
-              {{ chargeform.recalculation_hot_water.errors }}
             </div>
             <div class="form-group">
               <label for="{{ chargeform.recalculation_cold_water.id_for_label }}">{{ chargeform.recalculation_cold_water.label }}</label>
               {{ chargeform.recalculation_cold_water }}
-              {{ chargeform.recalculation_cold_water.errors }}
             </div>
             <div class="form-group">
               <label for="{{ chargeform.recalculation_sewage.id_for_label }}">{{ chargeform.recalculation_sewage.label }}</label>
               {{ chargeform.recalculation_sewage }}
-              {{ chargeform.recalculation_sewage.errors }}
             </div>
             <div class="form-group">
               <label for="{{ chargeform.recalculation_solid_waste.id_for_label }}">{{ chargeform.recalculation_solid_waste.label }}</label>
               {{ chargeform.recalculation_solid_waste }}
-              {{ chargeform.recalculation_solid_waste.errors }}
             </div>
-            <label for="id_charge">charge:</label>
-            <input type="text" id="id_charge" name="charge">
-            <input type="submit" value="Save">
+            <label for="id_charge" style="display: none;">charge:</label>
+            <input type="text" id="id_charge" name="charge" style="display: none;">
+            <input type="submit" value="Сохранить">
           </form>
-        </div>
-        <div class="col-md-6">
-          <h1>Apartment Option Form</h1>
-          <form method="post">
-            {% csrf_token %}
-            {{ optionsform.non_field_errors }}
-            <div class="form-group">
-              <label for="{{ optionsform.is_cold_water_meter.id_for_label }}">{{ optionsform.is_cold_water_meter.label }}</label>
-              {{ optionsform.is_cold_water_meter }}
-              {{ optionsform.is_cold_water_meter.errors }}
-            </div>
-            <div class="form-group">
-              <label for="{{ optionsform.is_hot_water_meter.id_for_label }}">{{ optionsform.is_hot_water_meter.label }}</label>
-              {{ optionsform.is_hot_water_meter }}
-              {{ optionsform.is_hot_water_meter.errors }}
-            </div>
-            <div class="form-group">
-              <label for="{{ optionsform.is_first_floor.id_for_label }}">{{ optionsform.is_first_floor.label }}</label>
-              {{ optionsform.is_first_floor }}
-              {{ optionsform.is_first_floor.errors }}
-            </div>
-            <div class="form-group">
-              <label for="{{ optionsform.is_absence_registered.id_for_label }}">{{ optionsform.is_absence_registered.label }}</label>
-              {{ optionsform.is_absence_registered }}
-              {{ optionsform.is_absence_registered.errors }}
-            </div>
-            <div class="form-group">
-              <label for="{{ optionsform.serialNumber.id_for_label }}">{{ optionsform.serialNumber.label }}</label>
-              {{ optionsform.serialNumber }}
-              {{ optionsform.serialNumber.errors }}
-            </div>
-            <label for="id_options">options:</label>
-            <input type="text" id="id_options" name="options">
-            <input type="submit" value="Save">
-          </form>
-        </div>
-        <div class="col-md-6">
-          <h1>Update Page</h1>
-          <button onclick="window.location.href = '{{ prev_url }}';">Go to Update {{ page_num|add:-1 }}</button>
-          <button onclick="window.location.href = '{{ next_url }}';">Go to Update {{ page_num|add:1 }}</button>
         </div>
     </div>
 

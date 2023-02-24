@@ -11,9 +11,14 @@ from main.pdf_generator import generate_pdf
 
 
 def index(request):
+    filter_criteria = request.GET.get('filter')
+    if filter_criteria == 'balance_end_gt_6000':
+        apartments = Apartment.objects.filter(apartmentfee__balance_end__gt=6000)
+    else:
+        apartments = Apartment.objects.all()
     context = {
         'title': 'ТСЖ Радуга',
-        'apartments': Apartment.objects.all(),
+        'apartments': apartments,
         'apartment_details': ApartmentDetail.objects.all(),
         'apartment_fees': ApartmentFee.objects.all(),
         'apartment_charges': ApartmentCharge.objects.all(),
@@ -25,7 +30,6 @@ def update(request, id):
     form = ApartmentDetailForm(instance=ApartmentDetail.objects.get(serialNumber=id))
     counterform = ApartmentCounterForm(instance=ApartmentCounter.objects.get(serialNumber=id))
     chargeform = ApartmentChargeForm(instance=ApartmentCharge.objects.get(serialNumber=id))
-    optionsform = ApartmentOptionsForm(instance=ApartmentOption.objects.get(serialNumber=id))
     prev_url = f"/update/{int(id) - 1}"
     next_url = f"/update/{int(id) + 1}"
     if request.method == 'POST':
@@ -33,35 +37,27 @@ def update(request, id):
             form = ApartmentDetailForm(request.POST, instance=ApartmentDetail.objects.get(serialNumber=id))
             if form.is_valid():
                 form.save()
-                return redirect('index')
+                return redirect(request.path_info)
             else:
                 print(form.errors)
         elif 'counters' in request.POST:
             counterform = ApartmentCounterForm(request.POST, instance=ApartmentCounter.objects.get(serialNumber=id))
             if counterform.is_valid():
                 counterform.save()
-                return redirect('index')
+                return redirect(request.path_info)
             else:
                 print(counterform.errors)
         elif 'charge' in request.POST:
             chargeform = ApartmentChargeForm(request.POST, instance=ApartmentCharge.objects.get(serialNumber=id))
             if chargeform.is_valid():
                 chargeform.save()
-                return redirect('index')
+                return redirect(request.path_info)
             else:
                 print(chargeform.errors)
-        elif 'options' in request.POST:
-            optionsform = ApartmentOptionsForm(request.POST, instance=ApartmentOption.objects.get(serialNumber=id))
-            if optionsform.is_valid():
-                optionsform.save()
-                return redirect('index')
-            else:
-                print(optionsform.errors)
     context = {
         'form': form,
         'counterform': counterform,
         'chargeform': chargeform,
-        'optionsform': optionsform,
         "prev_url": prev_url,
         "next_url": next_url,
         "page_num": id
@@ -120,11 +116,12 @@ def settings(request):
 
 
 def generate_excel(request):
-    # Get all apartment fees
-    apartment_fees = ApartmentFee.objects.all()
-
-    # Generate the Excel file and return the response
-    response = generate_excel_file(apartment_fees)
+    filter_criteria = request.GET.get('filter')
+    if filter_criteria == 'balance_end_gt_6000':
+        apartments = Apartment.objects.filter(apartmentfee__balance_end__gt=6000)
+    else:
+        apartments = Apartment.objects.all()
+    response = generate_excel_file(apartments)
     return response
 
 

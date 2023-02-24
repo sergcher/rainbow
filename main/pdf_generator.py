@@ -137,9 +137,9 @@ def generate_pdf():
         p.rect(431, h - 174 - y_offset, 54, 13)
         p.drawString(457, h - 171 - y_offset, f"-")
         p.rect(485, h - 174 - y_offset, 50, 13)
-        p.drawString(503, h - 171 - y_offset, str(apartment_charge.recalculation_heating_rub))
+        p.drawString(503, h - 171 - y_offset, str(round(apartment_charge.recalculation_heating_rub,2)))
         p.rect(535, h - 174 - y_offset, 50, 13)
-        p.drawString(537, h - 171 - y_offset, f"{apartment_fee.heating_rub + apartment_charge.recalculation_heating_rub}")
+        p.drawString(537, h - 171 - y_offset, f"{round(apartment_fee.heating_rub + apartment_charge.recalculation_heating_rub, 2)}")
 
         # Drawing fifth row hot water
         p.setFont("Calibri", 10)

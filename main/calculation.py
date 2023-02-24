@@ -65,6 +65,7 @@ def calculate_fees():
         sewage = round_float(counters.wastewater_value * tariff.sewage)
         #Перерасчет
         recalculation = charges.recalculation_sewage + charges.recalculation_electricity + charges.recalculation_cold_water + charges.recalculation_heating_rub + charges.recalculation_hot_water + charges.recalculation_solid_waste
+        recalculation = round_float(recalculation)
         #Итого коммунальные услуги
         maintenance_total = round_float(electricity + heating_rub + hot_water + cold_water + sewage + solid_waste + recalculation)
         #Содержание помещения
@@ -74,13 +75,13 @@ def calculate_fees():
         #Начислено
         accrued_expenses = round_float(maintenance_full + solid_waste + electricity + heating_rub + hot_water + cold_water + sewage)
         #Сальдо начало
-        balance_start = charges.balance_start
+        balance_start = round_float(charges.balance_start)
         #Оплачено
         paid = charges.money_deposited
         #Сальдо конец
         balance_end = round_float(balance_start - paid)
         # Пеня
-        fine = charges.fine
+        fine = round_float(charges.fine)
         #Итого к оплате
         total = round_float(accrued_expenses + recalculation + fine + balance_end)
 

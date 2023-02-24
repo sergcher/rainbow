@@ -1,6 +1,15 @@
-{% extends 'main/base.html' %}
+{% extends 'main/apartment_base.html' %}
 
 {% block content %}
+
+<form method="get" action="{% url 'index' %}">
+  <label for="filter">Выберите фильтр:</label>
+  <select name="filter" id="filter">
+    <option value="">Все записи</option>
+    <option value="balance_end_gt_6000">Должники (сальдо конец &gt; 6000)</option>
+  </select>
+</form>
+
 <table>
   <thead>
     <tr>
@@ -79,5 +88,36 @@
     {% endfor %}
   </tbody>
 </table>
+
+<script>
+  // get the filter select element
+  const filterSelect = document.getElementById('filter');
+
+  // get the current filter value from the query string
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentFilter = urlParams.get('filter');
+
+  // set the selected option in the filter select element based on the current filter value
+  if (currentFilter === 'balance_end_gt_6000') {
+    filterSelect.value = 'balance_end_gt_6000';
+  }
+
+  // add event listener to the filter select element
+  filterSelect.addEventListener('change', function() {
+    // get the selected option value
+    const selectedValue = this.value;
+
+    // construct the new URL based on the selected option value
+    let newUrl = window.location.origin + window.location.pathname;
+    if (selectedValue) {
+      newUrl += '?filter=' + selectedValue;
+    }
+
+    // redirect to the new URL
+    window.location.href = newUrl;
+  });
+</script>
+
+
 {% endblock %}
 

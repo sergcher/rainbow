@@ -9,4 +9,5 @@ urlpatterns = [
     path('', include('main.urls')),
     path('', index, name='index'),
     path('update/<int:id>', views.update),
+    path('users/', include('users.urls', namespace='users')),
 ]

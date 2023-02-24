@@ -3,69 +3,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{ title }}</title>
-	<style>
-		.icon-container {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			align-items: center;
-		}
-
-		.icon {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			margin: 20px;
-			cursor: pointer;
-			text-decoration: none;
-		}
-
-		.icon img {
-			width: 50px;
-			height: 50px;
-		}
-	</style>
+	<title>ТСЖ Радуга</title>
 </head>
-<body>
-	<div class="icon-container">
-		<a class="icon" href="{% url 'index' %}">
-			<img src="{% static '/main_icons/capital_repair.png' %}" alt="Icon 1">
-			<p>ТСЖ Радуга</p>
-		</a>
-		<a class="icon" href="{% url 'main:all' %}">
-			<img src="{% static '/main_icons/icon2.png' %}" alt="Icon 2">
-			<p>Капитальный ремонт</p>
-		</a>
-		<a class="icon" href="{% url 'main:all' %}">
-			<img src="{% static '/main_icons/icon3.png' %}" alt="Icon 3">
-			<p>Расценки</p>
-		</a>
-		<a class="icon" href="{% url 'main:update_fees' %}">
-			<img src="{% static '/main_icons/icon4.png' %}" alt="Icon 4">
-			<p>Перерасчитать</p>
-		</a>
-		<a class="icon" href="{% url 'main:generate_excel' %}">
-			<img src="{% static '/main_icons/icon5.png' %}" alt="Icon 5">
-			<p>Для клиент банка</p>
-		</a>
-		<a class="icon" href="{% url 'main:apartment_receipt' %}">
-			<img src="{% static '/main_icons/icon6.png' %}" alt="Icon 6">
-			<p>Итоги</p>
-		</a>
-		<a class="icon" href="{% url 'main:settings' %}">
-			<img src="{% static '/main_icons/icon7.png' %}" alt="Icon 7">
-			<p>Настройки</p>
-		</a>
-		<a class="icon" href="login.html">
-			<img src="{% static '/main_icons/login_icon.png' %}" alt="Login">
-			<p>Вход</p>
-		</a>
-		<a class="icon" href="logout.html">
-			<img src="{% static '/main_icons/logout_icon.png' %}" alt="Logout">
-			<p>Выход</p>
-		</a>
-	</div>
-{% block content %} {% endblock %}
+
+    <nav>
+      <ul>
+        <li style="display:inline-block;margin-right:20px;"><a href="{% url 'index' %}">Квартиры</a></li>
+        <li style="display:inline-block;margin-right:20px;"><a href="#">Капитальный ремонт</a></li>
+        <li style="display:inline-block;margin-right:20px;"><a href="{% url 'main:settings' %}">Настройки</a></li>
+        {% if user.is_authenticated %}
+            <li style="display:inline-block;margin-right:5px;"><p>Welcome, {{ user.username }}!</p></li>
+            <li style="display:inline-block;margin-right:5px;"><a href="{% url 'users:logout' %}">Выход</a></li>
+        {% else %}
+            <li style="display:inline-block;margin-right:5px;"><a href="{% url 'users:login' %}">Вход</a></li>
+        {% endif %}
+
+      </ul>
+    </nav>
+
+    <style>
+        /* Center the container div */
+        .container {
+            margin: auto;
+            text-align: center;
+        }
+
+        /* Add margin and padding to the form */
+        form {
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #ccc;
+        }
+
+        /* Add margin and padding to the table */
+        table {
+            margin: auto;
+            padding: 10px;
+        }
+
+        /* Add margin to the Submit and Cancel buttons */
+        input[type="submit"] {
+          background-color: #4CAF50; /* Green background color */
+          border: none; /* Remove button borders */
+          color: white; /* Set text color to white */
+          padding: 12px 24px; /* Add padding to increase button size */
+          text-align: center; /* Center button text */
+          text-decoration: none; /* Remove text underline */
+          display: inline-block; /* Set button to display as inline element */
+          font-size: 16px; /* Set font size */
+          margin: 4px 2px; /* Add margin to space buttons */
+          cursor: pointer; /* Set cursor to pointer on hover */
+        }
+
+        #transmitButton {
+          background-color: #4CAF50; /* Green background color */
+          border: none; /* Remove button borders */
+          color: white; /* Set text color to white */
+          padding: 12px 24px; /* Add padding to increase button size */
+          text-align: center; /* Center button text */
+          text-decoration: none; /* Remove text underline */
+          display: inline-block; /* Set button to display as inline element */
+          font-size: 16px; /* Set font size */
+          margin: 4px 2px; /* Add margin to space buttons */
+          cursor: pointer; /* Set cursor to pointer on hover */
+          border-radius: 10px; /* Add rounded corners */
+          box-shadow: 0px 0px 10px #ccc; /* Add box shadow */
+        }
+
+
+        .form-group {
+          margin-top: 1px;
+          padding: 3px;
+        }
+
+    </style>
+
+    {% block apartment_header %} {% endblock %}
+
+    {% block content %} {% endblock %}
+
 </body>
 </html>
+
