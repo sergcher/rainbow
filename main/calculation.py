@@ -68,27 +68,21 @@ def calculate_fees():
         #Итого коммунальные услуги
         maintenance_total = round_float(electricity + heating_rub + hot_water + cold_water + sewage + solid_waste + recalculation)
         #Содержание помещения
-        maintenance = 0
-
+        maintenance = round_float(total_area * tariff.maintenance)
+        #Содержание помещения итого
+        maintenance_full = round_float(maintenance + lift + electricity_odn + cold_water_odn + hot_water_odn + sewage_odn)
         #Начислено
-        accrued_expenses = solid_waste
-
-
-        #         (Adoquery1['Sodershanie_jilya']) + (Adoquery1['Otoplenie']) + (Adoquery1['Podogrev_new']) + (
-        # Adoquery1['Cold_Water_new']) + (Adoquery1['Canalization']) + (Adoquery1['Musor']) + (Adoquery1['Energy']) + (
-        #         Adoquery1['Lift']) + (Adoquery1['Objii_Svet']))) - (Adoquery1['Lgota_schet']) + Adoquery1[
-        #                                'Cap_remont'] + Adoquery1['odn_cold_water'] + Adoquery1['odn_hot_water'];
-
+        accrued_expenses = round_float(maintenance_full + solid_waste + electricity + heating_rub + hot_water + cold_water + sewage)
         #Сальдо начало
         balance_start = charges.balance_start
-
-        #maintenance = round_float((area_by_norm * tariff.maintenance) + (area_over_norm * tariff.maintenance_over_norm))
+        #Оплачено
         paid = charges.money_deposited
-        fine = charges.fine
+        #Сальдо конец
         balance_end = round_float(balance_start - paid)
-        maintenance_full = solid_waste + maintenance + lift + electricity_odn + cold_water_odn
-
-        total = maintenance_total + maintenance_full
+        # Пеня
+        fine = charges.fine
+        #Итого к оплате
+        total = round_float(accrued_expenses + recalculation + fine + balance_end)
 
         fee = ApartmentFee(
             solid_waste=solid_waste,

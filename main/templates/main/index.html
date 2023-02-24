@@ -27,10 +27,10 @@
         <th style="text-align:center">Начислено</th>
         <th style="text-align:center">Перерасчет</th>
         <th style="text-align:center">Сальдо Начало</th>
-        <th style="text-align:center">Balance End</th>
-        <th style="text-align:center">Paid</th>
-        <th style="text-align:center">Fine</th>
-        <th style="text-align:center">Total</th>
+        <th style="text-align:center">Сальдо Конец</th>
+        <th style="text-align:center">Оплачено</th>
+        <th style="text-align:center">Пеня</th>
+        <th style="text-align:center">Итого к оплате</th>
     </tr>
   </thead>
   <tbody>
@@ -47,13 +47,13 @@
         {% endfor %}
 
         {% for apartment_fee in apartment.apartmentfee_set.all %}
-            <td style="text-align:center">{{ apartment_fee.maintenance }}</td> {# not done #}
+            <td style="text-align:center">{{ apartment_fee.maintenance }}</td>
             <td style="text-align:center">{{ apartment_fee.electricity_odn }}</td>
             <td style="text-align:center">{{ apartment_fee.cold_water_odn }}</td>
             <td style="text-align:center">{{ apartment_fee.sewage_odn }}</td>
             <td style="text-align:center">{{ apartment_fee.hot_water_odn }}</td>
             <td style="text-align:center">{{ apartment_fee.lift }}</td>
-            <td style="text-align:center">{{ apartment_fee.maintenance }}</td> {# not done #}
+            <td style="text-align:center">{{ apartment_fee.maintenance_full }}</td>
             <td style="text-align:center">{{ apartment_fee.solid_waste }}</td>
             <td style="text-align:center">{{ apartment_fee.electricity }}</td>
             <td style="text-align:center">{{ apartment_fee.heating }}</td>
@@ -65,6 +65,10 @@
             <td style="text-align:center">{{ apartment_fee.accrued_expenses }}</td>
             <td style="text-align:center">{{ apartment_fee.recalculation }}</td>
             <td style="text-align:center">{{ apartment_fee.balance_start }}</td>
+            <td style="text-align:center">{{ apartment_fee.balance_end }}</td>
+            <td style="text-align:center">{{ apartment_fee.paid }}</td>
+            <td style="text-align:center">{{ apartment_fee.fine }}</td>
+            <td style="text-align:center">{{ apartment_fee.total }}</td>
         {% endfor %}
 
 {#        {% for charge in apartment.apartmentcharge_set.all %}#}
