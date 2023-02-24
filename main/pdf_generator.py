@@ -393,8 +393,10 @@ def generate_pdf():
         if apartment.serialNumber % 2 != 0:
             p.setFont("Calibri", 12)
             p.line(0, h - 400 - y_offset, 700, h - 400 - y_offset)
-        y_offset += 400
-    p.showPage()
+            y_offset += 400
+        else:
+            p.showPage()
+            y_offset = 0
     p.save()
 
     # get the value of the BytesIO buffer and write it to the response.
