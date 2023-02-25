@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-az7$mjptgnn+stkn=fhol+^$aqc)!)s$)ta53duxs1%#6e$5g$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['rainbowmzk.pythonanywhere.com']
 
 
 # Application definition
@@ -112,6 +112,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR / 'static', )
+STATIC_ROOT = '/home/rainbowmzk/rainbow/static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
