@@ -5,14 +5,27 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from main.forms import *
+import os
 
 
 def generate_pdf():
     settings = Settings.objects.get(id=1)
     apartments = Apartment.objects.all()
 
-    pdfmetrics.registerFont(TTFont('Calibri', r'.\static\fonts\calibri.ttf'))
-    pdfmetrics.registerFont(TTFont('CalibriB', r'.\static\fonts\calibrib.ttf'))
+    # Get the full path to the font file
+    font_path = os.path.join(os.path.dirname(__file__), 'static', 'fonts', 'calibri.ttf')
+
+    # Register the font with PDFmetrics
+    pdfmetrics.registerFont(TTFont('Calibri', font_path))
+
+    # Get the full path to the bold font file
+    bold_font_path = os.path.join(os.path.dirname(__file__), 'static', 'fonts', 'calibrib.ttf')
+
+    # Register the bold font with PDFmetrics
+    pdfmetrics.registerFont(TTFont('CalibriB', bold_font_path))
+
+    #pdfmetrics.registerFont(TTFont('Calibri', r'.\static\fonts\calibri.ttf'))
+    #pdfmetrics.registerFont(TTFont('CalibriB', r'.\static\fonts\calibrib.ttf'))
 
     buffer = BytesIO()
     w, h = A4
