@@ -13,13 +13,13 @@ def generate_pdf():
     apartments = Apartment.objects.all()
 
     # Get the full path to the font file
-    font_path = os.path.join(os.path.dirname(__file__), 'static', 'fonts', 'calibri.ttf')
+    font_path = os.path.join('static', 'fonts', 'calibri.ttf')
 
     # Register the font with PDFmetrics
     pdfmetrics.registerFont(TTFont('Calibri', font_path))
 
     # Get the full path to the bold font file
-    bold_font_path = os.path.join(os.path.dirname(__file__), 'static', 'fonts', 'calibrib.ttf')
+    bold_font_path = os.path.join('static', 'fonts', 'calibrib.ttf')
 
     # Register the bold font with PDFmetrics
     pdfmetrics.registerFont(TTFont('CalibriB', bold_font_path))
