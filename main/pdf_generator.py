@@ -13,9 +13,9 @@ def generate_pdf():
     apartments = Apartment.objects.all()
 
     #pdfmetrics.registerFont(TTFont('Calibri', r'.\static\fonts\calibri.ttf'))
-    pdfmetrics.registerFont(TTFont('Calibri', r'/home/rainbowmzk/rainbow/static'))
+    pdfmetrics.registerFont(TTFont('Calibri', r'/home/rainbowmzk/rainbow/static/fonts/calibri.ttf'))
     #pdfmetrics.registerFont(TTFont('CalibriB', r'.\static\fonts\calibrib.ttf'))
-    pdfmetrics.registerFont(TTFont('CalibriB', r'/home/rainbowmzk/rainbow/static'))
+    pdfmetrics.registerFont(TTFont('CalibriB', r'/home/rainbowmzk/rainbow/static/fonts/calibrib.ttf'))
 
     buffer = BytesIO()
     w, h = A4
