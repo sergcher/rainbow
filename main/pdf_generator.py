@@ -12,20 +12,10 @@ def generate_pdf():
     settings = Settings.objects.get(id=1)
     apartments = Apartment.objects.all()
 
-    # Get the full path to the font file
-    font_path = os.path.join('static', 'fonts', 'calibri.ttf')
-
-    # Register the font with PDFmetrics
-    pdfmetrics.registerFont(TTFont('Calibri', font_path))
-
-    # Get the full path to the bold font file
-    bold_font_path = os.path.join('static', 'fonts', 'calibrib.ttf')
-
-    # Register the bold font with PDFmetrics
-    pdfmetrics.registerFont(TTFont('CalibriB', bold_font_path))
-
     #pdfmetrics.registerFont(TTFont('Calibri', r'.\static\fonts\calibri.ttf'))
+    pdfmetrics.registerFont(TTFont('Calibri', r'/home/rainbowmzk/rainbow/static'))
     #pdfmetrics.registerFont(TTFont('CalibriB', r'.\static\fonts\calibrib.ttf'))
+    pdfmetrics.registerFont(TTFont('CalibriB', r'/home/rainbowmzk/rainbow/static'))
 
     buffer = BytesIO()
     w, h = A4
