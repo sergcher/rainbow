@@ -10,8 +10,8 @@
             <a href="{% url 'main:generate_excel' %}?filter={{ request.GET.filter }}">Excel</a>
         </li>
         <li style="display:inline-block;margin-right:20px;"><a href="{% url 'main:apartment_receipt' %}">Квитанции</a></li>
-        <li style="display:inline-block;margin-right:20px;"><a href="#">Для клиент банка</a></li>
-        <li style="display:inline-block;margin-right:20px;"><a href="#">Итоги</a></li>
+        <li style="display:inline-block;margin-right:20px;"><a href="{% url 'main:generate_txt' %}">Для клиент банка</a></li>
+        <li style="display:inline-block;margin-right:20px;"><a href="{% url 'main:generate_excel_apartment_total_file' %}">Итоги</a></li>
       </ul>
     </nav>
 

@@ -6,7 +6,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from main.calculation import calculate_fees
-from main.excells import generate_excel_file
+from main.excells import *
 from main.pdf_generator import generate_pdf
 
 
@@ -122,6 +122,16 @@ def generate_excel(request):
     else:
         apartments = Apartment.objects.all()
     response = generate_excel_file(apartments)
+    return response
+
+
+def generate_excel_apartment_total_file(request):
+    response = export_excel_apartment_total_file()
+    return response
+
+
+def generate_txt(request):
+    response = export_client_bank()
     return response
 
 

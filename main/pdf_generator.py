@@ -5,17 +5,19 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from main.forms import *
-import os
 
 
 def generate_pdf():
     settings = Settings.objects.get(id=1)
     apartments = Apartment.objects.all()
 
-    #pdfmetrics.registerFont(TTFont('Calibri', r'.\static\fonts\calibri.ttf'))
-    pdfmetrics.registerFont(TTFont('Calibri', r'/home/rainbowmzk/rainbow/static/fonts/calibri.ttf'))
-    #pdfmetrics.registerFont(TTFont('CalibriB', r'.\static\fonts\calibrib.ttf'))
-    pdfmetrics.registerFont(TTFont('CalibriB', r'/home/rainbowmzk/rainbow/static/fonts/calibrib.ttf'))
+    #
+    try:
+        pdfmetrics.registerFont(TTFont('Calibri', r'/home/rainbowmzk/rainbow/static/fonts/calibri.ttf'))
+        pdfmetrics.registerFont(TTFont('CalibriB', r'/home/rainbowmzk/rainbow/static/fonts/calibrib.ttf'))
+    except:
+        pdfmetrics.registerFont(TTFont('Calibri', r'.\static\fonts\calibri.ttf'))
+        pdfmetrics.registerFont(TTFont('CalibriB', r'.\static\fonts\calibrib.ttf'))
 
     buffer = BytesIO()
     w, h = A4
@@ -140,7 +142,7 @@ def generate_pdf():
         p.rect(431, h - 174 - y_offset, 54, 13)
         p.drawString(457, h - 171 - y_offset, f"-")
         p.rect(485, h - 174 - y_offset, 50, 13)
-        p.drawString(503, h - 171 - y_offset, str(round(apartment_charge.recalculation_heating_rub,2)))
+        p.drawString(503, h - 171 - y_offset, str(round(apartment_charge.recalculation_heating_rub, 2)))
         p.rect(535, h - 174 - y_offset, 50, 13)
         p.drawString(537, h - 171 - y_offset, f"{round(apartment_fee.heating_rub + apartment_charge.recalculation_heating_rub, 2)}")
 
