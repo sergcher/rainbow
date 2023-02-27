@@ -1,0 +1,42 @@
+<div class="col-md-6">
+          <form method="post">
+            {% csrf_token %}
+            {{ counterform.non_field_errors }}
+            <div class="form-group">
+                <label for="{{ counterform.hot_water_previous.id_for_label }}">Счетчики Горячей воды:</label><br>
+                <input type="number" id="{{ counterform.hot_water_previous.auto_id }}" name="{{ counterform.hot_water_previous.name }}" value="{{ counterform.hot_water_previous.value }}">
+                -
+                <input type="number" id="{{ counterform.hot_water_current.auto_id }}" name="{{ counterform.hot_water_current.name }}" value="{{ counterform.hot_water_current.value }}">
+                =
+                <input type="number" id="{{ counterform.hot_water_value.auto_id }}" name="{{ counterform.hot_water_value.name }}" value="{{ counterform.hot_water_value.value }}">
+            </div>
+            <div class="form-group">
+                <label for="{{ counterform.cold_water_previous.id_for_label }}">Счетчики Холодной воды:</label><br>
+                <input type="number" id="{{ counterform.cold_water_previous.auto_id }}" name="{{ counterform.cold_water_previous.name }}" value="{{ counterform.cold_water_previous.value }}">
+                -
+                <input type="number" id="{{ counterform.cold_water_current.auto_id }}" name="{{ counterform.cold_water_current.name }}" value="{{ counterform.cold_water_current.value }}">
+                =
+                <input type="number" id="{{ counterform.cold_water_value.auto_id }}" name="{{ counterform.cold_water_value.name }}" value="{{ counterform.cold_water_value.value }}">
+            </div>
+            <div class="form-group">
+                <label for="{{ counterform.electricity_previous.id_for_label }}">Счетчики Электричество:</label><br>
+                <input type="number" id="{{ counterform.electricity_previous.auto_id }}" name="{{ counterform.electricity_previous.name }}" value="{{ counterform.electricity_previous.value }}">
+                -
+                <input type="number" id="{{ counterform.electricity_current.auto_id }}" name="{{ counterform.electricity_current.name }}" value="{{ counterform.electricity_current.value }}">
+                =
+                <input type="number" id="{{ counterform.electricity_value.auto_id }}" name="{{ counterform.electricity_value.name }}" value="{{ counterform.electricity_value.value }}">
+            </div>
+            <div class="form-group">
+              <label for="{{ counterform.wastewater_value.id_for_label }}">Отведение сточных вод:</label><br>
+              <input type="number" id="{{ counterform.wastewater_value.auto_id }}" name="{{ counterform.wastewater_value.name }}" value="{{ counterform.wastewater_value.value }}">
+            </div>
+            <button id="transmitButton">Перенести показания</button>
+            <div class="form-group" style="display: none;">
+              <label>Квартира:</label><br>
+              {{ counterform.serialNumber }}
+            </div>
+            <label for="id_counters" style="display: none;">Counters:</label>
+            <input type="text" id="id_counters" name="counters" style="display: none;">
+            <input type="submit" value="Save">
+          </form>
+        </div>

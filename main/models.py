@@ -17,6 +17,10 @@ class Tariff(models.Model):
     lift = models.FloatField(null=True, blank=True)
     electricity_odn = models.FloatField(null=True, blank=True)
 
+    class Meta:
+        verbose_name = 'tariff'
+        verbose_name_plural = 'tariffs'
+
     def __str__(self):
         return self.name
 
@@ -95,3 +99,7 @@ class Settings(models.Model):
     month_to_date = models.CharField(max_length=200)
     bill = models.CharField(max_length=200)
     pay_up_to = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name = 'setting'
+        verbose_name_plural = 'settings'

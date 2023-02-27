@@ -1,0 +1,49 @@
+<div class="col-md-6">
+          <form method="post">
+            {% csrf_token %}
+            {{ chargeform.non_field_errors }}
+            <div class="form-group">
+              <label for="{{ chargeform.money_deposited.id_for_label }}">{{ chargeform.money_deposited.label }}</label>
+              {{ chargeform.money_deposited }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.fine.id_for_label }}">{{ chargeform.fine.label }}</label>
+              {{ chargeform.fine }}
+            </div>
+            <div class="form-group" style="display: none;">
+              <label for="{{ chargeform.serialNumber.id_for_label }}">{{ chargeform.serialNumber.label }}</label>
+              {{ chargeform.serialNumber }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.balance_start.id_for_label }}">{{ chargeform.balance_start.label }}</label>
+              {{ chargeform.balance_start }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_electricity.id_for_label }}">{{ chargeform.recalculation_electricity.label }}</label>
+              {{ chargeform.recalculation_electricity }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_heating_rub.id_for_label }}">{{ chargeform.recalculation_heating_rub.label }}</label>
+              {{ chargeform.recalculation_heating_rub }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_hot_water.id_for_label }}">{{ chargeform.recalculation_hot_water.label }}</label>
+              {{ chargeform.recalculation_hot_water }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_cold_water.id_for_label }}">{{ chargeform.recalculation_cold_water.label }}</label>
+              {{ chargeform.recalculation_cold_water }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_sewage.id_for_label }}">{{ chargeform.recalculation_sewage.label }}</label>
+              {{ chargeform.recalculation_sewage }}
+            </div>
+            <div class="form-group">
+              <label for="{{ chargeform.recalculation_solid_waste.id_for_label }}">{{ chargeform.recalculation_solid_waste.label }}</label>
+              {{ chargeform.recalculation_solid_waste }}
+            </div>
+            <label for="id_charge" style="display: none;">charge:</label>
+            <input type="text" id="id_charge" name="charge" style="display: none;">
+            <input type="submit" value="Сохранить">
+          </form>
+        </div>
