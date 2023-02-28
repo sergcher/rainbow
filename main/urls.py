@@ -1,4 +1,5 @@
 from django.urls import path
+
 from . import views
 
 app_name = 'main'
@@ -12,7 +13,8 @@ urlpatterns = [
     path('update_fees', views.update_fees, name='update_fees'),
     path('settings', views.settings, name='settings'),
     path('generate_excel', views.generate_excel, name='generate_excel'),
-    path('generate_excel_apartment_total_file', views.generate_excel_apartment_total_file, name='generate_excel_apartment_total_file'),
+    path('generate_excel_apartment_total_file', views.generate_excel_apartment_total_file,
+         name='generate_excel_apartment_total_file'),
     path('generate_txt', views.generate_txt, name='generate_txt'),
     path('apartment_receipt', views.apartment_receipt, name='apartment_receipt'),
 ]

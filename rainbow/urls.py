@@ -1,7 +1,7 @@
 from django.contrib import admin
-from django.urls import path, include
-from main import views
+from django.urls import include, path
 
+from main import views
 from main.views import index
 
 urlpatterns = [

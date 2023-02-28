@@ -1,14 +1,17 @@
-from django.shortcuts import render, redirect
-from main.forms import *
-from django.views import View
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.views import View
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.list import ListView
+
 from main.calculation import calculate_fees
-from main.excells import *
+from main.excells import export_client_bank, generate_excel_file, export_excel_apartment_total_file
+from main.forms import SettingsForm, Settings, ApartmentDetailForm, ApartmentCounterForm
+from main.forms import ApartmentChargeForm
 from main.pdf_generator import generate_pdf
-from django.contrib.auth.decorators import login_required
+from main.models import Tariff, ApartmentCharge, Apartment, ApartmentDetail, ApartmentFee
+from main.models import ApartmentCounter
 
 
 def index(request):
@@ -27,7 +30,6 @@ def index(request):
     return render(request, 'main/index.html', context)
 
 
-#@login_required()
 def update(request, id):
     form = ApartmentDetailForm(instance=ApartmentDetail.objects.get(serialNumber=id))
     counterform = ApartmentCounterForm(instance=ApartmentCounter.objects.get(serialNumber=id))
@@ -85,17 +87,14 @@ class TariffDetailView(TariffBaseView, DetailView):
     the specific tariff here and in the Views below"""
 
 
-#@login_required()
 class TariffCreateView(TariffBaseView, CreateView):
     """View to create a new tariff"""
 
 
-#@login_required()
 class TariffUpdateView(TariffBaseView, UpdateView):
     """View to update a tariff"""
 
 
-#@login_required()
 class TariffDeleteView(TariffBaseView, DeleteView):
     """View to delete a tariff"""
 
@@ -105,7 +104,6 @@ def update_fees(request):
     return redirect('index')
 
 
-#@login_required()
 def settings(request):
     form = SettingsForm(instance=Settings.objects.get(id=1))
     if request.method == 'POST':

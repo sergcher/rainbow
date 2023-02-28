@@ -1,4 +1,5 @@
-from main.models import *
+from main.models import ApartmentDetail, ApartmentCounter, ApartmentCharge
+from main.models import Tariff, Apartment, ApartmentFee
 
 
 def calculate_area(livedQt, totalArea):
@@ -36,53 +37,61 @@ def calculate_fees():
         counters = ApartmentCounter.objects.get(serialNumber=apartment.serialNumber)
         charges = ApartmentCharge.objects.get(serialNumber=apartment.serialNumber)
 
-        area_by_norm, area_over_norm = calculate_area(apartment_detail.livedQt, apartment_detail.totalArea)
+        # area_by_norm, area_over_norm = calculate_area(apartment_detail.livedQt, apartment_detail.totalArea)
         total_area = apartment_detail.totalArea
 
-        #Электроэнегия ОДН
+        # Электроэнегия ОДН
         electricity_odn = round_float(total_area * tariff.electricity_odn)
-        #Холодная вода ОДН
+        # Холодная вода ОДН
         cold_water_odn = round_float(total_area * tariff.cold_water_odn)
-        #Сточные вода ОДН
+        # Сточные вода ОДН
         sewage_odn = round_float(total_area * tariff.sewage_odn)
-        #Горячая вода ОДН
+        # Горячая вода ОДН
         hot_water_odn = round_float(total_area * tariff.hot_water_odn)
-        #Лифт
+        # Лифт
         lift = round_float(total_area * tariff.lift)
-        #Обращение с ТКО
+        # Обращение с ТКО
         solid_waste = round_float(apartment_detail.livedQt * tariff.solid_waste)
-        #Электричество
+        # Электричество
         electricity = round_float(counters.electricity_value * tariff.electricity)
-        #Отопление Гкал
+        # Отопление Гкал
         heating = round_float(total_area * tariff.heating)
-        #Отопление руб
+        # Отопление руб
         heating_rub = round_float(heating * tariff.heating_rub)
-        #Горячая вода
+        # Горячая вода
         hot_water = round_float(counters.hot_water_value * tariff.hot_water)
-        #Холодная вода
+        # Холодная вода
         cold_water = round_float(counters.cold_water_value * tariff.cold_water)
-        #Водоотведение
+        # Водоотведение
         sewage = round_float(counters.wastewater_value * tariff.sewage)
-        #Перерасчет
-        recalculation = charges.recalculation_sewage + charges.recalculation_electricity + charges.recalculation_cold_water + charges.recalculation_heating_rub + charges.recalculation_hot_water + charges.recalculation_solid_waste
+        # Перерасчет
+        recalculation = charges.recalculation_sewage + charges.recalculation_electricity + \
+            charges.recalculation_cold_water + charges.recalculation_heating_rub + \
+            charges.recalculation_hot_water + charges.recalculation_solid_waste
         recalculation = round_float(recalculation)
-        #Итого коммунальные услуги
-        maintenance_total = round_float(electricity + heating_rub + hot_water + cold_water + sewage + solid_waste + recalculation)
-        #Содержание помещения
+        # Итого коммунальные услуги
+        maintenance_total = round_float(
+            electricity + heating_rub + hot_water + cold_water + sewage + solid_waste + recalculation
+        )
+        # Содержание помещения
         maintenance = round_float(total_area * tariff.maintenance)
-        #Содержание помещения итого
-        maintenance_full = round_float(maintenance + lift + electricity_odn + cold_water_odn + hot_water_odn + sewage_odn)
-        #Начислено
-        accrued_expenses = round_float(maintenance_full + solid_waste + electricity + heating_rub + hot_water + cold_water + sewage)
-        #Сальдо начало
+        # Содержание помещения итого
+        maintenance_full = round_float(
+            maintenance + lift + electricity_odn + cold_water_odn + hot_water_odn + sewage_odn
+        )
+        # Начислено
+        accrued_expenses = round_float(
+            maintenance_full + solid_waste + electricity + heating_rub + hot_water + cold_water + sewage
+        )
+        # Сальдо начало
         balance_start = round_float(charges.balance_start)
-        #Оплачено
+        # Оплачено
         paid = charges.money_deposited
-        #Сальдо конец
+        # Сальдо конец
         balance_end = round_float(balance_start - paid)
         # Пеня
         fine = round_float(charges.fine)
-        #Итого к оплате
+        # Итого к оплате
         total = round_float(accrued_expenses + recalculation + fine + balance_end)
 
         fee = ApartmentFee(
