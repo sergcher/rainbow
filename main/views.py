@@ -6,12 +6,14 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 from main.calculation import calculate_fees
-from main.excells import export_client_bank, generate_excel_file, export_excel_apartment_total_file
-from main.forms import SettingsForm, Settings, ApartmentDetailForm, ApartmentCounterForm
-from main.forms import ApartmentChargeForm
+from main.excells import (export_client_bank,
+                          export_excel_apartment_total_file,
+                          generate_excel_file)
+from main.forms import (ApartmentChargeForm, ApartmentCounterForm,
+                        ApartmentDetailForm, Settings, SettingsForm)
+from main.models import (Apartment, ApartmentCharge, ApartmentCounter,
+                         ApartmentDetail, ApartmentFee, Tariff)
 from main.pdf_generator import generate_pdf
-from main.models import Tariff, ApartmentCharge, Apartment, ApartmentDetail, ApartmentFee
-from main.models import ApartmentCounter
 
 
 def index(request):

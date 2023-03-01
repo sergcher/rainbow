@@ -5,7 +5,7 @@ from django.db.models import Sum
 from django.http import FileResponse, HttpResponse
 from openpyxl import Workbook
 
-from main.models import ApartmentDetail, Settings, Apartment, ApartmentFee
+from main.models import Apartment, ApartmentDetail, ApartmentFee, Settings
 
 
 def export_client_bank():

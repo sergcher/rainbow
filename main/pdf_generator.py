@@ -6,8 +6,8 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 
-from main.models import ApartmentDetail, Settings, Apartment, ApartmentFee, ApartmentCounter
-from main.models import ApartmentCharge, Tariff
+from main.models import (Apartment, ApartmentCharge, ApartmentCounter,
+                         ApartmentDetail, ApartmentFee, Settings, Tariff)
 
 
 def generate_pdf():
