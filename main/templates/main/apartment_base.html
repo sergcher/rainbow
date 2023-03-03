@@ -4,7 +4,6 @@
 
     <nav>
       <ul>
-        <li style="display:inline-block;margin-right:20px;"><a href="{% url 'main:all' %}">Тарифы</a></li>
         <li style="display:inline-block;margin-right:20px;"><a href="{% url 'main:update_fees' %}">Перерасчитать</a></li>
         <li style="display:inline-block;margin-right:20px;">
             <a href="{% url 'main:generate_excel' %}?filter={{ request.GET.filter }}">Excel</a>

@@ -1,7 +1,9 @@
 from django.contrib import admin
 
 from main.models import (Apartment, ApartmentCharge, ApartmentCounter,
-                         ApartmentDetail, Settings, Tariff)
+                         ApartmentDetail, Settings)
+
+from tariff.models import Tariff
 
 
 class ApartmentDetailInline(admin.TabularInline):

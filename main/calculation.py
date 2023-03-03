@@ -1,5 +1,6 @@
 from main.models import (Apartment, ApartmentCharge, ApartmentCounter,
-                         ApartmentDetail, ApartmentFee, Tariff)
+                         ApartmentDetail, ApartmentFee)
+from tariff.models import Tariff
 
 
 def calculate_area(livedQt, totalArea):

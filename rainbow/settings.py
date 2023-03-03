@@ -31,6 +31,8 @@ INSTALLED_APPS = [
 
     'main',
     'users',
+    'repair',
+    'tariff'
 ]
 
 MIDDLEWARE = [

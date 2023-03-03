@@ -35,15 +35,15 @@
                     <td class="ml-5">{{tariff.heating}}</td>
                     <td class="ml-5">{{tariff.heating_rub}}</td>
                     <td class="ml-5">{{tariff.hot_water}}</td>
-                    <td><a href="{% url 'main:tariff_update' tariff.id %} ">Редактировать</a></td>
-                    <td><a href="{% url 'main:tariff_delete' tariff.id %}">Удалить</a></td>
+                    <td><a href="{% url 'tariff:tariff_update' tariff.id %} ">Редактировать</a></td>
+                    <td><a href="{% url 'tariff:tariff_delete' tariff.id %}">Удалить</a></td>
                 </tr>
             {% endfor %}
         
             </tbody>
         </table>    
         <div class="d-flex justify-content-center">
-            <a href="{% url 'main:tariff_create' %}" class="d-block btn btn-primary btn-lg my-5">Добавить новый тариф</a>
+            <a href="{% url 'tariff:tariff_create' %}" class="d-block btn btn-primary btn-lg my-5">Добавить новый тариф</a>
         </div>
     </div>
         
