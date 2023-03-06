@@ -26,6 +26,7 @@
         <option value="$MODULE_DIR$/main/templates" />
         <option value="$MODULE_DIR$/users/templates" />
         <option value="$MODULE_DIR$/tariff/templates" />
+        <option value="$MODULE_DIR$/repair/templates" />
       </list>
     </option>
   </component>

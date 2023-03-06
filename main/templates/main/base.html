@@ -9,7 +9,7 @@
     <nav>
       <ul>
         <li style="display:inline-block;margin-right:20px;"><a href="{% url 'index' %}">Квартиры</a></li>
-        <li style="display:inline-block;margin-right:20px;"><a href="#">Капитальный ремонт</a></li>
+        <li style="display:inline-block;margin-right:20px;"><a href="{% url 'repair:repair_list' %}">Капитальный ремонт</a></li>
         <li style="display:inline-block;margin-right:20px;"><a href="{% url 'tariff:tariff_list' %}">Тарифы</a></li>
         <li style="display:inline-block;margin-right:20px;"><a href="{% url 'main:settings' %}">Настройки</a></li>
         {% if user.is_authenticated %}
@@ -82,6 +82,8 @@
     </style>
 
     {% block apartment_header %} {% endblock %}
+
+    {% block repair_header %} {% endblock %}
 
     {% block content %} {% endblock %}
 

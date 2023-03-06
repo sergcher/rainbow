@@ -1,0 +1,45 @@
+{% extends 'repair/repair_base.html' %}
+
+{% block content %}
+
+<table>
+  <thead>
+    <tr>
+        <th style="text-align:center">№</th>
+        <th style="text-align:center">Список фамилий</th>
+        <th style="text-align:center">Общ. площ.</th>
+        <th style="text-align:center">Долг на начало месяца</th>
+        <th style="text-align:center">Начислено</th>
+        <th style="text-align:center">Пеня</th>
+        <th style="text-align:center">Перерасчет</th>
+        <th style="text-align:center">Оплачено</th>
+        <th style="text-align:center">Итого</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for apartment in apartments %}
+      <tr>
+        <td style="text-align:center">{{ apartment.serialNumber }}</td>
+        <td style="text-align:center">
+          <a href="edit/{{ apartment.serialNumber }}"><span class="glyphicon glyphicon-pencil">{{ apartment.owner }}</span></a>
+        </td>
+        {% for detail in apartment.apartmentdetail_set.all %}
+            <td style="text-align:center">{{ detail.totalArea }}</td>
+        {% endfor %}
+        {% for repair in apartment.capitalrepair_set.all %}
+            <td style="text-align:center">{{ repair.debt }}</td>
+            <td style="text-align:center">{{ repair.accrued }}</td>
+            <td style="text-align:center">{{ repair.fine }}</td>
+            <td style="text-align:center">{{ repair.recalculation }}</td>
+            <td style="text-align:center">{{ repair.paid }}</td>
+            <td style="text-align:center">{{ repair.total }}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+{% endblock %}
+

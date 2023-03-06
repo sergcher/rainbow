@@ -6,6 +6,9 @@ class Apartment(models.Model):
     owner = models.CharField(max_length=200)
     serialNumber = models.IntegerField()
 
+    def __str__(self):
+        return str(self.serialNumber)
+
 
 class ApartmentDetail(models.Model):
     registredQt = models.IntegerField()

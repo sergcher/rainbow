@@ -1,15 +1,14 @@
 from django.shortcuts import redirect, render
 
 from main.calculation import calculate_fees
-from main.excells import (export_client_bank,
-                          export_excel_apartment_total_file,
-                          generate_excel_file)
+from main.excel import (export_client_bank,
+                        export_excel_apartment_total_file,
+                        generate_excel_file)
 from main.forms import (ApartmentChargeForm, ApartmentCounterForm,
                         ApartmentDetailForm, Settings, SettingsForm)
 from main.models import (Apartment, ApartmentCharge, ApartmentCounter,
                          ApartmentDetail, ApartmentFee)
 from main.pdf_generator import generate_pdf
-
 
 
 def index(request):
@@ -36,21 +35,29 @@ def update(request, id):
     next_url = f"/update/{int(id) + 1}"
     if request.method == 'POST':
         if 'details' in request.POST:
-            form = ApartmentDetailForm(request.POST, instance=ApartmentDetail.objects.get(serialNumber=id))
+            form = ApartmentDetailForm(
+                request.POST, instance=ApartmentDetail.objects.get(serialNumber=id)
+                )
             if form.is_valid():
                 form.save()
                 return redirect(request.path_info)
             else:
                 print(form.errors)
         elif 'counters' in request.POST:
-            counterform = ApartmentCounterForm(request.POST, instance=ApartmentCounter.objects.get(serialNumber=id))
+            counterform = ApartmentCounterForm(
+                request.POST, instance=ApartmentCounter.objects.get(
+                    serialNumber=id
+                    )
+                )
             if counterform.is_valid():
                 counterform.save()
                 return redirect(request.path_info)
             else:
                 print(counterform.errors)
         elif 'charge' in request.POST:
-            chargeform = ApartmentChargeForm(request.POST, instance=ApartmentCharge.objects.get(serialNumber=id))
+            chargeform = ApartmentChargeForm(
+                request.POST, instance=ApartmentCharge.objects.get(serialNumber=id)
+                )
             if chargeform.is_valid():
                 chargeform.save()
                 return redirect(request.path_info)

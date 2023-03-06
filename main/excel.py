@@ -1,5 +1,6 @@
 from datetime import datetime
 from io import BytesIO
+import os
 
 from django.db.models import Sum
 from django.http import FileResponse, HttpResponse
@@ -19,9 +20,6 @@ def export_client_bank():
     date_obj = datetime.strptime(date_str, '%d.%m.%Y')
     date_str = datetime.strftime(date_obj, '%m%Y')
 
-    with open(filename, 'wb') as f:
-        f.write(fs.getbuffer())
-
     with open(filename, 'w') as f:
         for apartment in apartments:
             apartment_detail = ApartmentDetail.objects.get(serialNumber=apartment.serialNumber)
@@ -35,8 +33,11 @@ def export_client_bank():
         total = round(total, 2)
         f.write('=|106|' + str(int(total * 100)) + '\n')
 
-    response = FileResponse(open(filename, 'rb'), content_type='text/plain')
-    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    with open(filename, 'rb') as f:
+        response = HttpResponse(f.read(), content_type='text/plain')
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+    os.remove(filename)
     return response
 
 

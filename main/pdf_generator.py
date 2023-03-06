@@ -11,6 +11,17 @@ from main.models import (Apartment, ApartmentCharge, ApartmentCounter,
 from tariff.models import Tariff
 
 
+def horizontalAlign(textLength, boxWidth, fontSize):
+    horizontal_space = (boxWidth - (textLength * (fontSize / 2))) / 2
+    return horizontal_space
+
+
+def verticalAlign(boxHeight, row, allRow, offset):
+    singleHeight = (boxHeight / allRow) * row
+    vertical_space = offset - boxHeight + singleHeight
+    return vertical_space - 2
+
+
 def generate_pdf():
     settings = Settings.objects.get(id=1)
     apartments = Apartment.objects.all()
@@ -62,331 +73,1040 @@ def generate_pdf():
 
         # Drawing header row
         p.setFont("CalibriB", 10)
-        p.rect(15, h - 135 - y_offset, 115, 33)
-        p.drawString(47.5, h - 120 - y_offset, r"Виды услуг")
-        p.rect(130, h - 135 - y_offset, 50, 33)
-        p.drawString(138, h - 120 - y_offset, r"Ед.изм.")
+        fontSize = 10
+
+        start, offset, width, height = 15, 135, 115, 33
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Виды услуг'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 2, 3, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Ед.изм.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 2, 3, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
         p.setFont("CalibriB", 8)
-        p.rect(180, h - 135 - y_offset, 40, 33)
-        p.drawString(182.5, h - 110 - y_offset, r"норматив")
-        p.drawString(183.5, h - 120 - y_offset, r"потребле")
-        p.drawString(186, h - 130 - y_offset, r"ния КУ")
-        p.rect(220, h - 135 - y_offset, 40, 33)
-        p.drawString(229.5, h - 115 - y_offset, r"Объем")
-        p.drawString(231.5, h - 125 - y_offset, r"услуг")
-        p.rect(260, h - 135 - y_offset, 57, 33)
-        p.drawString(262, h - 110 - y_offset, r"Тариф/Размер")
-        p.drawString(262, h - 120 - y_offset, r"платы на кв.м.,")
-        p.drawString(280.5, h - 130 - y_offset, r"руб.")
-        p.rect(317, h - 135 - y_offset, 57, 33)
-        p.drawString(328, h - 110 - y_offset, r"Текущее")
-        p.drawString(325, h - 120 - y_offset, r"показание")
-        p.drawString(319, h - 130 - y_offset, r"счетчика - ИПУ")
-        p.rect(374, h - 135 - y_offset, 57, 33)
-        p.drawString(378, h - 110 - y_offset, r"Начислено за")
-        p.drawString(381, h - 120 - y_offset, r"расчетный")
-        p.drawString(379, h - 130 - y_offset, r"период/руб.")
+        fontSize = 10
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'норматив'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 2
+        vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'потребле'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 2
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'ния КУ'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 2
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Объем'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 2, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'услуг'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Тариф/Размер'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
+        vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'платы на кв.м.,'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 11
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'руб.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Текущее'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'показание'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'счетчика - ИПУ'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 10
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Начислено за'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
+        vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'расчетный'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'период/руб.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+
         p.setFont("CalibriB", 7)
-        p.rect(431, h - 135 - y_offset, 54, 33)
-        p.drawString(447, h - 110 - y_offset, r"Размер")
-        p.drawString(434, h - 120 - y_offset, r"повышающего")
-        p.drawString(434, h - 130 - y_offset, r"коэффициента")
+        fontSize = 7
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Размер'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) - 2
+        vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'повышающего'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) - 2
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'коэффициента'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) - 2
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+
         p.setFont("CalibriB", 8)
-        p.rect(485, h - 135 - y_offset, 50, 33)
-        p.drawString(487, h - 115 - y_offset, r"Перерасчеты")
-        p.drawString(487, h - 125 - y_offset, r"всего/руб.")
-        p.rect(535, h - 135 - y_offset, 50, 33)
+        fontSize = 8
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Перерасчеты'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 2, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'всего/руб.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+
         p.setFont("CalibriB", 7)
-        p.drawString(537, h - 110 - y_offset, r"Всего к оплате")
-        p.drawString(537, h - 120 - y_offset, r"за расчетный")
-        p.drawString(537, h - 130 - y_offset, r"период/руб.")
+        fontSize = 7
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Всего к оплате'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 2
+        vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'за расчетный'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
+        label = 'период/руб.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = vertical_space - 10
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing second row
         p.setFont("CalibriB", 10)
-        p.rect(15, h - 148 - y_offset, 520, 13)
-        p.drawString(17, h - 145 - y_offset, r"Коммунальные услуги итого:")
-        p.rect(535, h - 148 - y_offset, 50, 13)
-        p.drawString(537, h - 145 - y_offset, f"{apartment_fee.maintenance_total}")
+        fontSize = 10
+
+        start, offset, width, height = 15, offset + 13, 520, 13
+        p.rect(start, h - offset - y_offset, width, height)
+
+        label = 'Коммунальные услуги итого:'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.maintenance_total}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing third row electricity
         p.setFont("Calibri", 10)
-        p.rect(15, h - 161 - y_offset, 115, 13)
-        p.drawString(17, h - 158 - y_offset, r"Электроснабжение")
-        p.rect(130, h - 161 - y_offset, 50, 13)
-        p.drawString(142, h - 158 - y_offset, r"кВт.ч")
-        p.rect(180, h - 161 - y_offset, 40, 13)
-        p.rect(220, h - 161 - y_offset, 40, 13)
-        p.drawString(230, h - 158 - y_offset, f"{apartment_counter.electricity_value}")
-        p.rect(260, h - 161 - y_offset, 57, 13)
-        p.drawString(275, h - 158 - y_offset, f"{tariff.electricity}")
-        p.rect(317, h - 161 - y_offset, 57, 13)
-        p.drawString(330, h - 158 - y_offset, f"{apartment_counter.electricity_current}")
-        p.rect(374, h - 161 - y_offset, 57, 13)
-        p.drawString(384, h - 158 - y_offset, f"{apartment_fee.electricity}")
-        p.rect(431, h - 161 - y_offset, 54, 13)
-        p.drawString(457, h - 158 - y_offset, r"-")
-        p.rect(485, h - 161 - y_offset, 50, 13)
-        p.drawString(503, h - 158 - y_offset, f"{apartment_charge.recalculation_electricity}")
-        p.rect(535, h - 161 - y_offset, 50, 13)
-        p.drawString(537, h - 158 - y_offset,
-                     f"{apartment_fee.electricity + apartment_charge.recalculation_electricity}")
+        fontSize = 10
+
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Электроснабжение'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'кВт.ч'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_counter.electricity_value}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.electricity}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_counter.electricity_current}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.electricity}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_charge.recalculation_electricity}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.electricity + apartment_charge.recalculation_electricity}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing fourth row heating
-        p.setFont("Calibri", 10)
-        p.rect(15, h - 174 - y_offset, 115, 13)
-        p.drawString(17, h - 171 - y_offset, r"Отопление")
-        p.rect(130, h - 174 - y_offset, 50, 13)
-        p.drawString(142, h - 171 - y_offset, r"Гкал")
-        p.rect(180, h - 174 - y_offset, 40, 13)
-        p.drawString(182, h - 171 - y_offset, r"0.0176")
-        p.rect(220, h - 174 - y_offset, 40, 13)
-        p.drawString(230, h - 171 - y_offset, str(apartment_fee.heating))
-        p.rect(260, h - 174 - y_offset, 57, 13)
-        p.drawString(275, h - 171 - y_offset, str(tariff.heating_rub))
-        p.rect(317, h - 174 - y_offset, 57, 13)
-        p.drawString(330, h - 171 - y_offset, r"-")
-        p.rect(374, h - 174 - y_offset, 57, 13)
-        p.drawString(384, h - 171 - y_offset, str(apartment_fee.heating_rub))
-        p.rect(431, h - 174 - y_offset, 54, 13)
-        p.drawString(457, h - 171 - y_offset, r"-")
-        p.rect(485, h - 174 - y_offset, 50, 13)
-        value = round(apartment_charge.recalculation_heating_rub, 2)
-        p.drawString(503, h - 171 - y_offset, f'{value}')
-        p.rect(535, h - 174 - y_offset, 50, 13)
-        value = round(apartment_fee.heating_rub + apartment_charge.recalculation_heating_rub, 2)
-        p.drawString(537, h - 171 - y_offset, f"{value}")
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Отопление'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Гкал'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '0.0176'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.heating}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.heating_rub}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.heating_rub}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{round(apartment_charge.recalculation_heating_rub, 2)}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{round(apartment_fee.heating_rub + apartment_charge.recalculation_heating_rub, 2)}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing fifth row hot water
-        p.setFont("Calibri", 10)
-        p.rect(15, h - 187 - y_offset, 115, 13)
-        p.drawString(17, h - 184 - y_offset, r"Горячее водоснабжение")
-        p.rect(130, h - 187 - y_offset, 50, 13)
-        p.drawString(142, h - 184 - y_offset, r"куб.м.")
-        p.rect(180, h - 187 - y_offset, 40, 13)
-        p.drawString(182, h - 184 - y_offset, r"3.37")
-        p.rect(220, h - 187 - y_offset, 40, 13)
-        p.drawString(230, h - 184 - y_offset, str(apartment_counter.hot_water_value))
-        p.rect(260, h - 187 - y_offset, 57, 13)
-        p.drawString(275, h - 184 - y_offset, str(tariff.hot_water))
-        p.rect(317, h - 187 - y_offset, 57, 13)
-        p.drawString(330, h - 184 - y_offset, str(apartment_counter.hot_water_current))
-        p.rect(374, h - 187 - y_offset, 57, 13)
-        p.drawString(384, h - 184 - y_offset, str(apartment_fee.hot_water))
-        p.rect(431, h - 187 - y_offset, 54, 13)
-        p.drawString(457, h - 184 - y_offset, r"-")
-        p.rect(485, h - 187 - y_offset, 50, 13)
-        p.drawString(503, h - 184 - y_offset, str(apartment_charge.recalculation_hot_water))
-        p.rect(535, h - 187 - y_offset, 50, 13)
-        p.drawString(537, h - 184 - y_offset, f"{apartment_fee.hot_water + apartment_charge.recalculation_hot_water}")
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Горячее водоснабжение'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'куб.м.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '3.37'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_counter.hot_water_value}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.hot_water}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_counter.hot_water_current}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.hot_water}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_charge.recalculation_hot_water}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.hot_water + apartment_charge.recalculation_hot_water}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing sixth row cold water
-        p.setFont("Calibri", 9)
-        p.rect(15, h - 200 - y_offset, 115, 13)
-        p.drawString(17, h - 197 - y_offset, r"Холодное водоснабжение")
-        p.rect(130, h - 200 - y_offset, 50, 13)
-        p.drawString(142, h - 197 - y_offset, r"куб.м.")
-        p.rect(180, h - 200 - y_offset, 40, 13)
-        p.drawString(182, h - 197 - y_offset, r"5.01")
-        p.rect(220, h - 200 - y_offset, 40, 13)
-        p.drawString(230, h - 197 - y_offset, f"{apartment_counter.cold_water_value}")
-        p.rect(260, h - 200 - y_offset, 57, 13)
-        p.drawString(275, h - 197 - y_offset, f"{tariff.cold_water}")
-        p.rect(317, h - 200 - y_offset, 57, 13)
-        p.drawString(330, h - 197 - y_offset, f"{apartment_counter.cold_water_current}")
-        p.rect(374, h - 200 - y_offset, 57, 13)
-        p.drawString(384, h - 197 - y_offset, f"{apartment_fee.cold_water}")
-        p.rect(431, h - 200 - y_offset, 54, 13)
-        p.drawString(457, h - 197 - y_offset, r"-")
-        p.rect(485, h - 200 - y_offset, 50, 13)
-        p.drawString(503, h - 197 - y_offset, f"{apartment_charge.recalculation_cold_water}")
-        p.rect(535, h - 200 - y_offset, 50, 13)
-        p.drawString(537, h - 197 - y_offset, f"{apartment_fee.cold_water + apartment_charge.recalculation_cold_water}")
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Холодное водоснабжение'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'куб.м.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '5.01'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_counter.cold_water_value}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.cold_water}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_counter.cold_water_current}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.cold_water}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_charge.recalculation_cold_water}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.cold_water + apartment_charge.recalculation_cold_water}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing seven row sewage
-        p.setFont("Calibri", 10)
-        p.rect(15, h - 213 - y_offset, 115, 13)
-        p.drawString(17, h - 210 - y_offset, r"Водоотведение")
-        p.rect(130, h - 213 - y_offset, 50, 13)
-        p.drawString(142, h - 210 - y_offset, r"куб.м.")
-        p.rect(180, h - 213 - y_offset, 40, 13)
-        p.drawString(182, h - 210 - y_offset, r"8.38")
-        p.rect(220, h - 213 - y_offset, 40, 13)
-        p.drawString(230, h - 210 - y_offset, f"{apartment_counter.wastewater_value}")
-        p.rect(260, h - 213 - y_offset, 57, 13)
-        p.drawString(275, h - 210 - y_offset, f"{tariff.sewage}")
-        p.rect(317, h - 213 - y_offset, 57, 13)
-        p.drawString(330, h - 210 - y_offset, f"{apartment_counter.wastewater_value}")
-        p.rect(374, h - 213 - y_offset, 57, 13)
-        p.drawString(384, h - 210 - y_offset, f"{apartment_fee.sewage}")
-        p.rect(431, h - 213 - y_offset, 54, 13)
-        p.drawString(457, h - 210 - y_offset, r"-")
-        p.rect(485, h - 213 - y_offset, 50, 13)
-        p.drawString(503, h - 210 - y_offset, f"{apartment_charge.recalculation_sewage}")
-        p.rect(535, h - 213 - y_offset, 50, 13)
-        p.drawString(537, h - 210 - y_offset, f"{apartment_fee.sewage + apartment_charge.recalculation_sewage}")
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Водоотведение'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'куб.м.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '8.38'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_counter.wastewater_value}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.sewage}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_counter.wastewater_value}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.sewage}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_charge.recalculation_sewage}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.sewage + apartment_charge.recalculation_sewage}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing eight row solid waste
-        p.setFont("Calibri", 10)
-        p.rect(15, h - 226 - y_offset, 115, 13)
-        p.drawString(17, h - 223 - y_offset, r"Обращение с ТКО")
-        p.rect(130, h - 226 - y_offset, 50, 13)
-        p.drawString(142, h - 223 - y_offset, r"чел.")
-        p.rect(180, h - 226 - y_offset, 40, 13)
-        p.rect(220, h - 226 - y_offset, 40, 13)
-        p.drawString(230, h - 223 - y_offset, f"{detail.registredQt}")
-        p.rect(260, h - 226 - y_offset, 57, 13)
-        p.drawString(275, h - 223 - y_offset, f"{tariff.solid_waste}")
-        p.rect(317, h - 226 - y_offset, 57, 13)
-        p.drawString(330, h - 223 - y_offset, r"-")
-        p.rect(374, h - 226 - y_offset, 57, 13)
-        p.drawString(384, h - 223 - y_offset, f"{apartment_fee.solid_waste}")
-        p.rect(431, h - 226 - y_offset, 54, 13)
-        p.drawString(457, h - 223 - y_offset, r"-")
-        p.rect(485, h - 226 - y_offset, 50, 13)
-        p.drawString(503, h - 223 - y_offset, f"{apartment_charge.recalculation_solid_waste}")
-        p.rect(535, h - 226 - y_offset, 50, 13)
-        value = apartment_fee.solid_waste + apartment_charge.recalculation_solid_waste
-        p.drawString(537, h - 223 - y_offset, f"{value}")
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Обращение с ТКО'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'чел.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = ''
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{detail.registredQt}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.solid_waste}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.solid_waste}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_charge.recalculation_solid_waste}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.solid_waste + apartment_charge.recalculation_solid_waste}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing nine row
         p.setFont("CalibriB", 10)
-        p.rect(15, h - 239 - y_offset, 520, 13)
-        p.drawString(17, h - 236 - y_offset, r"Плата за содержание помещения итого:")
-        p.rect(535, h - 239 - y_offset, 50, 13)
-        p.drawString(537, h - 236 - y_offset, f"{apartment_fee.maintenance_full}")
+        fontSize = 10
+
+        start, offset, width, height = 15, offset + 13, 520, 13
+        p.rect(start, h - offset - y_offset, width, height)
+
+        label = 'Плата за содержание помещения итого:'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.maintenance_full}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing ten row maintenance
         p.setFont("Calibri", 8)
-        p.rect(15, h - 252 - y_offset, 115, 13)
-        p.drawString(17, h - 249 - y_offset, r"Содержание жилого помещения")
-        p.rect(130, h - 252 - y_offset, 50, 13)
+        fontSize = 8
+
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Содержание жилого помещения'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
         p.setFont("Calibri", 10)
-        p.drawString(142, h - 249 - y_offset, r"кв.м.")
-        p.rect(180, h - 252 - y_offset, 40, 13)
-        p.rect(220, h - 252 - y_offset, 40, 13)
-        p.drawString(230, h - 249 - y_offset, f"{detail.totalArea}")
-        p.rect(260, h - 252 - y_offset, 57, 13)
-        p.drawString(275, h - 249 - y_offset, f"{tariff.maintenance}")
-        p.rect(317, h - 252 - y_offset, 57, 13)
-        p.drawString(330, h - 249 - y_offset, r"-")
-        p.rect(374, h - 252 - y_offset, 57, 13)
-        p.drawString(384, h - 249 - y_offset, f"{apartment_fee.maintenance}")
-        p.rect(431, h - 252 - y_offset, 54, 13)
-        p.drawString(457, h - 249 - y_offset, r"-")
-        p.rect(485, h - 252 - y_offset, 50, 13)
-        p.drawString(503, h - 249 - y_offset, r"0")
-        p.rect(535, h - 252 - y_offset, 50, 13)
-        p.drawString(537, h - 249 - y_offset, f"{apartment_fee.maintenance}")
+        fontSize = 10
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'кв.м.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = ''
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{detail.totalArea}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.maintenance}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.maintenance}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '0'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.maintenance}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing eleven row electricity odn
-        p.setFont("Calibri", 10)
-        p.rect(15, h - 265 - y_offset, 115, 13)
-        p.drawString(17, h - 262 - y_offset, r"ОДН электроэнергия")
-        p.rect(130, h - 265 - y_offset, 50, 13)
-        p.drawString(142, h - 262 - y_offset, r"кв.м.")
-        p.rect(180, h - 265 - y_offset, 40, 13)
-        p.rect(220, h - 265 - y_offset, 40, 13)
-        p.drawString(230, h - 262 - y_offset, f"{detail.totalArea}")
-        p.rect(260, h - 265 - y_offset, 57, 13)
-        p.drawString(275, h - 262 - y_offset, f"{tariff.electricity_odn}")
-        p.rect(317, h - 265 - y_offset, 57, 13)
-        p.drawString(330, h - 262 - y_offset, r"-")
-        p.rect(374, h - 265 - y_offset, 57, 13)
-        p.drawString(384, h - 262 - y_offset, f"{apartment_fee.electricity_odn}")
-        p.rect(431, h - 265 - y_offset, 54, 13)
-        p.drawString(457, h - 262 - y_offset, r"-")
-        p.rect(485, h - 265 - y_offset, 50, 13)
-        p.drawString(503, h - 262 - y_offset, r"0")
-        p.rect(535, h - 265 - y_offset, 50, 13)
-        p.drawString(537, h - 262 - y_offset, f"{apartment_fee.electricity_odn}")
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'ОДН электроэнергия'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'кв.м.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = ''
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{detail.totalArea}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.electricity_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.electricity_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '0'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.electricity_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing twelve row sewage odn
-        p.setFont("Calibri", 10)
-        p.rect(15, h - 278 - y_offset, 115, 13)
-        p.drawString(17, h - 275 - y_offset, r"ОДН сточные воды")
-        p.rect(130, h - 278 - y_offset, 50, 13)
-        p.drawString(142, h - 275 - y_offset, r"кв.м.")
-        p.rect(180, h - 278 - y_offset, 40, 13)
-        p.rect(220, h - 278 - y_offset, 40, 13)
-        p.drawString(230, h - 275 - y_offset, f"{detail.totalArea}")
-        p.rect(260, h - 278 - y_offset, 57, 13)
-        p.drawString(275, h - 275 - y_offset, f"{tariff.sewage_odn}")
-        p.rect(317, h - 278 - y_offset, 57, 13)
-        p.drawString(330, h - 275 - y_offset, r"-")
-        p.rect(374, h - 278 - y_offset, 57, 13)
-        p.drawString(384, h - 275 - y_offset, f"{apartment_fee.sewage_odn}")
-        p.rect(431, h - 278 - y_offset, 54, 13)
-        p.drawString(457, h - 275 - y_offset, r"-")
-        p.rect(485, h - 278 - y_offset, 50, 13)
-        p.drawString(503, h - 275 - y_offset, r"0")
-        p.rect(535, h - 278 - y_offset, 50, 13)
-        p.drawString(537, h - 275 - y_offset, f"{apartment_fee.sewage_odn}")
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'ОДН сточные воды'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'кв.м.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = ''
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{detail.totalArea}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.sewage_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.sewage_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '0'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.sewage_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing thirteen row cold water odn
-        p.setFont("Calibri", 10)
-        p.rect(15, h - 291 - y_offset, 115, 13)
-        p.drawString(17, h - 288 - y_offset, r"ОДН холодная вода")
-        p.rect(130, h - 291 - y_offset, 50, 13)
-        p.drawString(142, h - 288 - y_offset, r"кв.м.")
-        p.rect(180, h - 291 - y_offset, 40, 13)
-        p.rect(220, h - 291 - y_offset, 40, 13)
-        p.drawString(230, h - 288 - y_offset, f"{detail.totalArea}")
-        p.rect(260, h - 291 - y_offset, 57, 13)
-        p.drawString(275, h - 288 - y_offset, f"{tariff.cold_water_odn}")
-        p.rect(317, h - 291 - y_offset, 57, 13)
-        p.drawString(330, h - 288 - y_offset, r"-")
-        p.rect(374, h - 291 - y_offset, 57, 13)
-        p.drawString(384, h - 288 - y_offset, f"{apartment_fee.cold_water_odn}")
-        p.rect(431, h - 291 - y_offset, 54, 13)
-        p.drawString(457, h - 288 - y_offset, r"-")
-        p.rect(485, h - 291 - y_offset, 50, 13)
-        p.drawString(503, h - 288 - y_offset, r"0")
-        p.rect(535, h - 291 - y_offset, 50, 13)
-        p.drawString(537, h - 288 - y_offset, f"{apartment_fee.cold_water_odn}")
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'ОДН холодная вода'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'кв.м.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = ''
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{detail.totalArea}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.cold_water_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.cold_water_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '0'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.cold_water_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing fourteen row hot water odn
-        p.setFont("Calibri", 10)
-        p.rect(15, h - 304 - y_offset, 115, 13)
-        p.drawString(17, h - 301 - y_offset, r"ОДН горячая вода")
-        p.rect(130, h - 304 - y_offset, 50, 13)
-        p.drawString(142, h - 301 - y_offset, r"кв.м.")
-        p.rect(180, h - 304 - y_offset, 40, 13)
-        p.rect(220, h - 304 - y_offset, 40, 13)
-        p.drawString(230, h - 301 - y_offset, f"{detail.totalArea}")
-        p.rect(260, h - 304 - y_offset, 57, 13)
-        p.drawString(275, h - 301 - y_offset, f"{tariff.hot_water_odn}")
-        p.rect(317, h - 304 - y_offset, 57, 13)
-        p.drawString(330, h - 301 - y_offset, r"-")
-        p.rect(374, h - 304 - y_offset, 57, 13)
-        p.drawString(384, h - 301 - y_offset, f"{apartment_fee.hot_water_odn}")
-        p.rect(431, h - 304 - y_offset, 54, 13)
-        p.drawString(457, h - 301 - y_offset, r"-")
-        p.rect(485, h - 304 - y_offset, 50, 13)
-        p.drawString(503, h - 301 - y_offset, r"0")
-        p.rect(535, h - 304 - y_offset, 50, 13)
-        p.drawString(537, h - 301 - y_offset, f"{apartment_fee.hot_water_odn}")
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'ОДН горячая вода'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'кв.м.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = ''
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{detail.totalArea}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.hot_water_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.hot_water_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '0'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.hot_water_odn}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing fifteen row lift
-        p.setFont("Calibri", 10)
-        p.rect(15, h - 317 - y_offset, 115, 13)
-        p.drawString(17, h - 314 - y_offset, r"Лифт   тех.обслуживание")
-        p.rect(130, h - 317 - y_offset, 50, 13)
-        p.drawString(142, h - 314 - y_offset, r"кв.м.")
-        p.rect(180, h - 317 - y_offset, 40, 13)
-        p.rect(220, h - 317 - y_offset, 40, 13)
-        p.drawString(230, h - 314 - y_offset, f"{detail.totalArea}")
-        p.rect(260, h - 317 - y_offset, 57, 13)
-        p.drawString(275, h - 314 - y_offset, f"{tariff.lift}")
-        p.rect(317, h - 317 - y_offset, 57, 13)
-        p.drawString(330, h - 314 - y_offset, r"-")
-        p.rect(374, h - 317 - y_offset, 57, 13)
-        p.drawString(384, h - 314 - y_offset, f"{apartment_fee.lift}")
-        p.rect(431, h - 317 - y_offset, 54, 13)
-        p.drawString(457, h - 314 - y_offset, r"-")
-        p.rect(485, h - 317 - y_offset, 50, 13)
-        p.drawString(503, h - 314 - y_offset, r"0")
-        p.rect(535, h - 317 - y_offset, 50, 13)
-        p.drawString(537, h - 314 - y_offset, f"{apartment_fee.lift}")
+        start, offset, width, height = 15, offset + 13, 115, 13
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'Лифт   тех.обслуживание'
+        horizontal_space = 17
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = 'кв.м.'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = ''
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 40
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{detail.totalArea}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{tariff.lift}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 57
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.lift}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 54
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '-'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = '0'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
+
+        start, width = width + start, 50
+        p.rect(start, h - offset - y_offset, width, height)
+        label = f'{apartment_fee.lift}'
+        horizontal_space = start + horizontalAlign(len(label), width, fontSize)
+        vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
+        p.drawString(horizontal_space, vertical_space, label)
 
         # Drawing total rows
         p.setFont("Calibri", 10)
