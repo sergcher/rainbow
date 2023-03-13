@@ -1,4 +1,5 @@
 from django.db import models
+
 from main.models import Apartment, ApartmentDetail
 from tariff.models import Tariff
 

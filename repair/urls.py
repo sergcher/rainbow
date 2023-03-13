@@ -1,7 +1,9 @@
 from django.urls import path
+
 from repair.views import (RepairListView, RepairUpdateView,
-                          repair_generate_txt, repair_generate_excel,
-                          generate_excel_repair_total_file, repairs_receipt)
+                          generate_excel_repair_total_file,
+                          repair_generate_excel, repair_generate_txt,
+                          repairs_receipt)
 
 app_name = 'repair'
 

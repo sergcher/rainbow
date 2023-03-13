@@ -1,8 +1,7 @@
 from django.shortcuts import redirect, render
 
 from main.calculation import calculate_fees
-from main.excel import (export_client_bank,
-                        export_excel_apartment_total_file,
+from main.excel import (export_client_bank, export_excel_apartment_total_file,
                         generate_excel_file)
 from main.forms import (ApartmentChargeForm, ApartmentCounterForm,
                         ApartmentDetailForm, Settings, SettingsForm)

@@ -1,7 +1,8 @@
 from django.urls import path
 
-from main.views import (update_fees, settings, generate_excel,
-                        generate_excel_apartment_total_file, generate_txt, apartment_receipt)
+from main.views import (apartment_receipt, generate_excel,
+                        generate_excel_apartment_total_file, generate_txt,
+                        settings, update_fees)
 
 app_name = 'main'
 

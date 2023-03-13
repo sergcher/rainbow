@@ -1,3 +1,4 @@
+from datetime import datetime
 from io import BytesIO
 
 from django.http import HttpResponse
@@ -6,10 +7,9 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 
-from main.models import (Apartment, ApartmentDetail, Settings)
-from tariff.models import Tariff
-from datetime import datetime
+from main.models import Apartment, ApartmentDetail, Settings
 from repair.models import CapitalRepair
+from tariff.models import Tariff
 
 
 def horizontalAlign(textLength, boxWidth, fontSize):

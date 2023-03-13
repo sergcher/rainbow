@@ -13,4 +13,3 @@ class IndexViewTestCase(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'main/index.html')
         # self.assertEqual(response.context_data['title'], 'ТСЖ Радуга')
-

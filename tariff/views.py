@@ -1,9 +1,10 @@
-from common.views import TitleMixin
-from tariff.models import Tariff
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+
+from common.views import TitleMixin
+from tariff.models import Tariff
 
 
 class TariffBaseView(View):

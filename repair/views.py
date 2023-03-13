@@ -1,11 +1,14 @@
-from common.views import TitleMixin
-from django.views.generic.list import ListView
-from repair.models import CapitalRepair
-from main.models import Apartment, ApartmentDetail
-from django.views.generic.edit import UpdateView
-from django.views import View
 from django.urls import reverse_lazy
-from repair.excel import repair_export_client_bank, repair_generate_excel_file, export_excel_repair_total_file
+from django.views import View
+from django.views.generic.edit import UpdateView
+from django.views.generic.list import ListView
+
+from common.views import TitleMixin
+from main.models import Apartment, ApartmentDetail
+from repair.excel import (export_excel_repair_total_file,
+                          repair_export_client_bank,
+                          repair_generate_excel_file)
+from repair.models import CapitalRepair
 from repair.pdf_repair import repair_generate_pdf
 
 

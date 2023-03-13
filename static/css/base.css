@@ -1,0 +1,84 @@
+#header {
+  text-align: center;
+  position: relative;
+  width: 100vw;
+  height: 148px;
+  background-color: #25B33f;
+  margin-bottom: 10px;
+  background-image: url("../img/header.png");
+  background-size: cover;
+  background-position: center center;
+  padding: 20px;
+}
+
+h1 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+  color: #FFFFFF;
+  margin: 0;
+  padding-top: 30px;
+}
+
+.rectangle {
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  left: 0;
+  top: 108px;
+  background: rgba(89, 0, 168, 0.4);
+}
+
+.rectangle a {
+  display: inline-block;
+  width: 140px;
+  height: 100%;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  text-decoration: none;
+  text-align: center;
+  margin: 0 20px;
+  padding-top: 5px;
+}
+
+.rectangle a:first-child {
+  margin-left: 0;
+  margin-left: 140px;
+}
+
+.rectangle a.second-link {
+  margin-right: auto;
+  margin-left: -40px;
+}
+
+.rectangle a.third-link {
+  margin-right: 0px;
+  margin-left: -60px;
+}
+
+.rectangle a.fourth-link {
+  margin-right: 0px;
+  margin-left: -60px;
+}
+
+.rectangle a.five-link {
+  margin-right: 0px;
+  margin-left: -60px;
+}
+
+.rectangle a.first-link,
+.rectangle a.second-link,
+.rectangle a.third-link,
+.rectangle a.fourth-link,
+.rectangle a.five-link {
+  color: #FFFFFF;
+  font-weight: bold;
+}

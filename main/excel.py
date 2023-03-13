@@ -1,16 +1,14 @@
-from datetime import datetime
-from io import BytesIO
 import os
+from datetime import datetime
 
 from django.db.models import Sum
-from django.http import FileResponse, HttpResponse
+from django.http import HttpResponse
 from openpyxl import Workbook
 
 from main.models import Apartment, ApartmentDetail, ApartmentFee, Settings
 
 
 def export_client_bank():
-    fs = BytesIO()
     filename = f'44069_{datetime.today().strftime("%d%m%Y")}_1.txt'
     total = 0
     apartments = Apartment.objects.all()
