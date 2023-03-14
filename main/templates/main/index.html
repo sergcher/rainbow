@@ -2,14 +2,6 @@
 
 {% block content %}
 
-<form method="get" action="{% url 'index' %}">
-  <label for="filter">Выберите фильтр:</label>
-  <select name="filter" id="filter">
-    <option value="">Все записи</option>
-    <option value="balance_end_gt_6000">Должники (сальдо конец &gt; 6000)</option>
-  </select>
-</form>
-
 <table>
   <thead>
     <tr>

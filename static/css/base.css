@@ -11,15 +11,15 @@
   padding: 20px;
 }
 
-h1 {
-  font-family: 'Inter';
+h1.special {
+  font-family: 'Segoe UI';
   font-style: normal;
   font-weight: 700;
   font-size: 40px;
   line-height: 48px;
   color: #FFFFFF;
   margin: 0;
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 .rectangle {
@@ -37,7 +37,7 @@ h1 {
   display: inline-block;
   width: 140px;
   height: 100%;
-  font-family: 'Inter';
+  font-family: 'Segoe UI';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -51,7 +51,7 @@ h1 {
 
 .rectangle a:first-child {
   margin-left: 0;
-  margin-left: 140px;
+  margin-left: 130px;
 }
 
 .rectangle a.second-link {
@@ -70,15 +70,14 @@ h1 {
 }
 
 .rectangle a.five-link {
-  margin-right: 0px;
+  margin-right: 130px;
   margin-left: -60px;
 }
 
-.rectangle a.first-link,
-.rectangle a.second-link,
-.rectangle a.third-link,
-.rectangle a.fourth-link,
-.rectangle a.five-link {
-  color: #FFFFFF;
-  font-weight: bold;
+.rectangle a.first-link:hover,
+.rectangle a.second-link:hover,
+.rectangle a.third-link:hover,
+.rectangle a.fourth-link:hover,
+.rectangle a.five-link:hover {
+  text-decoration: underline;
 }
