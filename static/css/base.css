@@ -33,7 +33,33 @@ h1.special {
   background: rgba(89, 0, 168, 0.4);
 }
 
+.rectangle_footer {
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  left: 0;
+  background: rgba(89, 0, 168, 0.4);
+}
+
 .rectangle a {
+  display: inline-block;
+  width: 140px;
+  height: 100%;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  text-decoration: none;
+  text-align: center;
+  margin: 0 20px;
+  padding-top: 5px;
+}
+
+.rectangle_footer a {
   display: inline-block;
   width: 140px;
   height: 100%;
@@ -54,7 +80,17 @@ h1.special {
   margin-left: 130px;
 }
 
+.rectangle_footer a:first-child {
+  margin-left: 0;
+  margin-left: 130px;
+}
+
 .rectangle a.second-link {
+  margin-right: auto;
+  margin-left: -40px;
+}
+
+.rectangle_footer a.second-link {
   margin-right: auto;
   margin-left: -40px;
 }
@@ -64,7 +100,17 @@ h1.special {
   margin-left: -60px;
 }
 
+.rectangle_footer a.third-link {
+  margin-right: 0px;
+  margin-left: -60px;
+}
+
 .rectangle a.fourth-link {
+  margin-right: 0px;
+  margin-left: -60px;
+}
+
+.rectangle_footer a.fourth-link {
   margin-right: 0px;
   margin-left: -60px;
 }
@@ -74,10 +120,26 @@ h1.special {
   margin-left: -60px;
 }
 
+.rectangle_footer a.five-link {
+  margin-right: 130px;
+  margin-left: -60px;
+}
+
 .rectangle a.first-link:hover,
 .rectangle a.second-link:hover,
 .rectangle a.third-link:hover,
 .rectangle a.fourth-link:hover,
 .rectangle a.five-link:hover {
-  text-decoration: underline;
+  color: #FFFFFF;
+  cursor: pointer;
 }
+
+.rectangle_footer a.first-link:hover,
+.rectangle_footer a.second-link:hover,
+.rectangle_footer a.third-link:hover,
+.rectangle_footer a.fourth-link:hover,
+.rectangle_footer a.five-link:hover {
+  color: #FFFFFF;
+  cursor: pointer;
+}
+

@@ -1,85 +1,79 @@
 {% extends 'main/apartment_base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/apartment.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
+    <table class="apartment-table">
+        <thead class="apartment-table">
+            <tr>
+                <th class="apartment-header">№</th>
+                <th class="apartment-header">Собственник</th>
+                <th class="apartment-header">Кол. прожив.</th>
+                <th class="apartment-header">Общ. площ.</th>
+                <th class="apartment-header">Содерж. помещения</th>
+                <th class="apartment-header">Начислено</th>
+                <th class="apartment-header">Перерасчет</th>
+                <th class="apartment-header">Сальдо Начало</th>
+                <th class="apartment-header">Сальдо Конец</th>
+                <th class="apartment-header">Оплачено</th>
+                <th class="apartment-header">Пеня</th>
+                <th class="apartment-header">Итого к оплате</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for apartment in apartments %}
+            <tr onclick="location.href='/update/{{ apartment.serialNumber }}';" style="cursor:pointer;">
+                <td>
+                    <span class="apartment-nomer">{{ apartment.serialNumber }}</span>
+                </td>
+                <td>
+                    <span class="apartment-owner">{{ apartment.owner }}</span>
+                </td>
+                {% for detail in apartment.apartmentdetail_set.all %}
+                <td>{{ detail.livedQt }}</td>
+                <td>{{ detail.totalArea }}</td>
+                {% endfor %}
+                {% for apartment_fee in apartment.apartmentfee_set.all %}
+                <td>{{ apartment_fee.maintenance }}</td>
+                <td>{{ apartment_fee.accrued_expenses }}</td>
+                <td>{{ apartment_fee.recalculation }}</td>
+                <td>{{ apartment_fee.balance_start }}</td>
+                <td>{{ apartment_fee.balance_end }}</td>
+                <td>{{ apartment_fee.paid }}</td>
+                <td>{{ apartment_fee.fine }}</td>
+                <td>{{ apartment_fee.total }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-<table>
-  <thead>
-    <tr>
-        <th style="text-align:center">№</th>
-        <th style="text-align:center">ФИО</th>
-        <th style="text-align:center">Кол. зарег.</th>
-        <th style="text-align:center">Кол. прожив.</th>
-        <th style="text-align:center">Общ. площ.</th>
-        <th style="text-align:center">Содерж. помещения</th>
-        <th style="text-align:center">Эл/эн ОДН</th>
-        <th style="text-align:center">ОДН Холодная вода</th>
-        <th style="text-align:center">ОДН Сточные воды</th>
-        <th style="text-align:center">ОДН Горячая вода</th>
-        <th style="text-align:center">Лифт</th>
-        <th style="text-align:center">Содерж. помещ. итого</th>
-        <th style="text-align:center">Обращение с ТКО</th>
-        <th style="text-align:center">Электр.</th>
-        <th style="text-align:center">Отопление Гкал</th>
-        <th style="text-align:center">Отопление, руб. </th>
-        <th style="text-align:center">Гор. вода</th>
-        <th style="text-align:center">Хол. вода</th>
-        <th style="text-align:center">Водоотв.</th>
-        <th style="text-align:center">Итого коммунальные услуги</th>
-        <th style="text-align:center">Начислено</th>
-        <th style="text-align:center">Перерасчет</th>
-        <th style="text-align:center">Сальдо Начало</th>
-        <th style="text-align:center">Сальдо Конец</th>
-        <th style="text-align:center">Оплачено</th>
-        <th style="text-align:center">Пеня</th>
-        <th style="text-align:center">Итого к оплате</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for apartment in apartments %}
-      <tr>
-        <td style="text-align:center">{{ apartment.serialNumber }}</td>
-        <td style="text-align:center">
-          <a href="/update/{{ apartment.serialNumber }}"><span class="glyphicon glyphicon-pencil">{{ apartment.owner }}</span></a>
-        </td>
-        {% for detail in apartment.apartmentdetail_set.all %}
-            <td style="text-align:center">{{ detail.registredQt }}</td>
-            <td style="text-align:center">{{ detail.livedQt }}</td>
-            <td style="text-align:center">{{ detail.totalArea }}</td>
-        {% endfor %}
+<div class="back-to-top"></div>
 
-        {% for apartment_fee in apartment.apartmentfee_set.all %}
-            <td style="text-align:center">{{ apartment_fee.maintenance }}</td>
-            <td style="text-align:center">{{ apartment_fee.electricity_odn }}</td>
-            <td style="text-align:center">{{ apartment_fee.cold_water_odn }}</td>
-            <td style="text-align:center">{{ apartment_fee.sewage_odn }}</td>
-            <td style="text-align:center">{{ apartment_fee.hot_water_odn }}</td>
-            <td style="text-align:center">{{ apartment_fee.lift }}</td>
-            <td style="text-align:center">{{ apartment_fee.maintenance_full }}</td>
-            <td style="text-align:center">{{ apartment_fee.solid_waste }}</td>
-            <td style="text-align:center">{{ apartment_fee.electricity }}</td>
-            <td style="text-align:center">{{ apartment_fee.heating }}</td>
-            <td style="text-align:center">{{ apartment_fee.heating_rub }}</td>
-            <td style="text-align:center">{{ apartment_fee.hot_water }}</td>
-            <td style="text-align:center">{{ apartment_fee.cold_water }}</td>
-            <td style="text-align:center">{{ apartment_fee.sewage }}</td>
-            <td style="text-align:center">{{ apartment_fee.maintenance_total }}</td>
-            <td style="text-align:center">{{ apartment_fee.accrued_expenses }}</td>
-            <td style="text-align:center">{{ apartment_fee.recalculation }}</td>
-            <td style="text-align:center">{{ apartment_fee.balance_start }}</td>
-            <td style="text-align:center">{{ apartment_fee.balance_end }}</td>
-            <td style="text-align:center">{{ apartment_fee.paid }}</td>
-            <td style="text-align:center">{{ apartment_fee.fine }}</td>
-            <td style="text-align:center">{{ apartment_fee.total }}</td>
-        {% endfor %}
+<script>
+    var backToTopButton = document.querySelector('.back-to-top');
 
-{#        {% for charge in apartment.apartmentcharge_set.all %}#}
-{#            <td style="text-align:center">{{ charge.electricity_odn }}</td>#}
-{#        {% endfor %}#}
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 100) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
 
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
+
 
 <script>
   // get the filter select element
@@ -112,4 +106,3 @@
 
 
 {% endblock %}
-
