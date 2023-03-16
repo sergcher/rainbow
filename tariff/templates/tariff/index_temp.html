@@ -4,7 +4,6 @@
 {% block css %}
     <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
     <link href="{% static 'css/apartment.css' %}" rel="stylesheet">
-    <link href="{% static 'css/buttons.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -34,36 +33,27 @@
                 <th class="apartment-header">Подогрев воды ГКал</th>
                 <th class="apartment-header">Подогрев воды рубли</th>
                 <th class="apartment-header">Горячая вода</th>
-                <th class="apartment-header">Действие</th>
+                <th class="apartment-header"></th>
+                <th class="apartment-header"></th>
             </tr>
         </thead>
-<tbody>
-{% for tariff in tariff_list %}
-  <tr>
-    <td>
-      <span class="apartment-nomer">{{ forloop.counter }}</span>
-    </td>
-    <td>{{ tariff.name }}</td>
-    <td>{{ tariff.maintenance }}</td>
-    <td>{{ tariff.heating }}</td>
-    <td>{{ tariff.heating_rub }}</td>
-    <td>{{ tariff.hot_water }}</td>
-    <td class="container">
-  <form action="{% url 'tariff:tariff_update' tariff.id %}" method="get">
-    <div class="button">
-      <button class="edit-btn2" type="submit">Редактировать</button>
-    </div>
-  </form>
-  <form action="{% url 'tariff:tariff_delete' tariff.id %}" method="get">
-    {% csrf_token %}
-    <div class="button">
-      <button class="delete-btn2" type="submit">Удалить</button>
-    </div>
-  </form>
-</td>
-  </tr>
-{% endfor %}
-</tbody>
-</table>
+        <tbody>
+
+            {% for tariff in tariff_list  %}
+                <tr>
+                    <td>
+                        <span class="apartment-nomer">{{ forloop.counter }}</span>
+                    </td>
+                    <td>{{tariff.name}}</td>
+                    <td>{{tariff.maintenance}}</td>
+                    <td>{{tariff.heating}}</td>
+                    <td>{{tariff.heating_rub}}</td>
+                    <td>{{tariff.hot_water}}</td>
+                    <td><a href="{% url 'tariff:tariff_update' tariff.id %} ">Редактировать</a></td>
+                    <td><a href="{% url 'tariff:tariff_delete' tariff.id %}">Удалить</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock content %}

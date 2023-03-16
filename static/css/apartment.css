@@ -78,12 +78,23 @@ td:nth-child(2) {
 .back-to-top {
     position: fixed;
     bottom: 65px;
-    right: 180px;
+    right: 80px;
     width: 60px;
     height: 60px;
-    background-image: url("../img/top-button.png");
+    background-image: url("../img/BtT_Normal.png");
     background-size: contain;
     background-repeat: no-repeat;
     display: none;
     cursor: pointer;
+    opacity: 0.5;
+}
+
+.back-to-top:hover {
+    background-image: url("../img/BtT_Hover.png");
+    opacity: 100%;
+}
+
+.back-to-top:active {
+    background-image: url("../img/BtT_Click.png");
+    opacity: 100%;
 }

@@ -1,0 +1,39 @@
+.edit-btn2, .delete-btn2 {
+  background-color: #FFFFFF;
+  border: 1px solid #0184C8;
+  border-radius: 22.5px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #0184C8;
+  padding: 6px 12px;
+  text-align: center; /* Align the buttons to the center */
+  display: inline-block; /* Make the buttons inline */
+  width: 120px; /* Set a fixed width for the buttons */
+  transition: background-color 0.3s, color 0.3s; /* Add a transition effect */
+  outline: none;
+}
+
+.edit-btn2:hover, .delete-btn2:hover {
+  background-color: #E7F7FF;
+  color: #0184C8;
+}
+
+.edit-btn2:focus, .delete-btn2:focus,
+.edit-btn2:active, .delete-btn2:active {
+  background-color: #0184C8;
+  color: #FFFFFF;
+  outline: none;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    margin: 0 10px;
+}
