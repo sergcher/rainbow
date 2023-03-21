@@ -17,5 +17,5 @@ def login(request):
                 return HttpResponseRedirect(reverse('index'))
     else:
         form = UserLoginForm()
-    context = {'form': form}
+    context = {'login_form': form}
     return render(request, 'login.html', context)

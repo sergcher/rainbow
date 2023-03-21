@@ -27,7 +27,8 @@ class ApartmentChargeForm(forms.ModelForm):
     class Meta:
         model = ApartmentCharge
         fields = ('money_deposited', 'fine', 'balance_start', 'recalculation_electricity',
-                  'recalculation_heating_rub', 'recalculation_hot_water', 'recalculation_cold_water',
+                  'recalculation_heating_rub', 'recalculation_hot_water',
+                  'recalculation_cold_water',
                   'recalculation_sewage', 'recalculation_solid_waste', 'serialNumber')
         labels = {
             'money_deposited': 'Оплачено', 'fine': 'Пеня',
@@ -42,10 +43,40 @@ class ApartmentChargeForm(forms.ModelForm):
 
 
 class SettingsForm(forms.ModelForm):
+    attrs = {'class': 'card w-100',
+             'style': 'border-color: #D9D9D9; '
+                      'padding-left: 10px;'
+                      'padding-bottom: 2px;'
+             }
+    month_name = forms.CharField(
+        widget=forms.TextInput(attrs=attrs)
+    )
+    month_to_pay = forms.CharField(
+        widget=forms.TextInput(
+            attrs=attrs
+        )
+    )
+    month_to_date = forms.CharField(
+        widget=forms.TextInput(
+            attrs=attrs
+        )
+    )
+    bill = forms.CharField(
+        widget=forms.TextInput(
+            attrs=attrs
+        )
+    )
+    pay_up_to = forms.CharField(
+        widget=forms.TextInput(
+            attrs=attrs
+        )
+    )
+
     class Meta:
         model = Settings
         fields = ['month_name', 'month_to_pay', 'month_to_date', 'bill', 'pay_up_to']
         labels = {
-            'month_name': 'Месяц', 'month_to_pay': 'К оплате на (месяц)', 'month_to_date': 'К оплате на (дата)',
-            'bill': 'Счет-извещение', 'pay_up_to': 'Оплатить до'
+            'month_name': 'Месяц:', 'month_to_pay': 'К оплате на (месяц):',
+            'month_to_date': 'К оплате на (дата):',
+            'bill': 'Счет-извещение:', 'pay_up_to': 'Оплатить до:'
         }

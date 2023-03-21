@@ -9,6 +9,23 @@ from main.models import (Apartment, ApartmentCharge, ApartmentCounter,
                          ApartmentDetail, ApartmentFee)
 from main.pdf_generator import generate_pdf
 
+from users.forms import UserLoginForm
+
+
+def settings(request):
+    form = SettingsForm(instance=Settings.objects.get(id=1))
+    if request.method == 'POST':
+        form = SettingsForm(request.POST, instance=Settings.objects.get(id=1))
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+        else:
+            print(form.errors)
+    context = {
+        'settings_form': form,
+    }
+    return render(request, 'main/settings_form.html', context)
+
 
 def index(request):
     filter_criteria = request.GET.get('filter')
@@ -22,6 +39,8 @@ def index(request):
         'apartment_details': ApartmentDetail.objects.all(),
         'apartment_fees': ApartmentFee.objects.all(),
         'apartment_charges': ApartmentCharge.objects.all(),
+        'settings_form': SettingsForm(instance=Settings.objects.get(id=1)),
+        'login_form': UserLoginForm(data=request.POST)
     }
     return render(request, 'main/index.html', context)
 
@@ -76,21 +95,6 @@ def update(request, id):
 def update_fees(request):
     calculate_fees()
     return redirect('index')
-
-
-def settings(request):
-    form = SettingsForm(instance=Settings.objects.get(id=1))
-    if request.method == 'POST':
-        form = SettingsForm(request.POST, instance=Settings.objects.get(id=1))
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-        else:
-            print(form.errors)
-    context = {
-        'form': form,
-    }
-    return render(request, 'main/settings_form.html', context)
 
 
 def generate_excel(request):

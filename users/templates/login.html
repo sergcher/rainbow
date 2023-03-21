@@ -1,45 +1,42 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <main>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-5">
-                        {% if form.non_field_errors %}
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert"
-                             style="margin-top: 50px;">
-                            {{ form.non_field_errors }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                             </div>
-                        {% endif %}
-                        <div class="card shadow-lg border-0 rounded-lg mt-5">
-                            <div class="card-header"><h3 class="text-center font-weight-light my-4">Авторизация</h3>
-                            </div>
-                            <div class="card-body">
-                                <form action="{% url 'users:login' %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="form-group">
-                                        <label class="small mb-1" for="{{ form.username.id_for_label }}">Имя пользователя</label>
-                                        {{ form.username }}
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="small mb-1" for="{{ form.password.id_for_label }}">Пароль</label>
-                                        {{ form.password }}
-                                    </div>
-                                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" href="#"></a>
-                                        <input class="btn btn-primary" type="submit" value="Авторизоваться">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="card-footer text-center">
-                                <div class="small"><a href="{% url 'index' %}">Вернуться на главную страницу</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-center bg-primary">
+        <h5 class="modal-title w-100" style="font-size: 14px; color: #FFFFFF; font-family: Segoe UI;">АВТОРИЗАЦИЯ</h5>
+      </div>
+      <form action="{% url 'users:login' %}" method="post">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col">
+              <label for="{{ login_form.username.id_for_label }}" class="form-label">Имя пользователя:</label>
+              {{ login_form.username }}
             </div>
-        </main>
-{% endblock %}
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="{{ login_form.password.id_for_label }}" class="form-label">Пароль:</label>
+              {{ login_form.password }}
+            </div>
+          </div>
+            <br>
+          <div class="row mb-3">
+            <div class="col text-center">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a class="btn-segoe" data-bs-dismiss="modal">Отмена</a>
+                <a class="btn-segoe-primary" id="saveButton">Войти</a>
+                <input type="submit" class="d-none" id="submitButton">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("saveButton").addEventListener("click", function() {
+    document.getElementById("submitButton").click();
+  });
+</script>

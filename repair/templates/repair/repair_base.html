@@ -1,17 +1,21 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
-{% block repair_header %}
-
-    <nav>
-      <ul>
-        <li style="display:inline-block;margin-right:20px;">
-            <a href="{% url 'repair:repair_generate_excel' %}">Excel</a>
-        </li>
-        <li style="display:inline-block;margin-right:20px;"><a href="{% url 'repair:repair_receipt' %}">Квитанции</a></li>
-        <li style="display:inline-block;margin-right:20px;"><a href="{% url 'repair:repair_generate_txt' %}">Для клиент банка</a></li>
-        <li style="display:inline-block;margin-right:20px;"><a href="{% url 'repair:generate_excel_repair_total_file' %}">Итоги</a></li>
-      </ul>
-    </nav>
-
+{% block css %}
+    <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
 {% endblock %}
 
+{% block repair_header %}
+    <h1 class="special2">Капитальный ремонт</h1>
+    <br>
+    <div class="nav-container">
+      <nav>
+        <ul>
+          <li><a href="{% url 'repair:repair_generate_excel' %}">Excel</a></li>
+          <li><a href="{% url 'repair:repair_receipt' %}">Квитанции</a></li>
+          <li><a href="{% url 'repair:repair_generate_txt' %}">Для клиент банка</a></li>
+          <li><a href="{% url 'repair:generate_excel_repair_total_file' %}">Итоги</a></li>
+        </ul>
+      </nav>
+    </div>
+{% endblock %}

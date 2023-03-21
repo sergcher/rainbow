@@ -1,26 +1,57 @@
-{% extends 'main/base.html' %}
-
-{% block content %}
-
-<!-- BOOTSTRAP FORM -->
-
-<div class="container d-flex justify-content-center mt-5" style="width: 25%;">
-    <div class="col mt-5">
-        <form action="" method="post">
-            {% csrf_token %}
-            <table class="table">
-                {{form.as_table}}
-            </table>
-            <div class="container d-flex justify-content-center" style="width: 10%;">
-                <input type="submit" class="btn btn-primary btn-lg" value="Сохранить" style="margin-right: 30px; margin-top: 30px;">
-                <input type="submit" class="btn btn-danger btn-lg" style="margin-top: 30px;" onclick="window.location='{% url 'index' %}'; return false;" value="Отмена">
+<div class="modal fade" id="SettingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-center bg-primary">
+        <h5 class="modal-title w-100" style="font-size: 14px; color: #FFFFFF; font-family: Segoe UI;">НАСТРОЙКИ</h5>
+      </div>
+      <form action="{% url 'main:settings' %}" method="post">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col">
+              <label for="{{ settings_form.month_name.id_for_label }}" class="form-label">Месяц:</label>
+              {{ settings_form.month_name }}
             </div>
-        </form>
-
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="{{ settings_form.month_to_pay.id_for_label }}" class="form-label">К оплате на (месяц):</label>
+              {{ settings_form.month_to_pay }}
+            </div>
+            <div class="col">
+              <label for="{{ settings_form.bill.id_for_label }}" class="form-label">Счет-извещение:</label>
+              {{ settings_form.bill }}
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="{{ settings_form.month_to_date.id_for_label }}" class="form-label">К оплате на (дата):</label>
+              {{ settings_form.month_to_date }}
+            </div>
+            <div class="col">
+              <label for="{{ settings_form.pay_up_to.id_for_label }}" class="form-label">Оплатить до:</label>
+              {{ settings_form.pay_up_to }}
+            </div>
+          </div>
+            <br>
+          <div class="row mb-3">
+            <div class="col text-center">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a class="btn-segoe" data-bs-dismiss="modal">Отмена</a>
+                <a class="btn-segoe-primary" id="loginButton">Вход</a>
+                <input type="submit" class="d-none" id="submitButtonLogin">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 
-<!-- END BOOTSTRAP FORM -->
 
-{% endblock %}
-
+<script>
+  document.getElementById("loginButton").addEventListener("click", function() {
+    document.getElementById("submitButtonLogin").click();
+  });
+</script>
