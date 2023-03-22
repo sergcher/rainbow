@@ -48,29 +48,12 @@ class SettingsForm(forms.ModelForm):
                       'padding-left: 10px;'
                       'padding-bottom: 2px;'
              }
-    month_name = forms.CharField(
-        widget=forms.TextInput(attrs=attrs)
-    )
-    month_to_pay = forms.CharField(
-        widget=forms.TextInput(
-            attrs=attrs
-        )
-    )
-    month_to_date = forms.CharField(
-        widget=forms.TextInput(
-            attrs=attrs
-        )
-    )
-    bill = forms.CharField(
-        widget=forms.TextInput(
-            attrs=attrs
-        )
-    )
-    pay_up_to = forms.CharField(
-        widget=forms.TextInput(
-            attrs=attrs
-        )
-    )
+
+    month_name = forms.CharField(widget=forms.TextInput(attrs=attrs))
+    month_to_pay = forms.CharField(widget=forms.TextInput(attrs=attrs))
+    month_to_date = forms.CharField(widget=forms.TextInput(attrs=attrs))
+    bill = forms.CharField(widget=forms.TextInput(attrs=attrs))
+    pay_up_to = forms.CharField(widget=forms.TextInput(attrs=attrs))
 
     class Meta:
         model = Settings

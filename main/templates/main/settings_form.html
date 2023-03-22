@@ -38,8 +38,8 @@
             <div class="col text-center">
               <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a class="btn-segoe" data-bs-dismiss="modal">Отмена</a>
-                <a class="btn-segoe-primary" id="loginButton">Вход</a>
-                <input type="submit" class="d-none" id="submitButtonLogin">
+                <a class="btn-segoe-primary" id="saveSettingsButton">Сохранить</a>
+                <input type="submit" class="d-none" id="submitButtonSaveSettings">
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@
 
 
 <script>
-  document.getElementById("loginButton").addEventListener("click", function() {
-    document.getElementById("submitButtonLogin").click();
+  document.getElementById("saveSettingsButton").addEventListener("click", function() {
+    document.getElementById("submitButtonSaveSettings").click();
   });
 </script>

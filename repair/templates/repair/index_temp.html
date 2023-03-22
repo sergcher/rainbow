@@ -24,10 +24,7 @@
         </thead>
         <tbody>
             {% for apartment in apartments %}
-            <tr onclick="location.href='/repair/edit/{{ apartment.serialNumber }}';" style="cursor:pointer;"
-                action="{% url 'cables_add_cycle' new_cycle.id %}"
-                data-toggle="modal" data-target="#repairEditModal"
-                >
+            <tr onclick="location.href='/repair/edit/{{ apartment.serialNumber }}';" style="cursor:pointer;">
                 <td>
                     <span class="apartment-nomer">{{ apartment.serialNumber }}</span>
                 </td>
@@ -100,5 +97,6 @@
     window.location.href = newUrl;
   });
 </script>
+
 
 {% endblock %}

@@ -44,6 +44,19 @@ class RepairUpdateView(RepairBaseView, TitleMixin, UpdateView):
         context['page_num'] = self.object.id
         return context
 
+#
+# class RepairUpdateView(RepairBaseView, TitleMixin, UpdateView):
+#     """View to update a repair"""
+#     template_name = 'repair/edit.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(RepairUpdateView, self).get_context_data(**kwargs)
+#         context['title'] = f'Капитальный ремонт квартира № {self.object.id}'
+#         context['prev_url'] = f"/repair/edit/{self.object.id - 1}"
+#         context['next_url'] = f"/repair/edit/{self.object.id + 1}"
+#         context['page_num'] = self.object.id
+#         return context
+
 
 def repair_generate_txt(request):
     response = repair_export_client_bank()

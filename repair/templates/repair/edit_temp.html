@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-6">
+          <button onclick="window.location.href = '{{ prev_url }}';">Перейти на квартиру {{ page_num|add:-1 }}</button>
+          <button onclick="window.location.href = '{{ next_url }}';">Перейти на квартиру {{ page_num|add:1 }}</button>
+        </div>
+    </div>
+    <div class="col-md-6">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+          <label for="{{ form.debt.id_for_label }}">Долг на начало месяца</label>
+          {{ form.debt }}
+        </div>
+        <div class="form-group">
+          <label>Начислено</label>
+          {{ object.accrued }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.fine.id_for_label }}">Пеня</label>
+          {{ form.fine }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.recalculation.id_for_label }}">Перерасчет</label>
+          {{ form.recalculation }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.paid.id_for_label }}">Оплачено</label>
+          {{ form.paid }}
+        </div>
+        <div class="form-group">
+          <label>Итого</label>
+          {{ object.total }}
+        </div>
+        <div class="form-group" style="display: none;">
+              <label for="{{ form.serialNumber.id_for_label }}">{{ form.serialNumber.label }}</label>
+              {{ form.serialNumber }}
+        </div>
+        <input type="submit" value="Сохранить">
+      </form>
+    </div>
+
+
+{% endblock %}
+
+

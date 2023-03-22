@@ -1,0 +1,23 @@
+{% for tariff in tariff_list %}
+  <tr>
+    <td>
+      <span class="apartment-nomer">{{ forloop.counter }}</span>
+    </td>
+    <td>{{ tariff.name }}</td>
+    <td>{{ tariff.maintenance }}</td>
+    <td>{{ tariff.heating }}</td>
+    <td>{{ tariff.heating_rub }}</td>
+    <td>{{ tariff.hot_water }}</td>
+    <td class="container">
+    <div class="button">
+      <button class="edit-btn2" hx-get="{% url 'tariff:edit_tariff' pk=tariff.pk %}" hx-target="#dialog">Редактировать</button>
+    </div>
+    <form action="{% url 'tariff:tariff_delete' tariff.pk %}" method="get">
+    {% csrf_token %}
+        <div class="button">
+          <button class="delete-btn2" type="submit">Удалить</button>
+        </div>
+    </form>
+    </td>
+</tr>
+{% endfor %}

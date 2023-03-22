@@ -50,12 +50,14 @@ label.form-label {
   background-color: #E7F7FF;
   color: #0184C8;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .btn-segoe-primary:hover {
   background: #199EE3;
   color: #FFFFFF;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .btn-segoe:focus,
@@ -64,6 +66,7 @@ label.form-label {
   color: #FFFFFF;
   outline: none;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .btn-segoe-primary:focus,
@@ -71,4 +74,5 @@ label.form-label {
   background: #0776B0;
   color: #FFFFFF;
   text-decoration: none;
+  cursor: pointer;
 }

@@ -5,6 +5,7 @@
     <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
     <link href="{% static 'css/apartment.css' %}" rel="stylesheet">
     <link href="{% static 'css/buttons.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
 {% endblock %}
 
 {% block content %}
@@ -20,7 +21,9 @@
 <div class="nav-container">
 <nav>
 <ul>
-  <li><a href="{% url 'tariff:tariff_create' %}">Добавить новый тариф</a></li>
+  <li><a hx-get="{% url 'tariff:add_tariff' %}" hx-target="#dialog"
+         style="color: #FFFFFF; cursor: pointer;
+         text-decoration: none">Добавить новый тариф</a></li>
 </ul>
 </nav>
 </div>
@@ -37,34 +40,30 @@
                 <th class="apartment-header">Действие</th>
             </tr>
         </thead>
-<tbody>
-{% for tariff in tariff_list %}
-  <tr>
-    <td>
-      <span class="apartment-nomer">{{ forloop.counter }}</span>
-    </td>
-    <td>{{ tariff.name }}</td>
-    <td>{{ tariff.maintenance }}</td>
-    <td>{{ tariff.heating }}</td>
-    <td>{{ tariff.heating_rub }}</td>
-    <td>{{ tariff.hot_water }}</td>
-    <td class="container">
-  <form action="{% url 'tariff:tariff_update' tariff.id %}" method="get">
-    <div class="button">
-      <button class="edit-btn2" type="submit">Редактировать</button>
-    </div>
-  </form>
-  <form action="{% url 'tariff:tariff_delete' tariff.id %}" method="get">
-    {% csrf_token %}
-    <div class="button">
-      <button class="delete-btn2" type="submit">Удалить</button>
-    </div>
-  </form>
-</td>
-  </tr>
-{% endfor %}
-</tbody>
+        <tbody hx-trigger="load, tariffListChanged from:body" hx-get="{% url 'tariff:tariff_list' %}" hx-target="this">
+          <tr>
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
 </table>
+
+<!-- Placeholder for the modal -->
+    <div id="modal" class="modal fade">
+      <div id="dialog" class="modal-dialog modal-dialog-centered modal-lg" hx-target="this"></div>
+    </div>
+
+<!-- Empty toast to show the message -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div id="toast-body" class="toast-body"></div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
 
 {% endblock content %}
 

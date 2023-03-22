@@ -7,7 +7,9 @@ class Tariff(models.Model):
     heating = models.FloatField(null=True, blank=True)
     heating_rub = models.FloatField(null=True, blank=True)
     hot_water = models.FloatField(null=True, blank=True)
+
     hot_water_odn = models.FloatField(null=True, blank=True)
+
     cold_water = models.FloatField(null=True, blank=True)
     cold_water_odn = models.FloatField(null=True, blank=True)
     sewage = models.FloatField(null=True, blank=True)
