@@ -1,50 +1,72 @@
-{% extends 'main/base.html' %}
-
-{% block content %}
-
-    <div class="row">
-        <div class="col-md-6">
-          <button onclick="window.location.href = '{{ prev_url }}';">Перейти на квартиру {{ page_num|add:-1 }}</button>
-          <button onclick="window.location.href = '{{ next_url }}';">Перейти на квартиру {{ page_num|add:1 }}</button>
+{% load widget_tweaks %}
+{% with WIDGET_ERROR_CLASS='is-invalid' %}
+<form hx-post="{{ request.path }}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' class="modal-content">
+    <div class="modal-content">
+      <div class="modal-header text-center bg-primary">
+        <h5 class="modal-title w-100" style="font-size: 14px; color: #FFFFFF; font-family: Segoe UI;">{{ title }}</h5>
+      </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col">
+              <label for="{{ repair_form.debt.id_for_label }}" class="form-label">Долг на начало месяца:</label>
+                {% render_field repair_form.debt class="form-control" %}
+                <div class="invalid-feedback">{{ repair_form.debt.errors|first }}</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label class="form-label" style="font-weight: bold">НАЧИСЛЕНО:</label>
+               <b>{{ repair.accrued }}</b>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="{{ repair_form.fine.id_for_label }}" class="form-label">Пеня:</label>
+              {% render_field repair_form.fine class="form-control" %}
+              <div class="invalid-feedback">{{ repair_form.fine.errors|first }}</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="{{ repair_form.recalculation.id_for_label }}" class="form-label">Перерасчет:</label>
+              {% render_field repair_form.recalculation class="form-control" %}
+              <div class="invalid-feedback">{{ repair_form.recalculation.errors|first }}</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="{{ repair_form.paid.id_for_label }}" class="form-label">Оплачено:</label>
+              {% render_field repair_form.paid class="form-control" %}
+              <div class="invalid-feedback">{{ repair_form.paid.errors|first }}</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label class="form-label" style="font-weight: bold">ИТОГО:</label>
+              <b>{{ repair.total }}</b>
+            </div>
+          </div>
+            <br>
+          <div class="row mb-3">
+            <div class="col text-center">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a class="btn-segoe" data-bs-dismiss="modal">Отменить</a>
+                <a class="btn-segoe-primary" id="saveRepairButton">Сохранить</a>
+                <input type="submit" class="d-none" id="submitButtonSaveRepair">
+              </div>
+            </div>
+          </div>
+         <div class="form-group" style="display: none;">
+              <label for="{{ repair_form.serialNumber.id_for_label }}">{{ repair_form.serialNumber.label }}</label>
+              {{ repair_form.serialNumber }}
+        </div>
         </div>
     </div>
-    <div class="col-md-6">
-      <form method="post">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        <div class="form-group">
-          <label for="{{ form.debt.id_for_label }}">Долг на начало месяца</label>
-          {{ form.debt }}
-        </div>
-        <div class="form-group">
-          <label>Начислено</label>
-          {{ object.accrued }}
-        </div>
-        <div class="form-group">
-          <label for="{{ form.fine.id_for_label }}">Пеня</label>
-          {{ form.fine }}
-        </div>
-        <div class="form-group">
-          <label for="{{ form.recalculation.id_for_label }}">Перерасчет</label>
-          {{ form.recalculation }}
-        </div>
-        <div class="form-group">
-          <label for="{{ form.paid.id_for_label }}">Оплачено</label>
-          {{ form.paid }}
-        </div>
-        <div class="form-group">
-          <label>Итого</label>
-          {{ object.total }}
-        </div>
-        <div class="form-group" style="display: none;">
-              <label for="{{ form.serialNumber.id_for_label }}">{{ form.serialNumber.label }}</label>
-              {{ form.serialNumber }}
-        </div>
-        <input type="submit" value="Сохранить">
-      </form>
-    </div>
+</form>
+{% endwith %}
 
-
-{% endblock %}
-
-
+<script>
+  document.getElementById("saveRepairButton").addEventListener("click", function() {
+    document.getElementById("submitButtonSaveRepair").click();
+  });
+</script>

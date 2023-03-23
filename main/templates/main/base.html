@@ -17,7 +17,7 @@
       <div class="rectangle">
         <a href="{% url 'tariff:tariff_list_main' %}" class="first-link">Тарифы</a>
         {% if title == 'ТСЖ Радуга'  %}
-            <a href="{% url 'repair:repair_list' %}" class="second-link">Капитальный ремонт</a>
+            <a href="{% url 'repair:repair_list_main' %}" class="second-link">Капитальный ремонт</a>
         {% else %}
             <a href="{% url 'index' %}" class="second-link">Квартиры</a>
         {% endif %}
@@ -43,6 +43,7 @@
   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
   <script src="{% static "js/dialog.js" %}"></script>
+  <script src="{% static "js/confirmation.js" %}"></script>
   <script src="{% static "js/toast.js" %}"></script>
 </body>
 

@@ -12,12 +12,9 @@
     <div class="button">
       <button class="edit-btn2" hx-get="{% url 'tariff:edit_tariff' pk=tariff.pk %}" hx-target="#dialog">Редактировать</button>
     </div>
-    <form action="{% url 'tariff:tariff_delete' tariff.pk %}" method="get">
-    {% csrf_token %}
-        <div class="button">
-          <button class="delete-btn2" type="submit">Удалить</button>
-        </div>
-    </form>
+    <div class="button">
+      <button class="delete-btn2" hx-get="{% url 'tariff:tariff_delete' pk=tariff.pk %}" hx-target="#confirmation">Удалить</button>
+    </div>
     </td>
 </tr>
 {% endfor %}

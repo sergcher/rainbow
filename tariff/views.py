@@ -2,7 +2,6 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 from common.views import TitleMixin
@@ -77,19 +76,24 @@ def edit_tariff(request, pk):
     })
 
 
-class TariffCreateView(TariffBaseView, TitleMixin, CreateView):
-    """View to create a new tariff"""
-    template_name = 'tariff/edit.html'
-    title = 'Новый тариф'
-
-
-class TariffUpdateView(TariffBaseView, TitleMixin, UpdateView):
-    """View to update a tariff"""
-    template_name = 'tariff/edit.html'
-    title = 'Редактировать тариф'
-
-
-class TariffDeleteView(TariffBaseView, TitleMixin, DeleteView):
-    """View to delete a tariff"""
-    template_name = 'tariff/confirm_delete.html'
-    title = 'Удалить тариф'
+def remove_tariff(request, pk):
+    tariff = get_object_or_404(Tariff, pk=pk)
+    if request.method == "POST":
+        tariff.delete()
+        return HttpResponse(
+            status=204,
+            headers={
+                'HX-Trigger': json.dumps({
+                    "tariffListChanged": None,
+                    "showMessage": f"Тариф {tariff.name} удален."
+                })
+            }
+        )
+    else:
+        tariff_form = TariffForm(instance=tariff)
+    return render(request, 'tariff/confirm_delete.html', {
+        'tariff_form': tariff_form,
+        'tariff': tariff,
+        'tariff_name': tariff.name,
+        'title': 'ПОДТВЕРЖДЕНИЕ ДЕЙСТВИЯ',
+    })

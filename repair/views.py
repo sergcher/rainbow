@@ -1,3 +1,7 @@
+import json
+
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import UpdateView
@@ -10,6 +14,39 @@ from repair.excel import (export_excel_repair_total_file,
                           repair_generate_excel_file)
 from repair.models import CapitalRepair
 from repair.pdf_repair import repair_generate_pdf
+from repair.forms import CapitalRepairForm
+
+
+def repair_list(request):
+    return render(request, 'repair/repair_list.html', {
+        'repairs': CapitalRepair.objects.all(),
+        'apartments': Apartment.objects.all(),
+        'details': ApartmentDetail.objects.all(),
+    })
+
+
+def edit_repair(request, pk):
+    repair = get_object_or_404(CapitalRepair, pk=pk)
+    if request.method == "POST":
+        repair_form = CapitalRepairForm(request.POST, instance=repair)
+        if repair_form.is_valid():
+            repair_form.save()
+            return HttpResponse(
+                status=204,
+                headers={
+                    'HX-Trigger': json.dumps({
+                        "repairListChanged": None,
+                        "showMessage": f"Данные по квартире №{repair.serialNumber} изменены."
+                    })
+                }
+            )
+    else:
+        repair_form = CapitalRepairForm(instance=repair)
+    return render(request, 'repair/edit.html', {
+        'repair_form': repair_form,
+        'repair': repair,
+        'title': f'КАПИТАЛЬНЫЙ РЕМОНТ КВАРТИРА №{repair.serialNumber}',
+    })
 
 
 class RepairBaseView(View):
@@ -43,19 +80,6 @@ class RepairUpdateView(RepairBaseView, TitleMixin, UpdateView):
         context['next_url'] = f"/repair/edit/{self.object.id + 1}"
         context['page_num'] = self.object.id
         return context
-
-#
-# class RepairUpdateView(RepairBaseView, TitleMixin, UpdateView):
-#     """View to update a repair"""
-#     template_name = 'repair/edit.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(RepairUpdateView, self).get_context_data(**kwargs)
-#         context['title'] = f'Капитальный ремонт квартира № {self.object.id}'
-#         context['prev_url'] = f"/repair/edit/{self.object.id - 1}"
-#         context['next_url'] = f"/repair/edit/{self.object.id + 1}"
-#         context['page_num'] = self.object.id
-#         return context
 
 
 def repair_generate_txt(request):

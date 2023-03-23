@@ -2,12 +2,19 @@
 {% load static %}
 
 {% block css %}
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
     <link href="{% static 'css/apartment.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
 {% endblock %}
 
 {% block content %}
+
+{% for repair in repair_list  %}
+    {% for colname in repair.column_set.all  %}
+        <p>{{ colname }}</p>
+    {% endfor %}
+{% endfor %}
+
     <table class="apartment-table">
         <thead class="apartment-table">
             <tr>
@@ -22,35 +29,31 @@
                 <th class="apartment-header">Итого</th>
             </tr>
         </thead>
-        <tbody>
-            {% for apartment in apartments %}
-            <tr onclick="location.href='/repair/edit/{{ apartment.serialNumber }}';" style="cursor:pointer;"
-                action="{% url 'cables_add_cycle' new_cycle.id %}"
-                data-toggle="modal" data-target="#repairEditModal"
-                >
-                <td>
-                    <span class="apartment-nomer">{{ apartment.serialNumber }}</span>
-                </td>
-                <td>
-                    <span class="apartment-owner">{{ apartment.owner }}</span>
-                </td>
-                {% for detail in apartment.apartmentdetail_set.all %}
-                    <td>{{ detail.totalArea }}</td>
-                {% endfor %}
-                {% for repair in apartment.capitalrepair_set.all %}
-                    <td>{{ repair.debt }}</td>
-                    <td>{{ repair.accrued }}</td>
-                    <td>{{ repair.fine }}</td>
-                    <td>{{ repair.recalculation }}</td>
-                    <td>{{ repair.paid }}</td>
-                    <td>{{ repair.total }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
+        <tbody hx-trigger="load, repairListChanged from:body" hx-get="{% url 'repair:repair_list' %}" hx-target="this">
+          <tr>
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
         </tbody>
     </table>
 
 <div class="back-to-top"></div>
+
+<!-- Placeholder for the modal edit tariff -->
+    <div id="modal" class="modal fade">
+      <div id="dialog" class="modal-dialog modal-dialog-centered" hx-target="this"></div>
+    </div>
+
+<!-- Empty toast to show the message -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div id="toast-body" class="toast-body"></div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
 
 <script>
     var backToTopButton = document.querySelector('.back-to-top');
@@ -71,34 +74,5 @@
     });
 </script>
 
-
-<script>
-  // get the filter select element
-  const filterSelect = document.getElementById('filter');
-
-  // get the current filter value from the query string
-  const urlParams = new URLSearchParams(window.location.search);
-  const currentFilter = urlParams.get('filter');
-
-  // set the selected option in the filter select element based on the current filter value
-  if (currentFilter === 'balance_end_gt_6000') {
-    filterSelect.value = 'balance_end_gt_6000';
-  }
-
-  // add event listener to the filter select element
-  filterSelect.addEventListener('change', function() {
-    // get the selected option value
-    const selectedValue = this.value;
-
-    // construct the new URL based on the selected option value
-    let newUrl = window.location.origin + window.location.pathname;
-    if (selectedValue) {
-      newUrl += '?filter=' + selectedValue;
-    }
-
-    // redirect to the new URL
-    window.location.href = newUrl;
-  });
-</script>
 
 {% endblock %}

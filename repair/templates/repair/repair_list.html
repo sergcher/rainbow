@@ -1,0 +1,23 @@
+{% for apartment in apartments %}
+    {% for repair in apartment.capitalrepair_set.all %}
+<tr hx-get="{% url 'repair:edit_repair' pk=repair.pk %}" hx-target="#dialog" style="cursor:pointer;">
+    {% endfor %}
+    <td>
+        <span class="apartment-nomer">{{ apartment.serialNumber }}</span>
+    </td>
+    <td>
+        <span class="apartment-owner">{{ apartment.owner }}</span>
+    </td>
+    {% for detail in apartment.apartmentdetail_set.all %}
+        <td>{{ detail.totalArea }}</td>
+    {% endfor %}
+    {% for repair in apartment.capitalrepair_set.all %}
+        <td>{{ repair.debt }}</td>
+        <td>{{ repair.accrued }}</td>
+        <td>{{ repair.fine }}</td>
+        <td>{{ repair.recalculation }}</td>
+        <td>{{ repair.paid }}</td>
+        <td>{{ repair.total }}</td>
+    {% endfor %}
+</tr>
+{% endfor %}
