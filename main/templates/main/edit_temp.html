@@ -2,13 +2,15 @@
 
 {% block content %}
 
-{#        <div class="col-md-6">#}
-{#          <button onclick="window.location.href = '{{ prev_url }}';">Перейти на квартиру {{ page_num|add:-1 }}</button>#}
-{#          <button onclick="window.location.href = '{{ next_url }}';">Перейти на квартиру {{ page_num|add:1 }}</button>#}
-{#        </div>#}
+    <div class="row">
+        <div class="col-md-6">
+          <button onclick="window.location.href = '{{ prev_url }}';">Перейти на квартиру {{ page_num|add:-1 }}</button>
+          <button onclick="window.location.href = '{{ next_url }}';">Перейти на квартиру {{ page_num|add:1 }}</button>
+        </div>
         {% include 'main/edit_detail.html' %}
-{#        {% include 'main/edit_counter.html' %}#}
-{#        {% include 'main/edit_charge.html' %}#}
+        {% include 'main/edit_counter.html' %}
+        {% include 'main/edit_charge.html' %}
+    </div>
 
 <script>
     const transmitButton = document.getElementById("transmitButton");

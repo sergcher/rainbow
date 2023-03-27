@@ -1,10 +1,69 @@
 from django import forms
 
 from main.models import (ApartmentCharge, ApartmentCounter, ApartmentDetail,
-                         Settings)
+                         Settings, Tariff)
+
+
+class TariffChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.name
 
 
 class ApartmentDetailForm(forms.ModelForm):
+    attrs = {'class': 'card',
+             'style': 'border-color: #D9D9D9; '
+                      'padding-left: 10px;'
+                      'padding-bottom: 2px;'
+             }
+
+    error_messages = {
+        'invalid': 'Для ввода дробных чисел используйте точку'
+    }
+
+    registredQt = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Количество зарегистрированных:'
+    )
+
+    livedQt = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Количество проживающих:'
+    )
+
+    totalArea = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Общая площадь:'
+    )
+
+    personalAccount = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Лицевой счет:'
+    )
+
+    account_number = forms.CharField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Единый лиц. счёт в ГИС ЖКХ:'
+    )
+
+    tariff = TariffChoiceField(
+        queryset=Tariff.objects.all(),
+        widget=forms.Select(attrs=attrs),
+        error_messages=error_messages,
+        required=False,
+        empty_label=None,
+        label='Действующий тариф:'
+    )
+
     class Meta:
         model = ApartmentDetail
         fields = ('registredQt', 'livedQt', 'totalArea',

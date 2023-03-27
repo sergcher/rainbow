@@ -15,6 +15,8 @@ from repair.excel import (export_excel_repair_total_file,
 from repair.models import CapitalRepair
 from repair.pdf_repair import repair_generate_pdf
 from repair.forms import CapitalRepairForm
+from users.forms import UserLoginForm
+from main.forms import (Settings, SettingsForm)
 
 
 def repair_list(request):
@@ -66,19 +68,8 @@ class RepairListView(TitleMixin, ListView):
         context['details'] = ApartmentDetail.objects.all()
         context['apartments'] = Apartment.objects.all()
         context['repairs'] = CapitalRepair.objects.all()
-        return context
-
-
-class RepairUpdateView(RepairBaseView, TitleMixin, UpdateView):
-    """View to update a repair"""
-    template_name = 'repair/edit.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(RepairUpdateView, self).get_context_data(**kwargs)
-        context['title'] = f'Капитальный ремонт квартира № {self.object.id}'
-        context['prev_url'] = f"/repair/edit/{self.object.id - 1}"
-        context['next_url'] = f"/repair/edit/{self.object.id + 1}"
-        context['page_num'] = self.object.id
+        context['settings_form'] = SettingsForm(instance=Settings.objects.get(id=1))
+        context['login_form'] = UserLoginForm()
         return context
 
 
