@@ -1,42 +1,134 @@
-<div class="col-md-6">
-          <form method="post">
-            {% csrf_token %}
-            {{ counterform.non_field_errors }}
-            <div class="form-group">
-                <label for="{{ counterform.hot_water_previous.id_for_label }}">Счетчики Горячей воды:</label><br>
-                <input type="number" id="{{ counterform.hot_water_previous.auto_id }}" name="{{ counterform.hot_water_previous.name }}" value="{{ counterform.hot_water_previous.value }}">
-                -
-                <input type="number" id="{{ counterform.hot_water_current.auto_id }}" name="{{ counterform.hot_water_current.name }}" value="{{ counterform.hot_water_current.value }}">
-                =
-                <input type="number" id="{{ counterform.hot_water_value.auto_id }}" name="{{ counterform.hot_water_value.name }}" value="{{ counterform.hot_water_value.value }}">
-            </div>
-            <div class="form-group">
-                <label for="{{ counterform.cold_water_previous.id_for_label }}">Счетчики Холодной воды:</label><br>
-                <input type="number" id="{{ counterform.cold_water_previous.auto_id }}" name="{{ counterform.cold_water_previous.name }}" value="{{ counterform.cold_water_previous.value }}">
-                -
-                <input type="number" id="{{ counterform.cold_water_current.auto_id }}" name="{{ counterform.cold_water_current.name }}" value="{{ counterform.cold_water_current.value }}">
-                =
-                <input type="number" id="{{ counterform.cold_water_value.auto_id }}" name="{{ counterform.cold_water_value.name }}" value="{{ counterform.cold_water_value.value }}">
-            </div>
-            <div class="form-group">
-                <label for="{{ counterform.electricity_previous.id_for_label }}">Счетчики Электричество:</label><br>
-                <input type="number" id="{{ counterform.electricity_previous.auto_id }}" name="{{ counterform.electricity_previous.name }}" value="{{ counterform.electricity_previous.value }}">
-                -
-                <input type="number" id="{{ counterform.electricity_current.auto_id }}" name="{{ counterform.electricity_current.name }}" value="{{ counterform.electricity_current.value }}">
-                =
-                <input type="number" id="{{ counterform.electricity_value.auto_id }}" name="{{ counterform.electricity_value.name }}" value="{{ counterform.electricity_value.value }}">
-            </div>
-            <div class="form-group">
-              <label for="{{ counterform.wastewater_value.id_for_label }}">Отведение сточных вод:</label><br>
-              <input type="number" id="{{ counterform.wastewater_value.auto_id }}" name="{{ counterform.wastewater_value.name }}" value="{{ counterform.wastewater_value.value }}">
-            </div>
-            <button id="transmitButton">Перенести показания</button>
-            <div class="form-group" style="display: none;">
-              <label>Квартира:</label><br>
-              {{ counterform.serialNumber }}
-            </div>
-            <label for="id_counters" style="display: none;">Counters:</label>
-            <input type="text" id="id_counters" name="counters" style="display: none;">
-            <input type="submit" value="Save">
-          </form>
+<div class="container" style="min-width: 1215px">
+  <form method="post">
+    {% csrf_token %}
+    <div class="card border rounded-0">
+      <div class="card-header header_text">
+        Счётчики
+      </div>
+      <div class="card-body">
+
+<div class="row mb-3">
+  <div class="col">
+    <div class="table-responsive table-borderless">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>
+            <label class="form-label" style="margin-bottom: 20px; width: 100px;">Горячая вода:</label>
+          </td>
+          <td>
+            <!-- Your control and label for row 1, column 2 -->
+            {{ counterform.hot_water_previous }}
+           </td>
+          <td>
+            <!-- Your control and label for row 1, column 3 -->
+            <label class="form-label" style="margin-bottom: 20px;">-</label>
+          </td>
+          <td>
+            <!-- Your control and label for row 1, column 4 -->
+            {{ counterform.hot_water_current }}
+          </td>
+          <td>
+            <!-- Your control and label for row 1, column 5 -->
+            <label class="form-label" style="margin-bottom: 20px">=</label>
+          </td>
+          <td>
+            <!-- Your control and label for row 1, column 6 -->
+            {{ counterform.hot_water_value }}
+          </td>
+          <td>
+              <span style="visibility:hidden">invisible text</span>&nbsp;&nbsp;&nbsp;
+          </td>
+          <td>
+            <!-- Your control and label for row 1, column 7 -->
+            <label class="form-label-table-counters" style="margin-bottom: 20px">Электричество:</label>
+          </td>
+          <td>
+            <!-- Your control and label for row 1, column 8 -->
+            {{ counterform.electricity_previous }}
+          </td>
+          <td>
+            <!-- Your control and label for row 1, column 9 -->
+            <label class="form-label" style="margin-bottom: 20px">-</label>
+          </td>
+          <td>
+            <!-- Your control and label for row 1, column 10 -->
+            {{ counterform.electricity_current }}
+          </td>
+          <td>
+            <!-- Your control and label for row 1, column 11 -->
+            <label class="form-label" style="margin-bottom: 20px">=</label>
+          </td>
+          <td>
+            <!-- Your control and label for row 1, column 11 -->
+            {{ counterform.electricity_value }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="form-label" style="margin-bottom: 20px">Холодная вода:</label>
+          </td>
+          <td>
+            <!-- Your control and label for row 2, column 2 -->
+             {{ counterform.cold_water_previous }}
+          </td>
+          <td>
+            <!-- Your control and label for row 2, column 3 -->
+            <label class="form-label" style="margin-bottom: 20px">-</label>
+          </td>
+          <td>
+            <!-- Your control and label for row 2, column 4 -->
+            {{ counterform.cold_water_current }}
+          </td>
+          <td>
+            <!-- Your control and label for row 2, column 5 -->
+            <label class="form-label" style="margin-bottom: 20px">=</label>
+          </td>
+          <td>
+            <!-- Your control and label for row 2, column 6 -->
+            {{ counterform.cold_water_value }}
+          </td>
+          <td>
+          </td>
+          <td>
+            <!-- Your control and label for row 2, column 7 -->
+            <label class="form-label-table-counters" style="margin-bottom: 20px">Отведение сточных вод:</label>
+          </td>
+          <td>
+            <!-- Your control and label for row 2, column 8 -->
+            {{ counterform.wastewater_value }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+       <div style="display: none;">
+          {{ counterform.serialNumber }}
         </div>
+        <div class="col-md-12" style="display: none;">
+          <input type="text" id="id_counters" name="counters">
+        </div>
+
+        <div class="row mb-3">
+            <div class="col text-center">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a class="btn-segoe" id="transmitButton" style="width: 200px">Перенести показания</a>
+                <a class="btn-segoe-primary" id="saveBlockTwoButton">Сохранить</a>
+                <input type="submit" class="d-none" id="submitButtonSaveBlockTwo">
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.getElementById("saveBlockTwoButton").addEventListener("click", function() {
+    document.getElementById("submitButtonSaveBlockTwo").click();
+  });
+</script>

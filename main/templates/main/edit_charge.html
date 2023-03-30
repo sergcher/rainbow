@@ -1,49 +1,67 @@
-<div class="col-md-6">
-          <form method="post">
-            {% csrf_token %}
-            {{ chargeform.non_field_errors }}
-            <div class="form-group">
-              <label for="{{ chargeform.money_deposited.id_for_label }}">{{ chargeform.money_deposited.label }}</label>
-              {{ chargeform.money_deposited }}
-            </div>
-            <div class="form-group">
-              <label for="{{ chargeform.fine.id_for_label }}">{{ chargeform.fine.label }}</label>
-              {{ chargeform.fine }}
-            </div>
-            <div class="form-group" style="display: none;">
-              <label for="{{ chargeform.serialNumber.id_for_label }}">{{ chargeform.serialNumber.label }}</label>
-              {{ chargeform.serialNumber }}
-            </div>
-            <div class="form-group">
-              <label for="{{ chargeform.balance_start.id_for_label }}">{{ chargeform.balance_start.label }}</label>
-              {{ chargeform.balance_start }}
-            </div>
-            <div class="form-group">
-              <label for="{{ chargeform.recalculation_electricity.id_for_label }}">{{ chargeform.recalculation_electricity.label }}</label>
-              {{ chargeform.recalculation_electricity }}
-            </div>
-            <div class="form-group">
-              <label for="{{ chargeform.recalculation_heating_rub.id_for_label }}">{{ chargeform.recalculation_heating_rub.label }}</label>
-              {{ chargeform.recalculation_heating_rub }}
-            </div>
-            <div class="form-group">
-              <label for="{{ chargeform.recalculation_hot_water.id_for_label }}">{{ chargeform.recalculation_hot_water.label }}</label>
-              {{ chargeform.recalculation_hot_water }}
-            </div>
-            <div class="form-group">
-              <label for="{{ chargeform.recalculation_cold_water.id_for_label }}">{{ chargeform.recalculation_cold_water.label }}</label>
-              {{ chargeform.recalculation_cold_water }}
-            </div>
-            <div class="form-group">
-              <label for="{{ chargeform.recalculation_sewage.id_for_label }}">{{ chargeform.recalculation_sewage.label }}</label>
-              {{ chargeform.recalculation_sewage }}
-            </div>
-            <div class="form-group">
-              <label for="{{ chargeform.recalculation_solid_waste.id_for_label }}">{{ chargeform.recalculation_solid_waste.label }}</label>
-              {{ chargeform.recalculation_solid_waste }}
-            </div>
-            <label for="id_charge" style="display: none;">charge:</label>
-            <input type="text" id="id_charge" name="charge" style="display: none;">
-            <input type="submit" value="Сохранить">
-          </form>
+<div class="container" style="min-width: 1215px">
+  <form method="post">
+    {% csrf_token %}
+    <div class="card border rounded-0">
+      <div class="card-header header_text">
+        Перерасчёт
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+           <div class="col">
+                <label class="form-label">{{ chargeform.money_deposited.label }}</label>
+                {{ chargeform.money_deposited }}
+                <label class="form-label">{{ chargeform.fine.label }}</label>
+                {{ chargeform.fine }}
+                <label class="form-label">{{ chargeform.balance_start.label }}</label>
+                {{ chargeform.balance_start }}
+          </div>
+
+          <div class="col">
+                <label class="form-label">{{ chargeform.recalculation_electricity.label }}</label>
+                {{ chargeform.recalculation_electricity }}
+                <label class="form-label">{{ chargeform.recalculation_heating_rub.label }}</label>
+                {{ chargeform.recalculation_heating_rub }}
+                <label class="form-label">{{ chargeform.recalculation_hot_water.label }}</label>
+                {{ chargeform.recalculation_hot_water }}
+          </div>
+
+         <div class="col">
+                <label class="form-label">{{ chargeform.recalculation_cold_water.label }}</label>
+                {{ chargeform.recalculation_cold_water }}
+                <label class="form-label">{{ chargeform.recalculation_sewage.label }}</label>
+                {{ chargeform.recalculation_sewage }}
+                <label class="form-label">{{ chargeform.recalculation_solid_waste.label }}</label>
+                {{ chargeform.recalculation_solid_waste }}
+          </div>
+
         </div>
+
+        <div style="display: none;">
+          {{ chargeform.serialNumber }}
+        </div>
+        <div class="col-md-12" style="display: none;">
+          <input type="text" id="id_charge" name="charge">
+        </div>
+        <br>
+        <div class="row mb-3">
+            <div class="col text-center">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a class="btn-segoe-primary" id="saveBlockThreeButton">Сохранить</a>
+                <input type="submit" class="d-none" id="submitButtonSaveBlockThree">
+              </div>
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.getElementById("saveBlockThreeButton").addEventListener("click", function() {
+    document.getElementById("submitButtonSaveBlockThree").click();
+  });
+</script>
+

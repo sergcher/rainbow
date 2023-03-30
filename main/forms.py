@@ -10,10 +10,11 @@ class TariffChoiceField(forms.ModelChoiceField):
 
 
 class ApartmentDetailForm(forms.ModelForm):
-    attrs = {'class': 'card',
-             'style': 'border-color: #D9D9D9; '
+    attrs = {'class': 'form-control',
+             'style': 'border-color: #D9D9D9;'
                       'padding-left: 10px;'
                       'padding-bottom: 2px;'
+                      'margin-bottom: 15px;'
              }
 
     error_messages = {
@@ -77,12 +78,158 @@ class ApartmentDetailForm(forms.ModelForm):
 
 
 class ApartmentCounterForm(forms.ModelForm):
+    attrs = {'class': 'form-control',
+
+             'style': 'border-color: #D9D9D9;'
+                      'padding-left: 10px;'
+                      'padding-bottom: 2px;'
+                      'margin-bottom: 15px;'
+             }
+
+    error_messages = {
+        'invalid': 'Для ввода дробных чисел используйте точку'
+    }
+
+    hot_water_previous = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0
+    )
+
+    hot_water_current = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0
+    )
+
+    hot_water_value = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0
+    )
+
+    electricity_previous = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0
+    )
+
+    electricity_current = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0
+    )
+
+    electricity_value = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0
+    )
+
+    cold_water_previous = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0
+    )
+
+    cold_water_current = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0
+    )
+
+    cold_water_value = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0
+    )
+
+    wastewater_value = forms.IntegerField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0
+    )
+
     class Meta:
         model = ApartmentCounter
         fields = "__all__"
 
 
 class ApartmentChargeForm(forms.ModelForm):
+    attrs = {'class': 'form-control',
+             'style': 'border-color: #D9D9D9;'
+                      'padding-left: 10px;'
+                      'padding-bottom: 2px;'
+                      'margin-bottom: 15px;'
+             }
+
+    error_messages = {
+        'invalid': 'Для ввода дробных чисел используйте точку'
+    }
+
+    money_deposited = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Оплачено:'
+    )
+
+    fine = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Пеня:'
+    )
+
+    balance_start = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Сальдо начало:'
+    )
+
+    recalculation_electricity = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Перерасчёт электроэнергия:'
+    )
+
+    recalculation_heating_rub = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Перерасчёт подогрев воды:'
+    )
+
+    recalculation_hot_water = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Перерасчёт горячая вода:'
+    )
+
+    recalculation_cold_water = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Перерасчёт холодная вода:'
+    )
+
+    recalculation_sewage = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Перерасчёт канализация:'
+    )
+
+    recalculation_solid_waste = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Перерасчёт обращение с ТКО:'
+    )
+
     class Meta:
         model = ApartmentCharge
         fields = ('money_deposited', 'fine', 'balance_start', 'recalculation_electricity',

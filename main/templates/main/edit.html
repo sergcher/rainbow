@@ -1,14 +1,34 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+    {% if page_num > 1 %}
+        <a onclick="window.location.href = '{{ prev_url }}';"
+           class="btn-segoe" data-bs-dismiss="modal" style="margin: 10px 0 0 170px;"><< Кв №{{ page_num|add:-1 }}</a>
+    {% endif %}
 
-{#        <div class="col-md-6">#}
-{#          <button onclick="window.location.href = '{{ prev_url }}';">Перейти на квартиру {{ page_num|add:-1 }}</button>#}
-{#          <button onclick="window.location.href = '{{ next_url }}';">Перейти на квартиру {{ page_num|add:1 }}</button>#}
-{#        </div>#}
+    {% if page_num < 106 %}
+        {% if page_num > 1 %}
+        <a onclick="window.location.href = '{{ next_url }}';" class="btn-segoe" data-bs-dismiss="modal"
+        style="margin: 10px 0 0 880px;"
+        >Кв №{{ page_num|add:1 }} >></a>
+        {% else %}
+        <a onclick="window.location.href = '{{ next_url }}';" class="btn-segoe" data-bs-dismiss="modal"
+        style="margin-left: 1204px; margin-top: 10px"
+        >Кв №{{ page_num|add:1 }} >></a>
+        {% endif %}
+    {% endif %}
+
+    <h1 class="special2">
+      <a href="{% url 'index' %}" class="apartments">Квартиры</a>
+      <span class="page-number"> -> Квартира №{{ page_num }}</span>
+    </h1>
+
+    <br>
         {% include 'main/edit_detail.html' %}
-{#        {% include 'main/edit_counter.html' %}#}
-{#        {% include 'main/edit_charge.html' %}#}
+        <br>
+        {% include 'main/edit_counter.html' %}
+        <br>
+        {% include 'main/edit_charge.html' %}
 
 <script>
     const transmitButton = document.getElementById("transmitButton");

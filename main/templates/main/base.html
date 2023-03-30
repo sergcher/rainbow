@@ -14,25 +14,44 @@
 </head>
 
 <body>
-  <div id="header">
-      <h1 class="special">ТСЖ “Радуга”</h1>
-      <div class="rectangle">
-        <a href="{% url 'tariff:tariff_list_main' %}" class="first-link">Тарифы</a>
+
+<div id="logo">
+  <h1 class="special">ТСЖ “Радуга”</h1>
+  <div class="rectangle">
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
         {% if title == 'ТСЖ Радуга'  %}
-            <a href="{% url 'repair:repair_list_main' %}" class="second-link">Капитальный ремонт</a>
         {% else %}
-            <a href="{% url 'index' %}" class="second-link">Квартиры</a>
+          <a href="{% url 'index' %}" class="my-link">Квартиры</a>&nbsp;&nbsp;&nbsp;
         {% endif %}
-        <a href="#" class="third-link">ENG</a>
-        <a href="" class="fourth-link" data-bs-toggle="modal" data-bs-target="#SettingsModal">Настройки</a>
-       {% if user.is_authenticated %}
-           <a href="{% url 'users:logout' %}" class="five-link">Выход</a>
+    {% if title == 'Тарифы'  %}
+        &nbsp;&nbsp;
         {% else %}
-            <a href="" class="five-link" data-bs-toggle="modal" data-bs-target="#LoginModal">Вход</a>
+          <a href="{% url 'tariff:tariff_list_main' %}" class="my-link">Тарифы</a>&nbsp;&nbsp;&nbsp;
         {% endif %}
-      </div>
+        {% if title == 'Капитальный ремонт'  %}
+        {% else %}
+          <a href="{% url 'repair:repair_list_main' %}" class="my-link">Капитальный ремонт</a>&nbsp;&nbsp;&nbsp;
+        {% endif %}
+    </div>
+    <div class="col offset-md-4">
+        <a href="" class="my-link" data-bs-toggle="modal" data-bs-target="#SettingsModal">Настройки</a>&nbsp;&nbsp;&nbsp;
+        {% if user.is_authenticated %}
+              <a href="{% url 'users:logout' %}" class="my-link">Выход</a>
+            {% else %}
+              <a href="" class="my-link" data-bs-toggle="modal" data-bs-target="#LoginModal">Вход</a>
+{#              <li style="display:inline-block;margin-right:5px;"><p>Welcome, {{ user.username }}!</p></li>#}
+            {% endif %}
+    </div>
   </div>
-  {#   <li style="display:inline-block;margin-right:5px;"><p>Welcome, {{ user.username }}!</p></li>#}
+</div>
+
+
+</div>
+</div>
+
 
   <!-- Add the content blocks -->
   {% block apartment_header %} {% endblock %}
@@ -43,7 +62,7 @@
   {% include 'login.html' %}
 
   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-  <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+  <script src="{% static 'js/htmx.min.js' %}"></script>
   <script src="{% static "js/dialog.js" %}"></script>
   <script src="{% static "js/confirmation.js" %}"></script>
   <script src="{% static "js/toast.js" %}"></script>
@@ -54,21 +73,7 @@
 <br>
 <br>
 <br>
-  <div class="rectangle_footer">
-    <a href="{% url 'tariff:tariff_list' %}" class="first-link">Тарифы</a>
-    {% if title == 'ТСЖ Радуга'  %}
-        <a href="{% url 'repair:repair_list' %}" class="second-link">Капитальный ремонт</a>
-    {% else %}
-        <a href="{% url 'index' %}" class="second-link">Квартиры</a>
-    {% endif %}
-    <a href="#" class="third-link">ENG</a>
-    <a href="" class="fourth-link" data-bs-toggle="modal" data-bs-target="#SettingsModal">Настройки</a>
-    {% if user.is_authenticated %}
-      <a href="{% url 'users:logout' %}" class="five-link">Выход</a>
-    {% else %}
-      <a href="{% url 'users:login' %}" class="five-link">Вход</a>
-    {% endif %}
-  </div>
+
 <br>
 <br>
 </footer>

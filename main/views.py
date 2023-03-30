@@ -10,6 +10,7 @@ from main.models import (Apartment, ApartmentCharge, ApartmentCounter,
 from main.pdf_generator import generate_pdf
 
 from users.forms import UserLoginForm
+from django.core.paginator import Paginator
 
 
 def settings(request):
