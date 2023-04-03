@@ -2,13 +2,12 @@
 {% load static %}
 
 {% block css %}
+    <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block apartment_header %}
 
 <div class="container">
-
-    <br>
 
     <div class="row">
         <div class="col-sm-6 text-start">
@@ -18,14 +17,20 @@
 
     <br>
 
+
     <div class="row">
-        <div class="col-sm-6">
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:update_fees' %}'">Перерасчёт</a>
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:generate_excel' %}?filter={{ request.GET.filter }}'">Excel</a>
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:apartment_receipt' %}'">Квитанции</a>
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:generate_txt' %}'">Для клиент банка</a>
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:generate_excel_apartment_total_file' %}'">Итоги</a>
+        <div class="col-sm-6 text-start">
+          <div class="nav-container">
+            <ul>
+              <li><a href="{% url 'main:update_fees' %}">Перерасчёт</a></li>
+              <li><a href="{% url 'main:generate_excel' %}?filter={{ request.GET.filter }}">Excel</a></li>
+              <li><a href="{% url 'main:apartment_receipt' %}">Квитанции</a></li>
+              <li><a href="{% url 'main:generate_txt' %}">Для клиент банка</a></li>
+              <li><a href="{% url 'main:generate_excel_apartment_total_file' %}">Итоги</a></li>
+            </ul>
+          </nav>
         </div>
+
         <div class="col-sm-6 text-end">
           <form method="get" action="{% url 'index' %}">
             <label for="filter">Выберите фильтр:</label>
@@ -37,8 +42,6 @@
         </div>
     </div>
 </div>
-
-    <br>
 
 {% endblock %}
 
