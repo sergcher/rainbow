@@ -1,6 +1,7 @@
 from django.urls import path
 
-from tariff.views import (TariffListView, add_tariff, edit_tariff, tariff_list, remove_tariff)
+from tariff.views import (TariffListView, add_tariff, edit_tariff,
+                          remove_tariff, tariff_list)
 
 app_name = 'tariff'
 

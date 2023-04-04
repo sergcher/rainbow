@@ -4,19 +4,18 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
 
 from common.views import TitleMixin
+from main.forms import Settings, SettingsForm
 from main.models import Apartment, ApartmentDetail
 from repair.excel import (export_excel_repair_total_file,
                           repair_export_client_bank,
                           repair_generate_excel_file)
+from repair.forms import CapitalRepairForm
 from repair.models import CapitalRepair
 from repair.pdf_repair import repair_generate_pdf
-from repair.forms import CapitalRepairForm
 from users.forms import UserLoginForm
-from main.forms import (Settings, SettingsForm)
 
 
 def repair_list(request):

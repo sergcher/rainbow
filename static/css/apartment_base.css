@@ -7,6 +7,44 @@ h1.special2 {
   color: #0085C8;
 }
 
+.btn-next-previous {
+  background-color: #FFFFFF;
+  border: 1px solid #0184C8;
+  border-radius: 22.5px;
+  font-family: 'Segoe UI', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #0184C8;
+  padding: 8px 12px;
+  text-align: center;
+  display: inline-block;
+  width: 150px;
+  transition: background-color 0.3s, color 0.3s;
+  outline: none;
+  text-decoration: none;
+}
+
+
+.btn-next-previous:hover {
+  background-color: #E7F7FF;
+  color: #0184C8;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.btn-next-previous:focus,
+.btn-next-previous:active {
+  background-color: #0184C8;
+  color: #FFFFFF;
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
 .btn-segoe-main {
   background-color: #0184C8;
   border-radius: 22.5px;
@@ -51,45 +89,6 @@ h1.special2 {
   cursor: pointer;
 }
 
-
-/*.nav-container {*/
-/*  display: flex;*/
-/*  justify-content: space-between;*/
-/*  !*align-items: center;*!*/
-/*}*/
-
-/*nav ul {*/
-/*  display: flex;*/
-/*  flex-direction: row;*/
-/*  align-items: flex-start;*/
-/*  gap: 10px;*/
-/*  list-style: none;*/
-/*}*/
-
-/*nav li {*/
-/*  padding: 8px 16px;*/
-/*  background: #0184C8;*/
-/*  border-radius: 22.5px;*/
-/*}*/
-
-/*nav li a {*/
-/*  display: flex;*/
-/*  !*justify-content: center;*!*/
-/*  !*align-items: center;*!*/
-/*  font-family: 'Segoe UI', serif;*/
-/*  font-style: normal;*/
-/*  font-weight: 400;*/
-/*  font-size: 14px;*/
-/*  line-height: 17px;*/
-/*  color: #FFFFFF;*/
-/*}*/
-
-/*form {*/
-/*  display: flex;*/
-/*  flex-direction: row;*/
-/*  align-items: center;*/
-/*}*/
-
 label {
   font-family: 'Segoe UI', serif;
   font-style: normal;
@@ -115,20 +114,3 @@ select {
   margin-top: -10px;
 }
 
-/*nav li:hover {*/
-/*  background: #199EE3;*/
-/*  text-decoration: none;*/
-/*}*/
-
-/*nav li:hover a {*/
-/*  color: #FFFFFF;*/
-/*  text-decoration: none;*/
-/*}*/
-
-/*nav li:active {*/
-/*  background: #0776B0;*/
-/*}*/
-
-/*nav li:active a {*/
-/*  color: #FFFFFF;*/
-/*}*/

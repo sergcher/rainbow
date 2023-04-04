@@ -96,6 +96,8 @@ td:nth-child(2) {
     background-image: url("../img/BtT_Click.png");
     opacity: 100%;
 }
+
+
 @-moz-keyframes dots-loader {
   0% {
     -moz-box-shadow: #F87F28 -14px -14px 0 7px, #fc6 14px -14px 0 7px, #199EE3 14px 14px 0 7px, #CA62EB -14px 14px 0 7px;
@@ -293,4 +295,14 @@ td:nth-child(2) {
   transform-origin: 50% 50%;
 }
 
+.loader-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-modal-header {
+  background-color: #0184C8;
+}
 

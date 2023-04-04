@@ -1,5 +1,6 @@
 {% extends 'main/apartment_base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block css %}
     <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
@@ -28,13 +29,13 @@
             <tr>
                 <th class="apartment-header">№</th>
                 <th class="apartment-header">Собственник</th>
-                <th class="apartment-header">Кол. прожив.</th>
+                <th class="apartment-header">Кол-во прожив.</th>
                 <th class="apartment-header">Общ. площ.</th>
                 <th class="apartment-header">Содерж. помещения</th>
                 <th class="apartment-header">Начислено</th>
-                <th class="apartment-header">Перерасчет</th>
-                <th class="apartment-header">Сальдо Начало</th>
-                <th class="apartment-header">Сальдо Конец</th>
+                <th class="apartment-header">Перерасчёт</th>
+                <th class="apartment-header">Сальдо (начало)</th>
+                <th class="apartment-header">Сальдо (конец)</th>
                 <th class="apartment-header">Оплачено</th>
                 <th class="apartment-header">Пеня</th>
                 <th class="apartment-header">Итого к оплате</th>
@@ -54,14 +55,14 @@
                 <td>{{ detail.totalArea }}</td>
                 {% endfor %}
                 {% for apartment_fee in apartment.apartmentfee_set.all %}
-                <td>{{ apartment_fee.maintenance }}</td>
-                <td>{{ apartment_fee.accrued_expenses }}</td>
-                <td>{{ apartment_fee.recalculation }}</td>
-                <td>{{ apartment_fee.balance_start }}</td>
-                <td>{{ apartment_fee.balance_end }}</td>
-                <td>{{ apartment_fee.paid }}</td>
-                <td>{{ apartment_fee.fine }}</td>
-                <td>{{ apartment_fee.total }}</td>
+                <td>{{ apartment_fee.maintenance|intcomma }}</td>
+                <td>{{ apartment_fee.accrued_expenses|intcomma }}</td>
+                <td>{{ apartment_fee.recalculation|intcomma }}</td>
+                <td>{{ apartment_fee.balance_start|intcomma }}</td>
+                <td>{{ apartment_fee.balance_end|intcomma }}</td>
+                <td>{{ apartment_fee.paid|intcomma }}</td>
+                <td>{{ apartment_fee.fine|intcomma }}</td>
+                <td>{{ apartment_fee.total|intcomma }}</td>
                 {% endfor %}
             </tr>
             {% endfor %}
@@ -69,12 +70,12 @@
     </table>
 </div>
 
-    <div class="back-to-top"></div>
+<div class="back-to-top"></div>
 
 <br>
 <br>
-    <br>
-    <br>
+<br>
+<br>
 <script>
     var backToTopButton = document.querySelector('.back-to-top');
 

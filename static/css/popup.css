@@ -18,10 +18,10 @@ label.form-label {
   line-height: 17px;
   color: #0184C8;
   padding: 8px 12px;
-  text-align: center; /* Align the buttons to the center */
-  display: inline-block; /* Make the buttons inline */
-  width: 150px; /* Set a fixed width for the buttons */
-  transition: background-color 0.3s, color 0.3s; /* Add a transition effect */
+  text-align: center;
+  display: inline-block;
+  width: 150px;
+  transition: background-color 0.3s, color 0.3s;
   outline: none;
   margin-right: 20px;
   text-decoration: none;

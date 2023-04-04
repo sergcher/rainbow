@@ -2,7 +2,7 @@
 {% with WIDGET_ERROR_CLASS='is-invalid' %}
 <form hx-post="{{ request.path }}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' class="modal-content">
     <div class="modal-content">
-      <div class="modal-header text-center bg-primary">
+      <div class="modal-header text-center custom-modal-header">
         <h5 class="modal-title w-100" style="font-size: 14px; color: #FFFFFF; font-family: Segoe UI;">{{ title }}</h5>
       </div>
         <div class="modal-body">

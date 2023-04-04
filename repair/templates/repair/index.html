@@ -1,10 +1,9 @@
 {% extends 'repair/repair_base.html' %}
 {% load static %}
 
+
 {% block css %}
-    <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
     <link href="{% static 'css/apartment.css' %}" rel="stylesheet">
-{#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />#}
 {% endblock %}
 
 {% block content %}
@@ -15,7 +14,19 @@
     {% endfor %}
 {% endfor %}
 
+    <div class="container">
     <table class="apartment-table">
+        <colgroup>
+            <col style="width: 3%;">
+            <col style="width: 22%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+        </colgroup>
         <thead class="apartment-table">
             <tr>
                 <th class="apartment-header">№</th>
@@ -24,19 +35,16 @@
                 <th class="apartment-header">Долг на начало месяца</th>
                 <th class="apartment-header">Начислено</th>
                 <th class="apartment-header">Пеня</th>
-                <th class="apartment-header">Перерасчет</th>
+                <th class="apartment-header">Перерасчёт</th>
                 <th class="apartment-header">Оплачено</th>
                 <th class="apartment-header">Итого</th>
             </tr>
         </thead>
         <tbody hx-trigger="load, repairListChanged from:body" hx-get="{% url 'repair:repair_list' %}" hx-target="this">
-          <tr>
-            <td class="dots-loader" role="status" style="margin-top: 25px; margin-left: 20px;">
-              <span class="visually-hidden">Loading...</span>
-            </td>
-          </tr>
+        <td class="dots-loader" role="status" style="margin-top: 25px; margin-left: 20px;">
         </tbody>
     </table>
+    </div>
 
 <div class="back-to-top"></div>
 

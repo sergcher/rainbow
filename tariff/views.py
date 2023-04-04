@@ -1,5 +1,7 @@
+import json
+
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.list import ListView
@@ -7,8 +9,6 @@ from django.views.generic.list import ListView
 from common.views import TitleMixin
 from tariff.forms import TariffForm
 from tariff.models import Tariff
-
-import json
 
 
 class TariffBaseView(View):

@@ -8,9 +8,7 @@ from main.forms import (ApartmentChargeForm, ApartmentCounterForm,
 from main.models import (Apartment, ApartmentCharge, ApartmentCounter,
                          ApartmentDetail, ApartmentFee)
 from main.pdf_generator import generate_pdf
-
 from users.forms import UserLoginForm
-from django.core.paginator import Paginator
 
 
 def settings(request):
@@ -52,6 +50,10 @@ def update(request, id):
     chargeform = ApartmentChargeForm(instance=ApartmentCharge.objects.get(serialNumber=id))
     prev_url = f"/update/{int(id) - 1}"
     next_url = f"/update/{int(id) + 1}"
+
+    shortOwnerName = Apartment.objects.get(serialNumber=id).owner.split()
+    shortOwnerName = f"{shortOwnerName[0]} {shortOwnerName[1][0]}.{shortOwnerName[2][0]}."
+
     if request.method == 'POST':
         if 'details' in request.POST:
             form = ApartmentDetailForm(
@@ -88,7 +90,8 @@ def update(request, id):
         'chargeform': chargeform,
         "prev_url": prev_url,
         "next_url": next_url,
-        "page_num": id
+        "page_num": id,
+        "shortOwnerName": shortOwnerName
     }
     return render(request, 'main/edit.html', context)
 

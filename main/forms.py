@@ -17,6 +17,15 @@ class ApartmentDetailForm(forms.ModelForm):
                       'margin-bottom: 15px;'
              }
 
+    attrs_tariff = {'class': 'form-control',
+                    'style': 'border-color: #D9D9D9;'
+                             'margin-top: 1px;'
+                             'height: 33px;'
+                             'padding-left: 10px;'
+                             'padding-bottom: 2px;'
+                             'margin-bottom: 15px;'
+                    }
+
     error_messages = {
         'invalid': 'Для ввода дробных чисел используйте точку'
     }
@@ -53,12 +62,12 @@ class ApartmentDetailForm(forms.ModelForm):
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Единый лиц. счёт в ГИС ЖКХ:'
+        label='Единый лицевой счёт в ГИС ЖКХ:'
     )
 
     tariff = TariffChoiceField(
         queryset=Tariff.objects.all(),
-        widget=forms.Select(attrs=attrs),
+        widget=forms.Select(attrs=attrs_tariff),
         error_messages=error_messages,
         required=False,
         empty_label=None,
@@ -79,25 +88,46 @@ class ApartmentDetailForm(forms.ModelForm):
 
 class ApartmentCounterForm(forms.ModelForm):
     attrs = {'class': 'form-control',
-
              'style': 'border-color: #D9D9D9;'
                       'padding-left: 10px;'
                       'padding-bottom: 2px;'
-                      'margin-bottom: 15px;'
+                      'margin-bottom: 15px;',
+             'data-toggle': 'tooltip',
+             'data-placement': 'top',
              }
+
+    attrs_previous = {'class': 'form-control',
+                      'style': 'border-color: #D9D9D9;'
+                               'padding-left: 10px;'
+                               'padding-bottom: 2px;'
+                               'margin-bottom: 15px;',
+                      'data-toggle': 'tooltip',
+                      'data-placement': 'top',
+                      'title': 'Предыдущее показание',
+                      }
+
+    attrs_current = {'class': 'form-control',
+                     'style': 'border-color: #D9D9D9;'
+                              'padding-left: 10px;'
+                              'padding-bottom: 2px;'
+                              'margin-bottom: 15px;',
+                     'data-toggle': 'tooltip',
+                     'data-placement': 'top',
+                     'title': 'Введите новое показание',
+                     }
 
     error_messages = {
         'invalid': 'Для ввода дробных чисел используйте точку'
     }
 
     hot_water_previous = forms.IntegerField(
-        widget=forms.TextInput(attrs=attrs),
+        widget=forms.TextInput(attrs=attrs_previous),
         error_messages=error_messages,
-        initial=0
+        initial=0,
     )
 
     hot_water_current = forms.IntegerField(
-        widget=forms.TextInput(attrs=attrs),
+        widget=forms.TextInput(attrs=attrs_current),
         error_messages=error_messages,
         initial=0
     )
@@ -109,13 +139,13 @@ class ApartmentCounterForm(forms.ModelForm):
     )
 
     electricity_previous = forms.IntegerField(
-        widget=forms.TextInput(attrs=attrs),
+        widget=forms.TextInput(attrs=attrs_previous),
         error_messages=error_messages,
         initial=0
     )
 
     electricity_current = forms.IntegerField(
-        widget=forms.TextInput(attrs=attrs),
+        widget=forms.TextInput(attrs=attrs_current),
         error_messages=error_messages,
         initial=0
     )
@@ -127,13 +157,13 @@ class ApartmentCounterForm(forms.ModelForm):
     )
 
     cold_water_previous = forms.IntegerField(
-        widget=forms.TextInput(attrs=attrs),
+        widget=forms.TextInput(attrs=attrs_previous),
         error_messages=error_messages,
         initial=0
     )
 
     cold_water_current = forms.IntegerField(
-        widget=forms.TextInput(attrs=attrs),
+        widget=forms.TextInput(attrs=attrs_current),
         error_messages=error_messages,
         initial=0
     )

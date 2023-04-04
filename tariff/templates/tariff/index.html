@@ -2,11 +2,8 @@
 {% load static %}
 
 {% block css %}
-    <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
     <link href="{% static 'css/apartment.css' %}" rel="stylesheet">
     <link href="{% static 'css/buttons.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/bootstrap_5.min.css' %}" />
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -17,24 +14,42 @@
     {% endfor %}
 {% endfor %}
 
-<h1 class="special2">Тарифы</h1>
 <br>
-<div class="nav-container">
-<nav>
-<ul>
-  <li><a hx-get="{% url 'tariff:add_tariff' %}" hx-target="#dialog"
-         style="color: #FFFFFF; cursor: pointer;
-         text-decoration: none">Добавить новый тариф</a></li>
-</ul>
-</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 text-start">
+            <h1 class="special2">Тарифы</h1>
+        </div>
+    </div>
+
+<br>
+
+<div class="row">
+    <div class="col-sm-6">
+         <a class="btn-segoe-main"
+            hx-get="{% url 'tariff:add_tariff' %}"
+            hx-target="#dialog">Добавить новый тариф</a>
+    </div>
 </div>
 
+<br>
+
 <table class="apartment-table">
+        <colgroup>
+            <col style="width: 5%;">
+            <col style="width: 25%;">
+            <col style="width: 7%;">
+            <col style="width: 7%;">
+            <col style="width: 7%;">
+            <col style="width: 7%;">
+            <col style="width: 20%;">
+        </colgroup>
         <thead class="apartment-table">
             <tr>
                 <th class="apartment-header">№</th>
                 <th class="apartment-header">Наименование</th>
-                <th class="apartment-header">Содержания жилья</th>
+                <th class="apartment-header">Содержание жилья</th>
                 <th class="apartment-header">Подогрев воды (ГКал)</th>
                 <th class="apartment-header">Подогрев воды (рубли)</th>
                 <th class="apartment-header">Горячая вода</th>
@@ -43,12 +58,15 @@
         </thead>
         <tbody hx-trigger="load, tariffListChanged from:body" hx-get="{% url 'tariff:tariff_list' %}" hx-target="this">
           <tr>
-            <td class="spinner-border" role="status">
+            <td class="dots-loader" role="status">
               <span class="visually-hidden">Loading...</span>
             </td>
           </tr>
         </tbody>
 </table>
+
+
+</div>
 
 <!-- Placeholder for the modal edit tariff -->
     <div id="modal" class="modal fade">

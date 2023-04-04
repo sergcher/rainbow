@@ -2,21 +2,28 @@
 {% load static %}
 
 {% block css %}
-    <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
+{#    <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">#}
 {% endblock %}
 
 {% block repair_header %}
-    <h1 class="special2">Капитальный ремонт</h1>
+    <div class="container">
     <br>
-    <div class="nav-container">
-      <nav>
-        <ul>
-          <li><a href="{% url 'repair:repair_generate_excel' %}" style="text-decoration: none">Excel</a></li>
-          <li><a href="{% url 'repair:repair_receipt' %}" style="text-decoration: none">Квитанции</a></li>
-          <li><a href="{% url 'repair:repair_generate_txt' %}" style="text-decoration: none">Для клиент банка</a></li>
-          <li><a href="{% url 'repair:generate_excel_repair_total_file' %}" style="text-decoration: none">Итоги</a></li>
-        </ul>
-      </nav>
+    <div class="row">
+        <div class="col-sm-6 text-start">
+            <h1 class="special2">Капитальный ремонт</h1>
+        </div>
     </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-6">
+             <a class="btn-segoe-main" onclick="window.location.href='{% url 'repair:repair_generate_excel' %}'">Excel</a>
+             <a class="btn-segoe-main" onclick="window.location.href='{% url 'repair:repair_receipt' %}'">Квитанции</a>
+             <a class="btn-segoe-main" onclick="window.location.href='{% url 'repair:repair_generate_txt' %}'">Для клиент банка</a>
+             <a class="btn-segoe-main" onclick="window.location.href='{% url 'repair:generate_excel_repair_total_file' %}'">Итоги</a>
+        </div>
+    </div>
+</div>
+
+<br>
 
 {% endblock %}

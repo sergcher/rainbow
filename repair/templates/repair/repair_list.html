@@ -1,3 +1,5 @@
+{% load humanize %}
+
 {% for apartment in apartments %}
     {% for repair in apartment.capitalrepair_set.all %}
 <tr hx-get="{% url 'repair:edit_repair' pk=repair.pk %}" hx-target="#dialog" style="cursor:pointer;">
@@ -12,12 +14,12 @@
         <td>{{ detail.totalArea }}</td>
     {% endfor %}
     {% for repair in apartment.capitalrepair_set.all %}
-        <td>{{ repair.debt }}</td>
-        <td>{{ repair.accrued }}</td>
-        <td>{{ repair.fine }}</td>
-        <td>{{ repair.recalculation }}</td>
-        <td>{{ repair.paid }}</td>
-        <td>{{ repair.total }}</td>
+        <td>{{ repair.debt|intcomma }}</td>
+        <td>{{ repair.accrued|intcomma }}</td>
+        <td>{{ repair.fine|intcomma }}</td>
+        <td>{{ repair.recalculation|intcomma }}</td>
+        <td>{{ repair.paid|intcomma }}</td>
+        <td>{{ repair.total|intcomma }}</td>
     {% endfor %}
 </tr>
 {% endfor %}
