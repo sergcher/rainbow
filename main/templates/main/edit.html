@@ -63,11 +63,31 @@
         <br>
         {% include 'main/edit_charge.html' %}
 
+<div class="back-to-top"></div>
+
 <br>
 <br>
 <br>
 <br>
 
+<script>
+    var backToTopButton = document.querySelector('.back-to-top');
+
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 100) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
+
+    backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
 
 <script>
     const transmitButton = document.getElementById("transmitButton");
