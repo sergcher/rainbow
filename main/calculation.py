@@ -56,7 +56,7 @@ def calculate_fees():
         # Электричество
         electricity = round_float(counters.electricity_value * tariff.electricity)
         # Отопление Гкал
-        heating = round_float(total_area * tariff.heating)
+        heating = round_float(tariff.heating)
         # Отопление руб
         heating_rub = round_float(heating * tariff.heating_rub)
         # Горячая вода

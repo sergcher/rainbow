@@ -277,6 +277,10 @@ td:nth-child(2) {
 .dots-loader:not(:required) {
   overflow: hidden;
   position:fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: 25px;
+  transform: translate(-50%, -50%);
   text-indent: -9999px;
   display: inline-block;
   width: 7px;
@@ -286,21 +290,21 @@ td:nth-child(2) {
   -moz-box-shadow: #F87F28 -14px -14px 0 7px, #fc6 14px -14px 0 7px, #199EE3 14px 14px 0 7px, #CA62EB -14px 14px 0 7px;
   -webkit-box-shadow: #F87F28 -14px -14px 0 7px, #fc6 14px -14px 0 7px, #199EE3 14px 14px 0 7px, #CA62EB -14px 14px 0 7px;
   box-shadow: #F87F28 -14px -14px 0 7px, #fc6 14px -14px 0 7px, #199EE3 14px 14px 0 7px, #CA62EB -14px 14px 0 7px;
-  -moz-animation: dots-loader 5s infinite ease-in-out;
-  -webkit-animation: dots-loader 5s infinite ease-in-out;
-  animation: dots-loader 5s infinite ease-in-out;
+  -moz-animation: dots-loader 1s infinite ease-in-out;
+  -webkit-animation: dots-loader 1s infinite ease-in-out;
+  animation: dots-loader 1s infinite ease-in-out;
   -moz-transform-origin: 50% 50%;
   -ms-transform-origin: 50% 50%;
   -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
 
-.loader-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+/*.loader-container {*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  left: 50%;*/
+/*  transform: translate(-50%, -50%);*/
+/*}*/
 
 .custom-modal-header {
   background-color: #0184C8;
