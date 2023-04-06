@@ -1,73 +1,72 @@
 {% load static %}
 
 <!DOCTYPE html>
-<head>
-   <title>{{ title }}</title>
-   <link rel="icon" href="{% static 'favicon.ico' %}">
-   <link href="{% static 'css/bootstrap_5.min.css' %}" rel="stylesheet">
-   <link href="{% static 'css/base.css' %}" rel="stylesheet">
-   <link href="{% static 'css/apartmentEdit.css' %}" rel="stylesheet">
-   <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
-   <link href="{% static 'css/popup.css' %}" rel="stylesheet">
-   <link href="{% static 'css/apartment.css' %}" rel="stylesheet">
-  {% block css %} {% endblock %}
-</head>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <link href="{% static 'css/bootstrap_5.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/apartmentEdit.css' %}" rel="stylesheet">
+    <link href="{% static 'css/apartment_base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/popup.css' %}" rel="stylesheet">
+    <link href="{% static 'css/apartment.css' %}" rel="stylesheet">
+    {% block css %} {% endblock %}
+  </head>
 
-<body>
-
-<div style="position: relative;">
-  <img src="{% static 'img/header.jpg' %}" style="width:100%; height:auto;" alt="header">
-  <div class="position-absolute" style="height:30px; background: rgba(89, 0, 168, 0.4); bottom: 10px; left: 0; right: 0;">
-    <div class="container">
-        <div class="row">
+  <body>
+    <div style="position: relative;">
+      <img src="{% static 'img/header.jpg' %}" style="width:100%; height:auto;" alt="header">
+      <div class="position-absolute" style="height:30px; background: rgba(89, 0, 168, 0.4); bottom: 10px; left: 0; right: 0;">
+        <div class="container">
+          <div class="row">
             <div class="col-sm-6 text-start">
-                {% if title == 'ТСЖ Радуга'  %}
-                {% else %}
-                  <a href="{% url 'index' %}" class="my-link">Квартиры</a>
-                  <span class="ms-3"></span>
-                {% endif %}
-                {% if title == 'Тарифы'  %}
-                {% else %}
-                  <a href="{% url 'tariff:tariff_list_main' %}" class="my-link">Тарифы</a>
-                  <span class="ms-3"></span>
-                {% endif %}
-                {% if title == 'Капитальный ремонт'  %}
-                {% else %}
-                  <a href="{% url 'repair:repair_list_main' %}" class="my-link">Капитальный ремонт</a>
-                  <span class="ms-3"></span>
-                {% endif %}
+              {% if title == 'ТСЖ Радуга' %}
+              {% else %}
+              <a href="{% url 'index' %}" class="my-link">Квартиры</a>
+              <span class="ms-3"></span>
+              {% endif %}
+              {% if title == 'Тарифы' %}
+              {% else %}
+              <a href="{% url 'tariff:tariff_list_main' %}" class="my-link">Тарифы</a>
+              <span class="ms-3"></span>
+              {% endif %}
+              {% if title == 'Капитальный ремонт' %}
+              {% else %}
+              <a href="{% url 'repair:repair_list_main' %}" class="my-link">Капитальный ремонт</a>
+              <span class="ms-3"></span>
+              {% endif %}
             </div>
             <div class="col-sm-6 text-end">
-                <a href="" class="my-link" data-bs-toggle="modal" data-bs-target="#SettingsModal">Настройки</a>
-                <span class="ms-3"></span>
-                {% if user.is_authenticated %}
-                      <a href="{% url 'users:logout' %}" class="my-link">Выход</a>
-                    {% else %}
-                      <a href="" class="my-link" data-bs-toggle="modal" data-bs-target="#LoginModal">Вход</a>
-                    {% endif %}
+              <a href="" class="my-link" data-bs-toggle="modal" data-bs-target="#SettingsModal">Настройки</a>
+              <span class="ms-3"></span>
+              {% if user.is_authenticated %}
+              <a href="{% url 'users:logout' %}" class="my-link">Выход</a>
+              {% else %}
+              <a href="" class="my-link" data-bs-toggle="modal" data-bs-target="#LoginModal">Вход</a>
+              {% endif %}
             </div>
+          </div>
         </div>
+      </div>
+      <div class="position-absolute top-50 start-50 translate-middle">
+        <h1 class="text-center special">ТСЖ “Радуга”</h1>
+      </div>
     </div>
-  </div>
-  <div class="position-absolute top-50 start-50 translate-middle">
-    <h1 class="text-center special">ТСЖ “Радуга”</h1>
-  </div>
-</div>
 
+    <!-- Add the content blocks -->
+    {% block apartment_header %} {% endblock %}
+    {% block repair_header %} {% endblock %}
+    {% block content %} {% endblock %}
 
-  <!-- Add the content blocks -->
-  {% block apartment_header %} {% endblock %}
-  {% block repair_header %} {% endblock %}
-  {% block content %} {% endblock %}
+    {% include 'main/settings_form.html' %}
+    {% include 'login.html' %}
 
-  {% include 'main/settings_form.html' %}
-  {% include 'login.html' %}
-
-  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'js/htmx.min.js' %}"></script>
-  <script src="{% static "js/dialog.js" %}"></script>
-  <script src="{% static "js/confirmation.js" %}"></script>
-  <script src="{% static "js/toast.js" %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/htmx.min.js' %}"></script>
+    <script src="{% static "js/dialog.js" %}"></script>
+    <script src="{% static "js/confirmation.js" %}"></script>
+    <script src="{% static "js/toast.js" %}"></script>
 </body>
 
 <footer>

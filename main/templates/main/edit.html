@@ -2,97 +2,89 @@
 {% load static %}
 
 {% block css %}
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
 
-<style>
+  <style>
     #back-to-top {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: none;
     }
 
     #back-to-top:hover {
-        cursor: pointer;
+      cursor: pointer;
     }
-</style>
-
+  </style>
 {% endblock %}
 
-
 {% block content %}
-    <br>
-<div class="container">
-
-        <div class="row">
-            <div class="col-sm-6">
-    {% if page_num > 1 %}
-        <a onclick="window.location.href = '{{ prev_url }}';"
-           class="btn-next-previous" data-bs-dismiss="modal"><< Кв №{{ page_num|add:-1 }}</a>
-    {% endif %}
-            </div>
-        <div class="col-sm-6 text-end">
-    {% if page_num < 106 %}
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
         {% if page_num > 1 %}
-        <a onclick="window.location.href = '{{ next_url }}';" class="btn-next-previous" data-bs-dismiss="modal"
-        >Кв №{{ page_num|add:1 }} >></a>
-        {% else %}
-        <a onclick="window.location.href = '{{ next_url }}';" class="btn-next-previous" data-bs-dismiss="modal"
-        >Кв №{{ page_num|add:1 }} >></a>
+          <a onclick="window.location.href = '{{ prev_url }}';" class="btn-next-previous" data-bs-dismiss="modal"><< Кв №{{ page_num|add:-1 }}</a>
         {% endif %}
-    {% endif %}
-        </div>
-</div>
-<br>
-        <div class="row">
-            <div class="col text-start">
-                <h1 class="special2">
-                  <a href="{% url 'index' %}" style="color: #0085C8; text-decoration: none">Квартиры</a>
-                  <span class="page-number"> -> №{{ page_num }} ({{ shortOwnerName }})</span>
-                </h1>
-            </div>
-        </div>
-</div>
-
+      </div>
+      <div class="col-sm-6 text-end">
+        {% if page_num < 106 %}
+          {% if page_num > 1 %}
+            <a onclick="window.location.href = '{{ next_url }}';" class="btn-next-previous" data-bs-dismiss="modal">Кв №{{ page_num|add:1 }} >></a>
+          {% else %}
+            <a onclick="window.location.href = '{{ next_url }}';" class="btn-next-previous" data-bs-dismiss="modal">Кв №{{ page_num|add:1 }} >></a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
     <br>
-        {% include 'main/edit_detail.html' %}
-        <br>
-        <br>
-        {% include 'main/edit_counter.html' %}
-        <br>
-        <br>
-        {% include 'main/edit_charge.html' %}
+    <div class="row">
+      <div class="col text-start">
+        <h1 class="special2">
+          <a href="{% url 'index' %}" style="color: #0085C8; text-decoration: none">Квартиры</a>
+          <span class="page-number"> -> №{{ page_num }} ({{ shortOwnerName }})</span>
+        </h1>
+      </div>
+    </div>
+  </div>
+  <br>
+  {% include 'main/edit_detail.html' %}
+  <br>
+  <br>
+  {% include 'main/edit_counter.html' %}
+  <br>
+  <br>
+  {% include 'main/edit_charge.html' %}
 
+  <div class="back-to-top"></div>
 
-<div class="back-to-top"></div>
+  <br>
+  <br>
+  <br>
+  <br>
 
-<br>
-<br>
-<br>
-<br>
-
-<script>
+  <script>
     var backToTopButton = document.querySelector('.back-to-top');
 
     window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 100) {
-            backToTopButton.style.display = 'block';
-        } else {
-            backToTopButton.style.display = 'none';
-        }
+      if (window.pageYOffset > 100) {
+        backToTopButton.style.display = 'block';
+      } else {
+        backToTopButton.style.display = 'none';
+      }
     });
 
     backToTopButton.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
-</script>
+  </script>
 
-<script>
+  <script>
     const transmitButton = document.getElementById("transmitButton");
     const electricityPrevInput = document.getElementById('{{ counterform.electricity_previous.auto_id }}');
     const electricityCurrInput = document.getElementById('{{ counterform.electricity_current.auto_id }}');
@@ -179,5 +171,3 @@
 
 
 {% endblock %}
-
-

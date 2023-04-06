@@ -1,5 +1,4 @@
 <div class="container">
-
   <form method="post">
     {% csrf_token %}
     <div class="card border rounded-0">
@@ -8,28 +7,24 @@
       </div>
       <div class="card-body">
         <div class="row">
-
           <div class="col">
-                <label for="{{ form.registredQt.id_for_label }}" class="form-label">{{ form.registredQt.label }}</label>
-                {{ form.registredQt }}
-                <label for="{{ form.livedQt.id_for_label }}" class="form-label">{{ form.livedQt.label }}</label>
-                {{ form.livedQt }}
+            <label for="{{ form.registredQt.id_for_label }}" class="form-label">{{ form.registredQt.label }}</label>
+            {{ form.registredQt }}
+            <label for="{{ form.livedQt.id_for_label }}" class="form-label">{{ form.livedQt.label }}</label>
+            {{ form.livedQt }}
           </div>
-
           <div class="col">
-                <label for="{{ form.registredQt.totalArea }}" class="form-label">{{ form.totalArea.label }}</label>
-                {{ form.totalArea }}
-                <label for="{{ form.account_number.id_for_label }}" class="form-label">{{ form.account_number.label }}</label>
-                {{ form.account_number }}
+            <label for="{{ form.registredQt.totalArea }}" class="form-label">{{ form.totalArea.label }}</label>
+            {{ form.totalArea }}
+            <label for="{{ form.account_number.id_for_label }}" class="form-label">{{ form.account_number.label }}</label>
+            {{ form.account_number }}
           </div>
-
           <div class="col">
-                <label for="{{ form.personalAccount.totalArea }}" class="form-label">{{ form.personalAccount.label }}</label>
-                {{ form.personalAccount }}
-                <label for="{{ form.tariff.id_for_label }}" class="form-label">{{ form.tariff.label }}</label>
-                {{ form.tariff }}
+            <label for="{{ form.personalAccount.totalArea }}" class="form-label">{{ form.personalAccount.label }}</label>
+            {{ form.personalAccount }}
+            <label for="{{ form.tariff.id_for_label }}" class="form-label">{{ form.tariff.label }}</label>
+            {{ form.tariff }}
           </div>
-
         </div>
         <div style="display: none;">
           {{ form.serialNumber }}
@@ -39,21 +34,17 @@
         </div>
         <br>
         <div class="row mb-3">
-            <div class="col text-center">
-              <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <a class="btn-segoe-primary" id="saveBlockOneButton">Сохранить</a>
-                <input type="submit" class="d-none" id="submitButtonSaveBlockOne">
-              </div>
+          <div class="col text-center">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+              <a class="btn-segoe-primary" id="saveBlockOneButton">Сохранить</a>
+              <input type="submit" class="d-none" id="submitButtonSaveBlockOne">
             </div>
           </div>
-
+        </div>
       </div>
     </div>
   </form>
-
-
 </div>
-
 <script>
   document.getElementById("saveBlockOneButton").addEventListener("click", function() {
     document.getElementById("submitButtonSaveBlockOne").click();
