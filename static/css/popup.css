@@ -23,14 +23,14 @@ label.form-label {
   width: 150px;
   transition: background-color 0.3s, color 0.3s;
   outline: none;
-  margin-right: 20px;
+  /*margin-right: 20px;*/
   text-decoration: none;
 }
 
 .btn-segoe-primary {
   background-color: #0184C8;
   border-radius: 22.5px;
-  font-family: 'Segoe UI';
+  font-family: 'Segoe UI', serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -42,7 +42,7 @@ label.form-label {
   width: 150px; /* Set a fixed width for the buttons */
   transition: background-color 0.3s, color 0.3s; /* Add a transition effect */
   outline: none;
-  margin-right: 20px;
+  /*margin-right: 20px;*/
   text-decoration: none;
 }
 
