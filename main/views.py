@@ -88,10 +88,12 @@ def update(request, id):
         'form': form,
         'counterform': counterform,
         'chargeform': chargeform,
-        "prev_url": prev_url,
-        "next_url": next_url,
-        "page_num": id,
-        "shortOwnerName": shortOwnerName
+        'prev_url': prev_url,
+        'next_url': next_url,
+        'page_num': id,
+        'shortOwnerName': shortOwnerName,
+        'settings_form': SettingsForm(instance=Settings.objects.get(id=1)),
+        'login_form': UserLoginForm(data=request.POST)
     }
     return render(request, 'main/edit.html', context)
 
