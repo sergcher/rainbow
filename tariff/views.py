@@ -7,8 +7,11 @@ from django.views import View
 from django.views.generic.list import ListView
 
 from common.views import TitleMixin
+from main.forms import SettingsForm
+from main.models import Settings
 from tariff.forms import TariffForm
 from tariff.models import Tariff
+from users.forms import UserLoginForm
 
 
 class TariffBaseView(View):
@@ -29,6 +32,12 @@ class TariffListView(TariffBaseView, TitleMixin, ListView):
     to access all Tariff objects"""
     template_name = 'tariff/index.html'
     title = 'Тарифы'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['settings_form'] = SettingsForm(instance=Settings.objects.get(id=1))
+        context['login_form'] = UserLoginForm(data=self.request.POST)
+        return context
 
 
 def add_tariff(request):

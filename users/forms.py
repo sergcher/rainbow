@@ -6,19 +6,17 @@ from users.models import User
 
 class UserLoginForm(AuthenticationForm):
 
-    attrs_user = {'class': 'form-control',
+    attrs_user = {'class': 'card w-100',
                   'style': 'border-color: #D9D9D9;'
                            'padding-left: 10px;'
-                           'padding-bottom: 2px;'
-                           'margin-bottom: 15px;',
+                           'padding-bottom: 2px;',
                   'placeholder': 'Введите имя пользователя',
                   }
 
-    attrs_pass = {'class': 'form-control',
+    attrs_pass = {'class': 'card w-100',
                   'style': 'border-color: #D9D9D9;'
                            'padding-left: 10px;'
-                           'padding-bottom: 2px;'
-                           'margin-bottom: 15px;',
+                           'padding-bottom: 2px;',
                   'placeholder': 'Введите пароль',
                   }
 
@@ -31,11 +29,6 @@ class UserLoginForm(AuthenticationForm):
             attrs=attrs_pass
         )
     )
-
-    # username = forms.CharField(widget=forms.TextInput(attrs={
-    #     'class': 'form-control py-4', }))
-    # password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control py-4',
-    #                                                              'placeholder': 'Введите пароль'}))
 
     class Meta:
         model = User
