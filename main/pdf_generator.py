@@ -66,7 +66,7 @@ def generate_pdf():
                                             f"{apartment.owner}       № Лицевого счета {detail.personalAccount}")
         p.setFont("Calibri", 10)
         p.drawString(20, h - 87 - y_offset,
-                     'Адрес: 652873, обл.Кемеровская, г. Междуреченск, пр-кт Шахтеров, 55. кв. 1')
+                     f'Адрес: 652873, обл.Кемеровская, г. Междуреченск, пр-кт Шахтеров, 55. кв. {apartment.serialNumber}')
         p.drawString(20, h - 99 - y_offset,
                      f'Площадь общая/отапливаемая площадь/м2 {detail.totalArea}           '
                      f'кол-во проживающих граждан      {detail.livedQt}')
