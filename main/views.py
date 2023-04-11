@@ -10,6 +10,8 @@ from main.models import (Apartment, ApartmentCharge, ApartmentCounter,
 from main.pdf_generator import generate_pdf
 from users.forms import UserLoginForm
 
+from django.contrib import messages
+
 
 def settings(request):
     form = SettingsForm(instance=Settings.objects.get(id=1))
@@ -61,9 +63,11 @@ def update(request, id):
                 )
             if form.is_valid():
                 form.save()
+                messages.success(request, 'Изменения сохранены!')
                 return redirect(request.path_info)
             else:
-                print(form.errors)
+                pass
+                # messages.error(request, 'Ошибка - ' + str(form.errors))
         elif 'counters' in request.POST:
             counterform = ApartmentCounterForm(
                 request.POST, instance=ApartmentCounter.objects.get(
@@ -72,18 +76,22 @@ def update(request, id):
                 )
             if counterform.is_valid():
                 counterform.save()
+                messages.success(request, 'Изменения сохранены!')
                 return redirect(request.path_info)
             else:
-                print(counterform.errors)
+                pass
+                # messages.error(request, 'Ошибка - ' + str(counterform.errors))
         elif 'charge' in request.POST:
             chargeform = ApartmentChargeForm(
                 request.POST, instance=ApartmentCharge.objects.get(serialNumber=id)
                 )
             if chargeform.is_valid():
                 chargeform.save()
+                messages.success(request, 'Изменения сохранены!')
                 return redirect(request.path_info)
             else:
-                print(chargeform.errors)
+                pass
+                # messages.error(request, 'Ошибка - ' + str(chargeform.errors))
     context = {
         'form': form,
         'counterform': counterform,

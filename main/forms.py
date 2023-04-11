@@ -55,7 +55,7 @@ class ApartmentDetailForm(forms.ModelForm):
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Лицевой счет:'
+        label='Лицевой счёт:'
     )
 
     account_number = forms.CharField(

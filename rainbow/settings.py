@@ -1,4 +1,28 @@
+import os
 from pathlib import Path
+from django.contrib.messages import constants as messages
+import environ
+
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=bool,
+    SECRET_KEY=str
+)
+
+# Set the project base directory
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -11,13 +35,12 @@ LOGOUT_REDIRECT_URL = '/'
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-az7$mjptgnn+stkn=fhol+^$aqc)!)s$)ta53duxs1%#6e$5g$'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['rainbowmzk.pythonanywhere.com', '127.0.0.1']
-
 
 # Application definition
 
@@ -117,7 +140,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR / 'static', )
-STATIC_ROOT = '/home/rainbowmzk/rainbow/static'
+if not DEBUG:
+    STATIC_ROOT = '/home/rainbowmzk/rainbow/static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
