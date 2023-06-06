@@ -140,8 +140,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-if not DEBUG:
-    STATIC_ROOT = ''
+STATIC_ROOT = '/home/serjmzk/rainbow/static'
 
 STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static/'),
