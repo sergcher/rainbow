@@ -35,7 +35,7 @@ def index(request):
     else:
         apartments = Apartment.objects.all()
     context = {
-        'title': 'ТСЖ Радуга',
+        'title': 'Rainbow',
         'apartments': apartments,
         'apartment_details': ApartmentDetail.objects.all(),
         'apartment_fees': ApartmentFee.objects.all(),
