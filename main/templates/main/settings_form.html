@@ -2,34 +2,34 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header text-center custom-modal-header">
-        <h5 class="modal-title w-100" style="font-size: 14px; color: #FFFFFF; font-family: Segoe UI,serif; font-weight: 400">НАСТРОЙКИ</h5>
+        <h5 class="modal-title w-100" style="font-size: 14px; color: #FFFFFF; font-family: Segoe UI,serif; font-weight: 400">SETTINGS</h5>
       </div>
       <form action="{% url 'main:settings' %}" method="post">
         {% csrf_token %}
         <div class="modal-body">
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ settings_form.month_name.id_for_label }}" class="form-label">Месяц:</label>
+              <label for="{{ settings_form.month_name.id_for_label }}" class="form-label">Month:</label>
               {{ settings_form.month_name }}
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ settings_form.month_to_pay.id_for_label }}" class="form-label">К оплате на (месяц):</label>
+              <label for="{{ settings_form.month_to_pay.id_for_label }}" class="form-label">To be paid for (month):</label>
               {{ settings_form.month_to_pay }}
             </div>
             <div class="col">
-              <label for="{{ settings_form.bill.id_for_label }}" class="form-label">Счёт-извещение:</label>
+              <label for="{{ settings_form.bill.id_for_label }}" class="form-label">Notification Bill:</label>
               {{ settings_form.bill }}
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ settings_form.month_to_date.id_for_label }}" class="form-label">К оплате на (дата):</label>
+              <label for="{{ settings_form.month_to_date.id_for_label }}" class="form-label">To be paid for (date):</label>
               {{ settings_form.month_to_date }}
             </div>
             <div class="col">
-              <label for="{{ settings_form.pay_up_to.id_for_label }}" class="form-label">Оплатить до:</label>
+              <label for="{{ settings_form.pay_up_to.id_for_label }}" class="form-label">Pay before:</label>
               {{ settings_form.pay_up_to }}
             </div>
           </div>
@@ -37,8 +37,8 @@
           <div class="row mb-3">
             <div class="col text-center">
               <div class="d-grid gap-3 d-md-flex justify-content-md-center">
-                <a class="btn-segoe" data-bs-dismiss="modal">Отменить</a>
-                <a class="btn-segoe-primary" id="saveSettingsButton">Сохранить</a>
+                <a class="btn-segoe" data-bs-dismiss="modal">Cancel</a>
+                <a class="btn-segoe-primary" id="saveSettingsButton">Save</a>
                 <input type="submit" class="d-none" id="submitButtonSaveSettings">
               </div>
             </div>

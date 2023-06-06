@@ -10,16 +10,16 @@
     <br>
     <div class="row">
         <div class="col-sm-6 text-start">
-            <h1 class="special2">Капитальный ремонт</h1>
+            <h1 class="special2">Complete overhaul</h1>
         </div>
     </div>
     <br>
     <div class="row">
         <div class="col-sm-6">
              <a class="btn-segoe-main" onclick="window.location.href='{% url 'repair:repair_generate_excel' %}'">Excel</a>
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'repair:repair_receipt' %}'">Квитанции</a>
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'repair:repair_generate_txt' %}'">Для клиент банка</a>
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'repair:generate_excel_repair_total_file' %}'">Итоги</a>
+{#             <a class="btn-segoe-main" onclick="window.location.href='{% url 'repair:repair_receipt' %}'">Receipts</a>#}
+             <a class="btn-segoe-main" onclick="window.location.href='{% url 'repair:repair_generate_txt' %}'">For bank app</a>
+             <a class="btn-segoe-main" onclick="window.location.href='{% url 'repair:generate_excel_repair_total_file' %}'">Summary</a>
         </div>
     </div>
 </div>

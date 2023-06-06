@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-sm-6 text-start">
-            <h1 class="special2">Квартиры</h1>
+            <h1 class="special2">Apartments</h1>
         </div>
     </div>
 
@@ -20,18 +20,18 @@
 
     <div class="row">
         <div class="col-sm-6">
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:update_fees' %}'">Перерасчёт</a>
+             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:update_fees' %}'">Recalculating</a>
              <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:generate_excel' %}?filter={{ request.GET.filter }}'">Excel</a>
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:apartment_receipt' %}'">Квитанции</a>
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:generate_txt' %}'">Для клиент банка</a>
-             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:generate_excel_apartment_total_file' %}'">Итоги</a>
+             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:apartment_receipt' %}'">Receipts</a>
+             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:generate_txt' %}'">For bank app</a>
+             <a class="btn-segoe-main" onclick="window.location.href='{% url 'main:generate_excel_apartment_total_file' %}'">Summary</a>
         </div>
         <div class="col-sm-6 text-end">
           <form method="get" action="{% url 'index' %}">
-            <label for="filter">Выберите фильтр:</label>
+            <label for="filter">Choose a filter:</label>
             <select name="filter" id="filter">
-              <option value="">Все записи</option>
-              <option value="balance_end_gt_6000">Должники (сальдо конец &gt; 6000)</option>
+              <option value="">All records</option>
+              <option value="balance_end_gt_6000">Debtors  (balance end &gt; 6000)</option>
             </select>
           </form>
         </div>

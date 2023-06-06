@@ -11,7 +11,7 @@ class TariffForm(forms.ModelForm):
              }
 
     error_messages = {
-        'invalid': 'Для ввода дробных чисел используйте точку'
+        'invalid': 'For entering decimal numbers, please use a dot (.)'
     }
 
     name = forms.CharField(

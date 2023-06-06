@@ -8,41 +8,41 @@
         <div class="modal-body">
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ repair_form.debt.id_for_label }}" class="form-label">Долг на начало месяца:</label>
+              <label for="{{ repair_form.debt.id_for_label }}" class="form-label">Debt at the beginning of the month:</label>
                 {% render_field repair_form.debt class="form-control" %}
                 <div class="invalid-feedback">{{ repair_form.debt.errors|first }}</div>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label class="form-label" style="font-weight: bold">НАЧИСЛЕНО:</label>
+              <label class="form-label" style="font-weight: bold">CURRENT CHARGES:</label>
                <b>{{ repair.accrued }}</b>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ repair_form.fine.id_for_label }}" class="form-label">Пеня:</label>
+              <label for="{{ repair_form.fine.id_for_label }}" class="form-label">Fine:</label>
               {% render_field repair_form.fine class="form-control" %}
               <div class="invalid-feedback">{{ repair_form.fine.errors|first }}</div>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ repair_form.recalculation.id_for_label }}" class="form-label">Перерасчет:</label>
+              <label for="{{ repair_form.recalculation.id_for_label }}" class="form-label">Recalculating:</label>
               {% render_field repair_form.recalculation class="form-control" %}
               <div class="invalid-feedback">{{ repair_form.recalculation.errors|first }}</div>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ repair_form.paid.id_for_label }}" class="form-label">Оплачено:</label>
+              <label for="{{ repair_form.paid.id_for_label }}" class="form-label">Paid:</label>
               {% render_field repair_form.paid class="form-control" %}
               <div class="invalid-feedback">{{ repair_form.paid.errors|first }}</div>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label class="form-label" style="font-weight: bold">ИТОГО:</label>
+              <label class="form-label" style="font-weight: bold">TOTAL:</label>
               <b>{{ repair.total }}</b>
             </div>
           </div>
@@ -50,8 +50,8 @@
           <div class="row mb-3">
             <div class="col text-center">
               <div class="d-grid gap-3 d-md-flex justify-content-md-center">
-                <a class="btn-segoe" data-bs-dismiss="modal">Отменить</a>
-                <a class="btn-segoe-primary" id="saveRepairButton">Сохранить</a>
+                <a class="btn-segoe" data-bs-dismiss="modal">Cancel</a>
+                <a class="btn-segoe-primary" id="saveRepairButton">Save</a>
                 <input type="submit" class="d-none" id="submitButtonSaveRepair">
               </div>
             </div>

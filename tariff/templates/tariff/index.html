@@ -19,7 +19,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 text-start">
-            <h1 class="special2">Тарифы</h1>
+            <h1 class="special2">Tariffs</h1>
         </div>
     </div>
 
@@ -29,7 +29,7 @@
     <div class="col-sm-6">
          <a class="btn-segoe-main"
             hx-get="{% url 'tariff:add_tariff' %}"
-            hx-target="#dialog">Добавить новый тариф</a>
+            hx-target="#dialog">Add a new tariff</a>
     </div>
 </div>
 
@@ -48,12 +48,12 @@
         <thead class="apartment-table">
             <tr>
                 <th class="apartment-header">№</th>
-                <th class="apartment-header">Наименование</th>
-                <th class="apartment-header">Содержание жилья</th>
-                <th class="apartment-header">Подогрев воды (ГКал)</th>
-                <th class="apartment-header">Подогрев воды (рубли)</th>
-                <th class="apartment-header">Горячая вода</th>
-                <th class="apartment-header">Действие</th>
+                <th class="apartment-header">Title</th>
+                <th class="apartment-header">Maintenance fee</th>
+                <th class="apartment-header">Water heating (Gcal)</th>
+                <th class="apartment-header">Water heating ($)</th>
+                <th class="apartment-header">Hot water</th>
+                <th class="apartment-header">Option</th>
             </tr>
         </thead>
         <tbody hx-trigger="load, tariffListChanged from:body" hx-get="{% url 'tariff:tariff_list' %}" hx-target="this">

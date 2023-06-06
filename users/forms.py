@@ -10,14 +10,14 @@ class UserLoginForm(AuthenticationForm):
                   'style': 'border-color: #D9D9D9;'
                            'padding-left: 10px;'
                            'padding-bottom: 2px;',
-                  'placeholder': 'Введите имя пользователя',
+                  'placeholder': 'Please fill out this field Username',
                   }
 
     attrs_pass = {'class': 'card w-100',
                   'style': 'border-color: #D9D9D9;'
                            'padding-left: 10px;'
                            'padding-bottom: 2px;',
-                  'placeholder': 'Введите пароль',
+                  'placeholder': 'Please fill out this field Password',
                   }
 
     username = forms.CharField(

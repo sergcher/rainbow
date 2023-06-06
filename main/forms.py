@@ -27,14 +27,14 @@ class ApartmentDetailForm(forms.ModelForm):
                     }
 
     error_messages = {
-        'invalid': 'Для ввода дробных чисел используйте точку'
+        'invalid': 'For entering decimal numbers, please use a dot (.)'
     }
 
     registredQt = forms.IntegerField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Количество зарегистрированных:'
+        label='Number of registered:'
     )
 
     livedQt = forms.IntegerField(
@@ -48,21 +48,21 @@ class ApartmentDetailForm(forms.ModelForm):
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Общая площадь:'
+        label='Apartment size:'
     )
 
     personalAccount = forms.IntegerField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Лицевой счёт:'
+        label='Personal account:'
     )
 
     account_number = forms.CharField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Единый лицевой счёт в ГИС ЖКХ:'
+        label='Unified personal account:'
     )
 
     tariff = TariffChoiceField(
@@ -71,7 +71,7 @@ class ApartmentDetailForm(forms.ModelForm):
         error_messages=error_messages,
         required=False,
         empty_label=None,
-        label='Действующий тариф:'
+        label='Current tariff:'
     )
 
     class Meta:
@@ -80,9 +80,9 @@ class ApartmentDetailForm(forms.ModelForm):
                   'personalAccount', 'account_number',
                   'serialNumber', 'tariff')
         labels = {
-            'registredQt': 'Количество зарегистрированных', 'livedQt': 'Количество проживающих',
-            'totalArea': 'Общая площадь', 'personalAccount': 'Лицевой счет',
-            'account_number': 'Единый лицевой счет в ГИС ЖКХ', 'tariff': 'Действующий тариф'
+            'registredQt': 'Number of registered', 'livedQt': 'Number of residents',
+            'totalArea': 'Apartment size', 'personalAccount': 'Licence account',
+            'account_number': 'Unified personal account', 'tariff': 'Current tariff'
         }
 
 
@@ -117,7 +117,7 @@ class ApartmentCounterForm(forms.ModelForm):
                      }
 
     error_messages = {
-        'invalid': 'Для ввода дробных чисел используйте точку'
+        'invalid': 'For entering decimal numbers, please use a dot (.)'
     }
 
     hot_water_previous = forms.IntegerField(
@@ -194,70 +194,70 @@ class ApartmentChargeForm(forms.ModelForm):
              }
 
     error_messages = {
-        'invalid': 'Для ввода дробных чисел используйте точку'
+        'invalid': 'For entering decimal numbers, please use a dot (.)'
     }
 
     money_deposited = forms.FloatField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Оплачено:'
+        label='Paid:'
     )
 
     fine = forms.FloatField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Пеня:'
+        label='Fine:'
     )
 
     balance_start = forms.FloatField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Сальдо начало:'
+        label='Balance start:'
     )
 
     recalculation_electricity = forms.FloatField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Перерасчёт электроэнергия:'
+        label='Recalculating Electricity:'
     )
 
     recalculation_heating_rub = forms.FloatField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Перерасчёт подогрев воды:'
+        label='Recalculating heating water:'
     )
 
     recalculation_hot_water = forms.FloatField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Перерасчёт горячая вода:'
+        label='Recalculating hot water:'
     )
 
     recalculation_cold_water = forms.FloatField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Перерасчёт холодная вода:'
+        label='Recalculating Cold water:'
     )
 
     recalculation_sewage = forms.FloatField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Перерасчёт канализация:'
+        label='Recalculating Sewerage:'
     )
 
     recalculation_solid_waste = forms.FloatField(
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Перерасчёт обращение с ТКО:'
+        label='Recalculating Solid waste management:'
     )
 
     class Meta:
@@ -267,14 +267,14 @@ class ApartmentChargeForm(forms.ModelForm):
                   'recalculation_cold_water',
                   'recalculation_sewage', 'recalculation_solid_waste', 'serialNumber')
         labels = {
-            'money_deposited': 'Оплачено', 'fine': 'Пеня',
-            'balance_start': 'Сальдо начало',
-            'recalculation_electricity': 'Перерасчет электроэнергия',
-            'recalculation_heating_rub': 'Перерасчет подогрев воды',
-            'recalculation_hot_water': 'Перерасчет горячая вода',
-            'recalculation_cold_water': 'Перерасчет холодная вода',
-            'recalculation_sewage': 'Перерасчет канализация',
-            'recalculation_solid_waste': 'Перерасчет обращение с ТКО',
+            'money_deposited': 'Paid', 'fine': 'Fine',
+            'balance_start': 'Balance start',
+            'recalculation_electricity': 'Recalculating Electricity',
+            'recalculation_heating_rub': 'Recalculating hot water',
+            'recalculation_hot_water': 'Recalculating hot water',
+            'recalculation_cold_water': 'Recalculating Cold water',
+            'recalculation_sewage': 'Recalculating sewerage',
+            'recalculation_solid_waste': 'Recalculating solid waste management',
         }
 
 
@@ -295,7 +295,7 @@ class SettingsForm(forms.ModelForm):
         model = Settings
         fields = ['month_name', 'month_to_pay', 'month_to_date', 'bill', 'pay_up_to']
         labels = {
-            'month_name': 'Месяц:', 'month_to_pay': 'К оплате на (месяц):',
-            'month_to_date': 'К оплате на (дата):',
-            'bill': 'Счет-извещение:', 'pay_up_to': 'Оплатить до:'
+            'month_name': 'Month:', 'month_to_pay': 'To be paid for (month):',
+            'month_to_date': 'To be paid for (date):',
+            'bill': 'Notification Bill:', 'pay_up_to': 'Pay before:'
         }

@@ -48,28 +48,28 @@ def generate_pdf():
         apartment_charge = ApartmentCharge.objects.get(serialNumber=apartment.serialNumber)
         tariff = Tariff.objects.get(id=detail.tariff_id)
         p.setFont("CalibriB", 12)
-        p.drawString(20, h - 20 - y_offset, f"Платежный документ № {settings.bill}-{apartment.serialNumber}")
-        p.drawString(250, h - 20 - y_offset, f"расчетный период {settings.month_name}")
+        p.drawString(20, h - 20 - y_offset, f"Payment receipt № {settings.bill}-{apartment.serialNumber}")
+        p.drawString(250, h - 20 - y_offset, f"Billing period {settings.month_name}")
         p.rect(15, h - 66 - y_offset,  570, 45)
         p.setFont("CalibriB", 10)
-        p.drawString(20, h - 32 - y_offset, 'Получатель платежа ТСЖ "Радуга"        ИНН 4214020636       КПП 421401001')
+        p.drawString(20, h - 32 - y_offset, 'Payee homeowners association "Rainbow"        ITN 4214020636       TRRC 421401001')
         p.setFont("Calibri", 10)
         p.drawString(20, h - 42 - y_offset,
-                     'Адрес: 652873, обл.Кемеровская, г. Междуреченск, пр-кт Шахтеров, 55. Тел. 8 (38475) 5-03-42')
+                     'Address: 769 W 10TH ST NEW YORK NY 10634-1247 USA. Tel. 212-639-9675')
         p.drawString(20, h - 52 - y_offset,
-                     '№ банковского счета и банковские реквизиты: Кемеровское отделение № 8615 "ПАО Сбербанк России"')
+                     'Bank account number and bank details: J.P. Morgan S.A. (376)')
         p.setFont("CalibriB", 10)
         p.drawString(20, h - 62 - y_offset,
-                     'БИК 043207612     р/сч 40703810626070100299    к/сч 30101810200000000612')
+                     'BIC 1043607632     Account 40773810626600106799    Corr. acc. 30491814800000000332')
         p.rect(15, h - 102 - y_offset, 570, 36)
-        p.drawString(20, h - 75 - y_offset, f"Плательщик/собственник помещения        "
-                                            f"{apartment.owner}       № Лицевого счета {detail.personalAccount}")
+        p.drawString(20, h - 75 - y_offset, f"Payer/landlord        "
+                                            f"{apartment.owner}       Ledger Account № {detail.personalAccount}")
         p.setFont("Calibri", 10)
         p.drawString(20, h - 87 - y_offset,
-                     f'Адрес: 652873, обл.Кемеровская, г. Междуреченск, пр-кт Шахтеров, 55. кв. {apartment.serialNumber}')
+                     f'Address: 769 W 10TH ST NEW YORK NY 10634-1247 USA  Apartment № {apartment.serialNumber}')
         p.drawString(20, h - 99 - y_offset,
-                     f'Площадь общая/отапливаемая площадь/м2 {detail.totalArea}           '
-                     f'кол-во проживающих граждан      {detail.livedQt}')
+                     f'Apartment size full/heated area/sq.ft. {detail.totalArea}           '
+                     f'Number of residents      {detail.livedQt}')
 
         # Drawing header row
         p.setFont("CalibriB", 10)
@@ -77,14 +77,14 @@ def generate_pdf():
 
         start, offset, width, height = 15, 135, 115, 33
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Виды услуг'
+        label = 'Types of services'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 2, 3, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Ед.изм.'
+        label = 'Unit.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 2, 3, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -94,71 +94,71 @@ def generate_pdf():
 
         start, width = width + start, 40
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'норматив'
+        label = '    Norm'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 2
         vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'потребле'
+        label = 'of con'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 2
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'ния КУ'
+        label = 'sumption'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 2
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 40
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Объем'
+        label = 'Volume'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 2, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'услуг'
+        label = ''
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 57
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Тариф/Размер'
+        label = 'Tariff'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
         vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'платы на кв.м.,'
+        label = ''
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 11
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'руб.'
+        label = ''
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 57
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Текущее'
+        label = 'Current'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'показание'
+        label = 'reading'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'счетчика - ИПУ'
+        label = 'of counter'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 10
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 57
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Начислено за'
+        label = 'Accrued for'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
         vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'расчетный'
+        label = 'the billing'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'период/руб.'
+        label = 'period/USD'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 4
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
@@ -168,15 +168,15 @@ def generate_pdf():
 
         start, width = width + start, 54
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Размер'
+        label = 'size'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) - 2
         vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'повышающего'
+        label = 'of the'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) - 2
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'коэффициента'
+        label = 'multiplier'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) - 2
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
@@ -186,11 +186,11 @@ def generate_pdf():
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Перерасчеты'
+        label = 'Recalculatings'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 2, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'всего/руб.'
+        label = 'Total/USD'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
@@ -200,15 +200,15 @@ def generate_pdf():
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Всего к оплате'
+        label = 'Total amount due'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize) + 2
         vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'за расчетный'
+        label = 'the billing'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'период/руб.'
+        label = 'period/ USD'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
@@ -220,7 +220,7 @@ def generate_pdf():
         start, offset, width, height = 15, offset + 13, 520, 13
         p.rect(start, h - offset - y_offset, width, height)
 
-        label = 'Коммунальные услуги итого:'
+        label = 'Utilities total:'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -238,14 +238,14 @@ def generate_pdf():
 
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Электроснабжение'
+        label = 'Electricity'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'кВт.ч'
+        label = 'kWh'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -305,14 +305,14 @@ def generate_pdf():
         # Drawing fourth row heating
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Отопление'
+        label = 'Heating'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Гкал'
+        label = 'Gcal'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -376,14 +376,14 @@ def generate_pdf():
         # Drawing fifth row hot water
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Горячее водоснабжение'
+        label = 'Hot water'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'куб.м.'
+        label = 'gal.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -447,14 +447,14 @@ def generate_pdf():
         # Drawing sixth row cold water
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Холодное водоснабжение'
+        label = 'Cold water'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'куб.м.'
+        label = 'gal.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -518,14 +518,14 @@ def generate_pdf():
         # Drawing seven row sewage
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Водоотведение'
+        label = 'Sewerage'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'куб.м.'
+        label = 'gal.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -589,14 +589,14 @@ def generate_pdf():
         # Drawing eight row solid waste
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Обращение с ТКО'
+        label = 'Solid waste management'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'чел.'
+        label = 'people'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -664,7 +664,7 @@ def generate_pdf():
         start, offset, width, height = 15, offset + 13, 520, 13
         p.rect(start, h - offset - y_offset, width, height)
 
-        label = 'Плата за содержание помещения итого:'
+        label = 'Fee for the maintenance of the premises in total:'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -682,7 +682,7 @@ def generate_pdf():
 
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Содержание жилого помещения'
+        label = 'Maintenance fee'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -692,7 +692,7 @@ def generate_pdf():
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'кв.м.'
+        label = 'sq.ft.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -756,14 +756,14 @@ def generate_pdf():
         # Drawing eleven row electricity odn
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'ОДН электроэнергия'
+        label = 'Electricity (hn)'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'кв.м.'
+        label = 'sq.ft.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -827,14 +827,14 @@ def generate_pdf():
         # Drawing twelve row sewage odn
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'ОДН сточные воды'
+        label = 'Sewerage (hn)'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'кв.м.'
+        label = 'sq.ft.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -898,14 +898,14 @@ def generate_pdf():
         # Drawing thirteen row cold water odn
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'ОДН холодная вода'
+        label = 'Cold water (hn)'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'кв.м.'
+        label = 'sq.ft.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -969,14 +969,14 @@ def generate_pdf():
         # Drawing fourteen row hot water odn
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'ОДН горячая вода'
+        label = 'Hot water (hn)'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'кв.м.'
+        label = 'sq.ft.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -1040,14 +1040,14 @@ def generate_pdf():
         # Drawing fifteen row lift
         start, offset, width, height = 15, offset + 13, 115, 13
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Лифт   тех.обслуживание'
+        label = 'Elevator (technical service)'
         horizontal_space = 17
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 50
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'кв.м.'
+        label = 'sq.ft.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -1110,23 +1110,23 @@ def generate_pdf():
 
         # Drawing total rows
         p.setFont("Calibri", 10)
-        p.drawString(350, h - 327 - y_offset, r"Всего по услугам за расчетный период/руб.")
+        p.drawString(350, h - 327 - y_offset, r"Total for the billing period/ USD")
         p.line(538, h - 329 - y_offset, 585, h - 329 - y_offset)
         total_ = round(apartment_fee.maintenance_full + apartment_fee.maintenance_total, 2)
         p.drawString(540, h - 327 - y_offset, f'{total_}')
-        p.drawString(315, h - 341 - y_offset, r"Задолженность на начало расчетного периода/руб.")
+        p.drawString(315, h - 341 - y_offset, r"Debt at the beginning of the billing period/ USD")
         p.line(538, h - 343 - y_offset, 585, h - 343 - y_offset)
         p.drawString(540, h - 341 - y_offset, f"{apartment_fee.balance_start}")
-        p.drawString(473, h - 357 - y_offset, r"Оплачено/руб.")
+        p.drawString(473, h - 357 - y_offset, r"Paid/USD")
         p.line(538, h - 359 - y_offset, 585, h - 359 - y_offset)
         p.drawString(540, h - 357 - y_offset, f"{apartment_fee.paid}")
-        p.drawString(493, h - 371 - y_offset, r"Пени/руб.")
+        p.drawString(493, h - 371 - y_offset, r"Fine/USD")
         p.line(538, h - 373 - y_offset, 585, h - 373 - y_offset)
         p.drawString(540, h - 371 - y_offset, f"{apartment_fee.fine}")
         p.setFont("CalibriB", 12)
         p.drawString(47, h - 385 - y_offset,
-                     f"Итого к оплате на {settings.month_to_date} "
-                     "(с учетом задолженности/переплаты за расчетный период) руб.")
+                     f"Total amount on {settings.month_to_date} "
+                     "(including debt/overpayment for the billing period) USD")
         p.line(538, h - 387 - y_offset, 585, h - 387 - y_offset)
         p.drawString(540, h - 385 - y_offset, f"{apartment_fee.total}")
         if apartment.serialNumber % 2 != 0:

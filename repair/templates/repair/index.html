@@ -30,14 +30,14 @@
         <thead class="apartment-table">
             <tr>
                 <th class="apartment-header">№</th>
-                <th class="apartment-header">Список фамилий</th>
-                <th class="apartment-header">Общ. площ.</th>
-                <th class="apartment-header">Долг на начало месяца</th>
-                <th class="apartment-header">Начислено</th>
-                <th class="apartment-header">Пеня</th>
-                <th class="apartment-header">Перерасчёт</th>
-                <th class="apartment-header">Оплачено</th>
-                <th class="apartment-header">Итого</th>
+                <th class="apartment-header">List of Landlords</th>
+                <th class="apartment-header">Apartment size</th>
+                <th class="apartment-header">Debt at the beginning of the month</th>
+                <th class="apartment-header">Current charges</th>
+                <th class="apartment-header">Fine</th>
+                <th class="apartment-header">Recalculating</th>
+                <th class="apartment-header">Paid</th>
+                <th class="apartment-header">Total amount due</th>
             </tr>
         </thead>
         <tbody hx-trigger="load, repairListChanged from:body" hx-get="{% url 'repair:repair_list' %}" hx-target="this">

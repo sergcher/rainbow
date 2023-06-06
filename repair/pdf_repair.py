@@ -101,7 +101,7 @@ def repair_generate_pdf():
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 2, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'руб.'
+        label = '$.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
@@ -116,25 +116,25 @@ def repair_generate_pdf():
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'периода, руб.'
+        label = 'периода, $.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 80
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Начислено за'
+        label = 'Current charges за'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 2, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'период, руб.'
+        label = 'период, $.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 65
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Оплачено в'
+        label = 'Paid в'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 3, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -142,14 +142,14 @@ def repair_generate_pdf():
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'руб.'
+        label = '$.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
 
         start, width = width + start, 65
         p.rect(start, h - offset - y_offset, width, height)
-        label = 'Пеня руб.'
+        label = 'Fine $.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 2, 3, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -164,7 +164,7 @@ def repair_generate_pdf():
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)
-        label = 'руб.'
+        label = '$.'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = vertical_space - 10
         p.drawString(horizontal_space, vertical_space, label)

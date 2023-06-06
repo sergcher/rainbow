@@ -3,7 +3,7 @@
     {% csrf_token %}
     <div class="card border rounded-0">
       <div class="card-header header_text">
-        СЧЁТЧИКИ
+        METERS
       </div>
       <div class="card-body">
 
@@ -14,7 +14,7 @@
       <tbody>
         <tr>
           <td>
-            <label class="form-label" style="margin-bottom: 20px; width: 100px;">Горячая вода:</label>
+            <label class="form-label" style="margin-bottom: 20px; width: 100px;">Hot water:</label>
           </td>
           <td>
              {{ counterform.hot_water_previous }}
@@ -40,7 +40,7 @@
           </td>
           <td>
             <!-- Your control and label for row 1, column 7 -->
-            <label class="form-label-table-counters" style="margin-bottom: 20px">Электричество:</label>
+            <label class="form-label-table-counters" style="margin-bottom: 20px">Electricity:</label>
           </td>
           <td>
             <!-- Your control and label for row 1, column 8 -->
@@ -65,7 +65,7 @@
         </tr>
         <tr>
           <td>
-            <label class="form-label" style="margin-bottom: 20px">Холодная вода:</label>
+            <label class="form-label" style="margin-bottom: 20px">Cold water:</label>
           </td>
           <td>
             <!-- Your control and label for row 2, column 2 -->
@@ -91,7 +91,7 @@
           </td>
           <td>
             <!-- Your control and label for row 2, column 7 -->
-            <label class="form-label-table-counters" style="margin-bottom: 20px">Отведение сточных вод:</label>
+            <label class="form-label-table-counters" style="margin-bottom: 20px">Canalization:</label>
           </td>
           <td>
             <!-- Your control and label for row 2, column 8 -->
@@ -114,8 +114,8 @@
         <div class="row mb-3">
             <div class="col text-center">
               <div class="d-grid gap-3 d-md-flex justify-content-md-center">
-                <a class="btn-segoe" id="transmitButton" style="width: 200px">Перенести показания</a>
-                <a class="btn-segoe-primary" id="saveBlockTwoButton">Сохранить</a>
+                <a class="btn-segoe" id="transmitButton" style="width: 200px">Transfer to next month</a>
+                <a class="btn-segoe-primary" id="saveBlockTwoButton">Save</a>
                 <input type="submit" class="d-none" id="submitButtonSaveBlockTwo">
               </div>
             </div>

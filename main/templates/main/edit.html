@@ -40,15 +40,15 @@
     <div class="row">
       <div class="col-sm-6">
         {% if page_num > 1 %}
-          <a onclick="window.location.href = '{{ prev_url }}';" class="btn-next-previous" data-bs-dismiss="modal"><< Кв №{{ page_num|add:-1 }}</a>
+          <a onclick="window.location.href = '{{ prev_url }}';" class="btn-next-previous" data-bs-dismiss="modal"><< Apt. №{{ page_num|add:-1 }}</a>
      {% endif %}
       </div>
       <div class="col-sm-6 text-end">
         {% if page_num < 106 %}
           {% if page_num > 1 %}
-            <a onclick="window.location.href = '{{ next_url }}';" class="btn-next-previous" data-bs-dismiss="modal">Кв №{{ page_num|add:1 }} >></a>
+            <a onclick="window.location.href = '{{ next_url }}';" class="btn-next-previous" data-bs-dismiss="modal">Apt. №{{ page_num|add:1 }} >></a>
           {% else %}
-            <a onclick="window.location.href = '{{ next_url }}';" class="btn-next-previous" data-bs-dismiss="modal">Кв №{{ page_num|add:1 }} >></a>
+            <a onclick="window.location.href = '{{ next_url }}';" class="btn-next-previous" data-bs-dismiss="modal">Apt. №{{ page_num|add:1 }} >></a>
           {% endif %}
         {% endif %}
       </div>
@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col text-start">
         <h1 class="special2">
-          <a href="{% url 'index' %}" style="color: #0085C8; text-decoration: none">Квартиры</a>
+          <a href="{% url 'index' %}" style="color: #0085C8; text-decoration: none">Apartments</a>
           <span class="page-number"> -> №{{ page_num }} ({{ shortOwnerName }})</span>
         </h1>
       </div>

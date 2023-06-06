@@ -27,8 +27,8 @@ def repair_export_client_bank():
             total += repair_total
             f.write(
                 f'{apartment_detail.personalAccount}|{apartment.owner.strip()}'
-                f'|Междуреченск, Шахтеров проспект, д. 55,{apartment.serialNumber}|12|'
-                f'кап.ремонт|{date_str}||{int(repair_total * 100)}' + '\n')
+                f'|New York, street, h. 55,{apartment.serialNumber}|12|'
+                f'cap.repair|{date_str}||{int(repair_total * 100)}' + '\n')
         total = round(total, 2)
         f.write('=|106|' + str(int(total * 100)) + '\n')
 
@@ -44,8 +44,8 @@ def repair_generate_excel_file(apartments):
     wb = Workbook()
     ws = wb.active
     headers = [
-         'Квартира', 'ФИО', 'Общ. площ.', 'Долг на нач. месяца', 'Начислено',
-         'Пеня', 'Перерасчет', 'Оплачено', 'Итого'
+         'Apartment', 'Owner', 'Apartment size', 'Debt at the beginning of the month', 'Current charges',
+         'Fine', 'Recalculating', 'Paid', 'Total'
     ]
 
     ws.append(headers)
@@ -78,34 +78,34 @@ def export_excel_repair_total_file():
     ws = wb.active
     objects = CapitalRepair.objects.all()
 
-    # Долг на начало месяца
+    # Debt at the beginning of the month
     value = CapitalRepair.objects.aggregate(Sum('debt'))['debt__sum']
-    data = ['Долг на начало месяца', value]
+    data = ['Debt at the beginning of the month', value]
     ws.append(data)
 
-    # Начислено
+    # Current charges
     value = sum([obj.accrued() for obj in objects])
-    data = ['Начислено', value]
+    data = ['Current charges', value]
     ws.append(data)
 
-    # Пеня
+    # Fine
     value = CapitalRepair.objects.aggregate(Sum('fine'))['fine__sum']
-    data = ['Пеня', value]
+    data = ['Fine', value]
     ws.append(data)
 
     # Перерасчет
     value = CapitalRepair.objects.aggregate(Sum('recalculation'))['recalculation__sum']
-    data = ['Перерасчет', value]
+    data = ['Recalculating', value]
     ws.append(data)
 
-    # Оплачено
+    # Paid
     value = CapitalRepair.objects.aggregate(Sum('paid'))['paid__sum']
-    data = ['Оплачено', value]
+    data = ['Paid', value]
     ws.append(data)
 
     # Итого
     value = sum([obj.total() for obj in objects])
-    data = ['Итого', value]
+    data = ['Total', value]
     ws.append(data)
 
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')

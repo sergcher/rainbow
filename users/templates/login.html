@@ -2,20 +2,20 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header text-center custom-modal-header">
-        <h5 class="modal-title w-100" style="font-size: 14px; color: #FFFFFF; font-family: Segoe UI,serif; font-weight: 400">АВТОРИЗАЦИЯ</h5>
+        <h5 class="modal-title w-100" style="font-size: 14px; color: #FFFFFF; font-family: Segoe UI,serif; font-weight: 400">SIGN IN</h5>
       </div>
       <form action="{% url 'users:login' %}" method="post">
         {% csrf_token %}
         <div class="modal-body">
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ login_form.username.id_for_label }}" class="form-label">Имя пользователя:</label>
+              <label for="{{ login_form.username.id_for_label }}" class="form-label">Username:</label>
               {{ login_form.username }}
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ login_form.password.id_for_label }}" class="form-label">Пароль:</label>
+              <label for="{{ login_form.password.id_for_label }}" class="form-label">Password:</label>
               {{ login_form.password }}
             </div>
           </div>
@@ -23,8 +23,8 @@
           <div class="row mb-3">
             <div class="col text-center">
               <div class="d-grid gap-3 d-md-flex justify-content-md-center">
-                <a class="btn-segoe" data-bs-dismiss="modal">Отменить</a>
-                <a class="btn-segoe-primary" id="saveButton">Войти</a>
+                <a class="btn-segoe" data-bs-dismiss="modal">Cancel</a>
+                <a class="btn-segoe-primary" id="saveButton">Log in</a>
                 <input type="submit" class="d-none" id="submitButton">
               </div>
             </div>

@@ -31,7 +31,7 @@ class TariffListView(TariffBaseView, TitleMixin, ListView):
     Use the 'tariff_list' variable in the template
     to access all Tariff objects"""
     template_name = 'tariff/index.html'
-    title = 'Тарифы'
+    title = 'Tariffs'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -50,14 +50,14 @@ def add_tariff(request):
                 headers={
                     'HX-Trigger': json.dumps({
                         "tariffListChanged": None,
-                        "showMessage": f"Тариф {tariff.name} добавлен."
+                        "showMessage": f"Tariff {tariff.name} added."
                     })
                 })
     else:
         tariff_form = TariffForm()
     return render(request, 'tariff/edit.html', {
         'tariff_form': tariff_form,
-        'title': 'СОЗДАНИЕ НОВОГО ТАРИФА',
+        'title': 'Creating a new tariff',
     })
 
 
@@ -72,7 +72,7 @@ def edit_tariff(request, pk):
                 headers={
                     'HX-Trigger': json.dumps({
                         "tariffListChanged": None,
-                        "showMessage": f"Тариф {tariff.name} изменен."
+                        "showMessage": f"Tariff {tariff.name} changed."
                     })
                 }
             )
@@ -81,7 +81,7 @@ def edit_tariff(request, pk):
     return render(request, 'tariff/edit.html', {
         'tariff_form': tariff_form,
         'tariff': tariff,
-        'title': 'РЕДАКТИРОВАНИЕ ТАРИФА',
+        'title': 'EDITING TARIFF',
     })
 
 
@@ -94,7 +94,7 @@ def remove_tariff(request, pk):
             headers={
                 'HX-Trigger': json.dumps({
                     "tariffListChanged": None,
-                    "showMessage": f"Тариф {tariff.name} удален."
+                    "showMessage": f"Tariff {tariff.name} deleted."
                 })
             }
         )
@@ -104,5 +104,5 @@ def remove_tariff(request, pk):
         'tariff_form': tariff_form,
         'tariff': tariff,
         'tariff_name': tariff.name,
-        'title': 'ПОДТВЕРЖДЕНИЕ ДЕЙСТВИЯ',
+        'title': 'ACTION CONFIRMATION',
     })

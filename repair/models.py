@@ -5,13 +5,13 @@ from tariff.models import Tariff
 
 
 class CapitalRepair(models.Model):
-    # Долг на начало месяца
+    # Debt at the beginning of the month
     debt = models.FloatField(null=True, blank=True)
-    # Пеня
+    # Fine
     fine = models.FloatField(null=True, blank=True)
-    # Оплачено
+    # Paid
     paid = models.FloatField(null=True, blank=True)
-    # Перерасчет
+    # Recalculation
     recalculation = models.FloatField(null=True, blank=True)
     serialNumber = models.ForeignKey(to=Apartment, on_delete=models.CASCADE)
 

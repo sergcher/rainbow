@@ -37,7 +37,7 @@ def edit_repair(request, pk):
                 headers={
                     'HX-Trigger': json.dumps({
                         "repairListChanged": None,
-                        "showMessage": f"Данные по квартире №{repair.serialNumber} изменены."
+                        "showMessage": f"Changes for apartment №{repair.serialNumber} has been saved."
                     })
                 }
             )
@@ -46,7 +46,7 @@ def edit_repair(request, pk):
     return render(request, 'repair/edit.html', {
         'repair_form': repair_form,
         'repair': repair,
-        'title': f'КАПИТАЛЬНЫЙ РЕМОНТ КВАРТИРА №{repair.serialNumber}',
+        'title': f'COMPLETE OVERHAUL APARTMENT №{repair.serialNumber}',
     })
 
 
@@ -58,7 +58,7 @@ class RepairBaseView(View):
 
 class RepairListView(TitleMixin, ListView):
     template_name = 'repair/index.html'
-    title = 'Капитальный ремонт'
+    title = 'Complete overhaul'
     queryset = CapitalRepair.objects.all()
     ordering = 'serialNumber'
 

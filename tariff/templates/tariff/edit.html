@@ -8,85 +8,85 @@
         <div class="modal-body">
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ tariff_form.name.id_for_label }}" class="form-label">Название:</label>
+              <label for="{{ tariff_form.name.id_for_label }}" class="form-label">Title:</label>
                 {% render_field tariff_form.name class="form-control" %}
                 <div class="invalid-feedback">{{ tariff_form.name.errors|first }}</div>
             </div>
             <div class="col">
-              <label for="{{ tariff_form.hot_water_odn.id_for_label }}" class="form-label">Горячая вода (ОДН):</label>
+              <label for="{{ tariff_form.hot_water_odn.id_for_label }}" class="form-label">Hot water (household needs):</label>
               {% render_field tariff_form.hot_water_odn class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.hot_water_odn.errors|first }}</div>
             </div>
             <div class="col">
-              <label for="{{ tariff_form.solid_waste.id_for_label }}" class="form-label">Обращение с ТКО:</label>
+              <label for="{{ tariff_form.solid_waste.id_for_label }}" class="form-label">Solid waste management:</label>
               {% render_field tariff_form.solid_waste class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.solid_waste.errors|first }}</div>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ tariff_form.maintenance.id_for_label }}" class="form-label">Содержание жилья:</label>
+              <label for="{{ tariff_form.maintenance.id_for_label }}" class="form-label">Maintenance fee:</label>
               {% render_field tariff_form.maintenance class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.maintenance.errors|first }}</div>
             </div>
             <div class="col">
-              <label for="{{ tariff_form.cold_water.id_for_label }}" class="form-label">Холодная вода:</label>
+              <label for="{{ tariff_form.cold_water.id_for_label }}" class="form-label">Cold water:</label>
               {% render_field tariff_form.cold_water class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.cold_water.errors|first }}</div>
             </div>
             <div class="col">
-              <label for="{{ tariff_form.electricity.id_for_label }}" class="form-label">Электроэнергия:</label>
+              <label for="{{ tariff_form.electricity.id_for_label }}" class="form-label">Electricity:</label>
               {% render_field tariff_form.electricity class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.electricity.errors|first }}</div>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ tariff_form.heating.id_for_label }}" class="form-label">Отопление (Гкал):</label>
+              <label for="{{ tariff_form.heating.id_for_label }}" class="form-label">Heating (Gcal):</label>
               {% render_field tariff_form.heating class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.heating.errors|first }}</div>
             </div>
             <div class="col">
-              <label for="{{ tariff_form.cold_water_odn.id_for_label }}" class="form-label">Холодная вода (ОДН):</label>
+              <label for="{{ tariff_form.cold_water_odn.id_for_label }}" class="form-label">Cold water (household needs):</label>
               {% render_field tariff_form.cold_water_odn class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.cold_water_odn.errors|first }}</div>
             </div>
             <div class="col">
-              <label for="{{ tariff_form.electricity_odn.id_for_label }}" class="form-label">Электроэнергия (ОДН):</label>
+              <label for="{{ tariff_form.electricity_odn.id_for_label }}" class="form-label">Electricity (household needs):</label>
               {% render_field tariff_form.electricity_odn class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.electricity_odn.errors|first }}</div>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ tariff_form.heating_rub.id_for_label }}" class="form-label">Отопление (Руб):</label>
+              <label for="{{ tariff_form.heating_rub.id_for_label }}" class="form-label">Heating ($):</label>
               {% render_field tariff_form.heating_rub class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.heating_rub.errors|first }}</div>
             </div>
             <div class="col">
-              <label for="{{ tariff_form.sewage.id_for_label }}" class="form-label">Канализация:</label>
+              <label for="{{ tariff_form.sewage.id_for_label }}" class="form-label">Sewerage:</label>
               {% render_field tariff_form.sewage class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.sewage.errors|first }}</div>
             </div>
             <div class="col">
-              <label for="{{ tariff_form.lift.id_for_label }}" class="form-label">Лифт:</label>
+              <label for="{{ tariff_form.lift.id_for_label }}" class="form-label">Elevator:</label>
               {% render_field tariff_form.lift class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.lift.errors|first }}</div>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label for="{{ tariff_form.hot_water.id_for_label }}" class="form-label">Горячая вода:</label>
+              <label for="{{ tariff_form.hot_water.id_for_label }}" class="form-label">Hot water:</label>
               {% render_field tariff_form.hot_water class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.hot_water.errors|first }}</div>
             </div>
             <div class="col">
-              <label for="{{ tariff_form.sewage_odn.id_for_label }}" class="form-label">Канализация (ОДН):</label>
+              <label for="{{ tariff_form.sewage_odn.id_for_label }}" class="form-label">Sewerage (household needs):</label>
               {% render_field tariff_form.sewage_odn class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.sewage_odn.errors|first }}</div>
             </div>
             <div class="col">
-              <label for="{{ tariff_form.capital_repair.id_for_label }}" class="form-label">Капитальный ремонт:</label>
+              <label for="{{ tariff_form.capital_repair.id_for_label }}" class="form-label">Complete overhaul:</label>
               {% render_field tariff_form.capital_repair class="form-control" %}
               <div class="invalid-feedback">{{ tariff_form.capital_repair.errors|first }}</div>
             </div>
@@ -95,8 +95,8 @@
           <div class="row mb-3">
             <div class="col text-center">
               <div class="d-grid gap-3 d-md-flex justify-content-md-center">
-                <a class="btn-segoe" data-bs-dismiss="modal">Отменить</a>
-                <a class="btn-segoe-primary" id="saveTariffButton">Сохранить</a>
+                <a class="btn-segoe" data-bs-dismiss="modal">Cancel</a>
+                <a class="btn-segoe-primary" id="saveTariffButton">Save</a>
                 <input type="submit" class="d-none" id="submitButtonSaveTariff">
               </div>
             </div>

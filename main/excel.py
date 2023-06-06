@@ -26,8 +26,8 @@ def export_client_bank():
             total += fee
             f.write(
                 f'{apartment_detail.personalAccount}|{apartment.owner.strip()}'
-                f'|Междуреченск, Шахтеров проспект, д. 55,{apartment.serialNumber}|11|'
-                f'Квартплата|{date_str}||{int(fee * 100)}' + '\n')
+                f'|New York, street, h. 55,{apartment.serialNumber}|11|'
+                f'payment|{date_str}||{int(fee * 100)}' + '\n')
         total = round(total, 2)
         f.write('=|106|' + str(int(total * 100)) + '\n')
 
@@ -43,10 +43,13 @@ def generate_excel_file(apartments):
     wb = Workbook()
     ws = wb.active
     headers = [
-         '№', 'ФИО', 'Кол. зарег.', 'Кол. прожив.', 'Общ. площ.', 'Содерж. помещения', 'Эл/эн ОДН', 'ОДН Холодная вода',
-         'ОДН Сточные воды', 'ОДН Горячая вода', 'Лифт', 'Содерж. помещ. итого', 'Обращение с ТКО', 'Электр.',
-         'Отопление Гкал', 'Отопление, руб.', 'Гор. вода', 'Хол. вода', 'Водоотв.', 'Итого коммунальные услуги',
-         'Начислено', 'Перерасчет', 'Сальдо Начало', 'Сальдо Конец', 'Оплачено', 'Пеня', 'Итого к оплате'
+         '№', 'Owner', 'Number of registered', 'Number of residents', 'Apartment size',
+         'Maintenance fee', 'Electricity household needs', 'Cold water household needs',
+         'Sewage household needs', 'Hot water household needs', 'Elevator',
+         'Maintenance fee total', 'Solid waste management', 'Electricity',
+         'Heating Gcal', 'Heating, $.', 'Hot water', 'Cold water', 'Canalization',
+         'Total Utilities', 'Current charges', 'Recalculating', 'Balance start',
+         'Balance end', 'Paid', 'Fine', 'Total amount due'
     ]
 
     ws.append(headers)
@@ -96,119 +99,119 @@ def export_excel_apartment_total_file():
     wb = Workbook()
     ws = wb.active
 
-    # Кол-во прописанных
+    # Number of registered
     value = ApartmentDetail.objects.aggregate(Sum('registredQt'))['registredQt__sum']
-    data = ['Кол-во прописанных', value]
+    data = ['Number of registered', value]
     ws.append(data)
 
-    # Кол-во проживающих
+    # Number of residents
     value = ApartmentDetail.objects.aggregate(Sum('livedQt'))['livedQt__sum']
-    data = ['Кол-во проживающих', value]
+    data = ['Number of residents', value]
     ws.append(data)
 
-    # Общая площадь
+    # Apartment size
     value = ApartmentDetail.objects.aggregate(Sum('totalArea'))['totalArea__sum']
-    data = ['Общая площадь', value]
+    data = ['Apartment size', value]
     ws.append(data)
 
     # Отапливаемая площадь
     value = ApartmentDetail.objects.aggregate(Sum('totalArea'))['totalArea__sum']
-    data = ['Отапливаемая площадь', value]
+    data = ['Heating area', value]
     ws.append(data)
 
-    # Электроэнергия
+    # Electricity
     value = ApartmentFee.objects.aggregate(Sum('electricity'))['electricity__sum']
-    data = ['Электроэнергия', value]
+    data = ['Electricity', value]
     ws.append(data)
 
-    # Отопление
+    # Heating
     value = ApartmentFee.objects.aggregate(Sum('heating_rub'))['heating_rub__sum']
-    data = ['Отопление', value]
+    data = ['Heating', value]
     ws.append(data)
 
-    # Горячая вода
+    # Hot water
     value = ApartmentFee.objects.aggregate(Sum('hot_water'))['hot_water__sum']
-    data = ['Горячая вода', value]
+    data = ['Hot water', value]
     ws.append(data)
 
-    # Холодная вода
+    # Cold water
     value = ApartmentFee.objects.aggregate(Sum('cold_water'))['cold_water__sum']
-    data = ['Холодная вода', value]
+    data = ['Cold water', value]
     ws.append(data)
 
-    # Водоотведение
+    # Canalization
     value = ApartmentFee.objects.aggregate(Sum('sewage'))['sewage__sum']
-    data = ['Водоотведение', value]
+    data = ['Canalization', value]
     ws.append(data)
 
-    # Обращение с ТКО
+    # Solid waste management
     value = ApartmentFee.objects.aggregate(Sum('solid_waste'))['solid_waste__sum']
-    data = ['Обращение с ТКО', value]
+    data = ['Solid waste management', value]
     ws.append(data)
 
-    # Содержание помещения
+    # Maintenance fee
     value = ApartmentFee.objects.aggregate(Sum('maintenance'))['maintenance__sum']
-    data = ['Содержание помещения', value]
+    data = ['Maintenance fee', value]
     ws.append(data)
 
-    # ОДН Эл/энергия
+    # household needs Эл/энергия
     value = ApartmentFee.objects.aggregate(Sum('electricity_odn'))['electricity_odn__sum']
-    data = ['ОДН Эл/энергия', value]
+    data = ['household needs Electricity', value]
     ws.append(data)
 
-    # ОДН сточные воды
+    # household needs sewage
     value = ApartmentFee.objects.aggregate(Sum('sewage_odn'))['sewage_odn__sum']
-    data = ['ОДН сточные воды', value]
+    data = ['household needs sewage', value]
     ws.append(data)
 
-    # ОДН холодная вода
+    # household needs Cold water
     value = ApartmentFee.objects.aggregate(Sum('cold_water_odn'))['cold_water_odn__sum']
-    data = ['ОДН холодная вода', value]
+    data = ['household needs cold water', value]
     ws.append(data)
 
-    # ОДН горячая вода
+    # household needs Hot water
     value = ApartmentFee.objects.aggregate(Sum('hot_water_odn'))['hot_water_odn__sum']
-    data = ['ОДН горячая вода', value]
+    data = ['household needs hot water', value]
     ws.append(data)
 
-    # Лифт
+    # Elevator
     value = ApartmentFee.objects.aggregate(Sum('lift'))['lift__sum']
-    data = ['Лифт', value]
+    data = ['Elevator', value]
     ws.append(data)
 
     # Сальдо конец
     value = ApartmentFee.objects.aggregate(Sum('balance_end'))['balance_end__sum']
-    data = ['Сальдо конец', value]
+    data = ['Balance end', value]
     ws.append(data)
 
-    # Оплачено
+    # Paid
     value = ApartmentFee.objects.aggregate(Sum('paid'))['paid__sum']
-    data = ['Оплачено', value]
+    data = ['Paid', value]
     ws.append(data)
 
     # Сальдо начало
     value = ApartmentFee.objects.aggregate(Sum('balance_start'))['balance_start__sum']
-    data = ['Сальдо начало', value]
+    data = ['Balance start', value]
     ws.append(data)
 
-    # Пеня
+    # Fine
     value = ApartmentFee.objects.aggregate(Sum('fine'))['fine__sum']
-    data = ['Пеня', value]
+    data = ['Fine', value]
     ws.append(data)
 
     # Перерасчет/недопоставка услуг
     value = ApartmentFee.objects.aggregate(Sum('recalculation'))['recalculation__sum']
-    data = ['Пеня', value]
+    data = ['Fine', value]
     ws.append(data)
 
-    # Начислено
+    # Current charges
     value = ApartmentFee.objects.aggregate(Sum('accrued_expenses'))['accrued_expenses__sum']
-    data = ['Начислено', value]
+    data = ['Current charges', value]
     ws.append(data)
 
     # Итого
     value = ApartmentFee.objects.aggregate(Sum('total'))['total__sum']
-    data = ['Итого', value]
+    data = ['Total', value]
     ws.append(data)
 
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')

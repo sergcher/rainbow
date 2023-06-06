@@ -12,10 +12,10 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-5">
-          <button class="edit-btn2" hx-get="{% url 'tariff:edit_tariff' pk=tariff.pk %}" hx-target="#dialog">Редактировать</button>
+          <button class="edit-btn2" hx-get="{% url 'tariff:edit_tariff' pk=tariff.pk %}" hx-target="#dialog">Edit</button>
         </div>
         <div class="col-5">
-          <button class="delete-btn2" hx-get="{% url 'tariff:tariff_delete' pk=tariff.pk %}" hx-target="#confirmation">Удалить</button>
+          <button class="delete-btn2" hx-get="{% url 'tariff:tariff_delete' pk=tariff.pk %}" hx-target="#confirmation">Delete</button>
         </div>
       </div>
     </div>

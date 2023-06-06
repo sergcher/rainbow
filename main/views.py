@@ -53,8 +53,7 @@ def update(request, id):
     prev_url = f"/update/{int(id) - 1}"
     next_url = f"/update/{int(id) + 1}"
 
-    shortOwnerName = Apartment.objects.get(serialNumber=id).owner.split()
-    shortOwnerName = f"{shortOwnerName[0]} {shortOwnerName[1][0]}.{shortOwnerName[2][0]}."
+    shortOwnerName = Apartment.objects.get(serialNumber=id).owner
 
     if request.method == 'POST':
         if 'details' in request.POST:
@@ -63,7 +62,7 @@ def update(request, id):
                 )
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Изменения сохранены!')
+                messages.success(request, 'Changes saved!')
                 return redirect(request.path_info)
             else:
                 pass
@@ -76,7 +75,7 @@ def update(request, id):
                 )
             if counterform.is_valid():
                 counterform.save()
-                messages.success(request, 'Изменения сохранены!')
+                messages.success(request, 'Changes saved!')
                 return redirect(request.path_info)
             else:
                 pass
@@ -87,7 +86,7 @@ def update(request, id):
                 )
             if chargeform.is_valid():
                 chargeform.save()
-                messages.success(request, 'Изменения сохранены!')
+                messages.success(request, 'Changes saved!')
                 return redirect(request.path_info)
             else:
                 pass
