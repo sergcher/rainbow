@@ -91,6 +91,17 @@
               <div class="invalid-feedback">{{ tariff_form.capital_repair.errors|first }}</div>
             </div>
           </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="{{ tariff_form.multiplying_factor.id_for_label }}" class="form-label">Размер повышающего коэффициента:</label>
+              {% render_field tariff_form.multiplying_factor class="form-control" %}
+              <div class="invalid-feedback">{{ tariff_form.multiplying_factor.errors|first }}</div>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+            </div>
+          </div>
             <br>
           <div class="row mb-3">
             <div class="col text-center">

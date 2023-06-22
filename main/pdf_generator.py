@@ -425,7 +425,10 @@ def generate_pdf():
 
         start, width = width + start, 54
         p.rect(start, h - offset - y_offset, width, height)
-        label = '-'
+        if tariff.multiplying_factor == 1:
+            label = '-'
+        else:
+            label = f'{tariff.multiplying_factor}'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -496,7 +499,10 @@ def generate_pdf():
 
         start, width = width + start, 54
         p.rect(start, h - offset - y_offset, width, height)
-        label = '-'
+        if tariff.multiplying_factor == 1:
+            label = '-'
+        else:
+            label = f'{tariff.multiplying_factor}'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)

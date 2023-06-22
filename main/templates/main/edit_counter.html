@@ -130,4 +130,14 @@
   document.getElementById("saveBlockTwoButton").addEventListener("click", function() {
     document.getElementById("submitButtonSaveBlockTwo").click();
   });
+
+  function updateWastewaterValue() {
+    var hotWaterValue = parseFloat(document.getElementById("id_hot_water_value").value);
+    var coldWaterValue = parseFloat(document.getElementById("id_cold_water_value").value);
+    var wastewaterValue = hotWaterValue + coldWaterValue;
+    document.getElementById('{{ counterform.wastewater_value.auto_id }}').value = wastewaterValue;
+  }
+
+  document.getElementById("id_hot_water_value").addEventListener("input", updateWastewaterValue);
+  document.getElementById("id_cold_water_value").addEventListener("input", updateWastewaterValue);
 </script>

@@ -93,6 +93,12 @@ class TariffForm(forms.ModelForm):
         initial=0
     )
 
+    multiplying_factor = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0
+    )
+
     class Meta:
         model = Tariff
         fields = "__all__"

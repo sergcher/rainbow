@@ -56,13 +56,13 @@ def calculate_fees():
         # Электричество
         electricity = round_float(counters.electricity_value * tariff.electricity)
         # Отопление Гкал
-        heating = round_float(tariff.heating)
+        heating = round_float(tariff.heating * total_area)
         # Отопление руб
         heating_rub = round_float(heating * tariff.heating_rub)
         # Горячая вода
-        hot_water = round_float(counters.hot_water_value * tariff.hot_water)
+        hot_water = round_float(counters.hot_water_value * tariff.hot_water * tariff.multiplying_factor)
         # Холодная вода
-        cold_water = round_float(counters.cold_water_value * tariff.cold_water)
+        cold_water = round_float(counters.cold_water_value * tariff.cold_water * tariff.multiplying_factor)
         # Водоотведение
         sewage = round_float(counters.wastewater_value * tariff.sewage)
         # Перерасчет

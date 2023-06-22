@@ -4,8 +4,10 @@ from datetime import datetime
 from django.db.models import Sum
 from django.http import HttpResponse
 from openpyxl import Workbook
+from openpyxl.utils import get_column_letter
+from openpyxl.styles import Alignment
 
-from main.models import Apartment, ApartmentDetail, ApartmentFee, Settings
+from main.models import Apartment, ApartmentDetail, ApartmentFee, Settings, ApartmentCounter
 
 
 def export_client_bank():
@@ -46,14 +48,27 @@ def generate_excel_file(apartments):
          '№', 'ФИО', 'Кол. зарег.', 'Кол. прожив.', 'Общ. площ.', 'Содерж. помещения', 'Эл/эн ОДН', 'ОДН Холодная вода',
          'ОДН Сточные воды', 'ОДН Горячая вода', 'Лифт', 'Содерж. помещ. итого', 'Обращение с ТКО', 'Электр.',
          'Отопление Гкал', 'Отопление, руб.', 'Гор. вода', 'Хол. вода', 'Водоотв.', 'Итого коммунальные услуги',
-         'Начислено', 'Перерасчет', 'Сальдо Начало', 'Сальдо Конец', 'Оплачено', 'Пеня', 'Итого к оплате'
+         'Начислено', 'Перерасчет', 'Сальдо Начало', 'Сальдо Конец', 'Оплачено', 'Пеня', 'Итого к оплате',
+         'Горячая вода показания предыдущие', 'Горячая вода показания текущие', 'Горячая вода потребление',
+         'Холодная вода показания предыдущие', 'Холодная вода показания текущие', 'Холодная вода потребление',
+         'Электричество показания предыдущие', 'Электричество показания текущие', 'Электричество вода потребление',
+         'Отведение сточных вод'
     ]
 
     ws.append(headers)
 
+    ws.row_dimensions[1].height = 30
+
+    column_widths = [10, 30, 12, 12, 12, 18, 12, 18, 18, 18, 12, 20, 12, 12, 12, 12, 12, 12, 20, 12,
+                     12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12]
+    for i, width in enumerate(column_widths):
+        col_letter = get_column_letter(i + 1)
+        ws.column_dimensions[col_letter].width = width
+
     for i, apartment in enumerate(apartments):
         apartment_detail = ApartmentDetail.objects.get(serialNumber=apartment.serialNumber)
         apartment_fee = ApartmentFee.objects.get(serialNumber=apartment.serialNumber)
+        apartment_counter = ApartmentCounter.objects.get(serialNumber=apartment.serialNumber)
         data = [
             apartment.serialNumber,
             apartment.owner,
@@ -81,9 +96,24 @@ def generate_excel_file(apartments):
             apartment_fee.balance_end,
             apartment_fee.paid,
             apartment_fee.fine,
-            apartment_fee.total
+            apartment_fee.total,
+            apartment_counter.hot_water_previous,
+            apartment_counter.hot_water_current,
+            apartment_counter.hot_water_value,
+            apartment_counter.cold_water_previous,
+            apartment_counter.cold_water_current,
+            apartment_counter.cold_water_value,
+            apartment_counter.electricity_previous,
+            apartment_counter.electricity_current,
+            apartment_counter.electricity_value,
+            apartment_counter.wastewater_value
         ]
         ws.append(data)
+
+    for column in range(1, len(headers) + 1):
+        col_letter = get_column_letter(column)
+        cell = ws["{}{}".format(col_letter, i + 2)]
+        cell.alignment = Alignment(wrap_text=True)
 
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename=apartment_fees.xlsx'

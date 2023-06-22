@@ -17,6 +17,7 @@ class Tariff(models.Model):
     lift = models.FloatField(null=True, blank=True)
     electricity_odn = models.FloatField(null=True, blank=True)
     capital_repair = models.FloatField(null=True, blank=True, default=0)
+    multiplying_factor = models.FloatField(null=True, blank=True, default=1)
 
     class Meta:
         verbose_name = 'tariff'
