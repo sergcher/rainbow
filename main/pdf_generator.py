@@ -28,8 +28,8 @@ def generate_pdf():
 
     #
     try:
-        pdfmetrics.registerFont(TTFont('Calibri', r'/home/rainbowmzk/rainbow/static/fonts/calibri.ttf'))
-        pdfmetrics.registerFont(TTFont('CalibriB', r'/home/rainbowmzk/rainbow/static/fonts/calibrib.ttf'))
+        pdfmetrics.registerFont(TTFont('Calibri', r'/home/serjmzk/rainbow/static/fonts/calibri.ttf'))
+        pdfmetrics.registerFont(TTFont('CalibriB', r'/home/serjmzk/rainbow/static/fonts/calibrib.ttf'))
     except Exception as e:
         pdfmetrics.registerFont(TTFont('Calibri', r'.\static\fonts\calibri.ttf'))
         pdfmetrics.registerFont(TTFont('CalibriB', r'.\static\fonts\calibrib.ttf'))
