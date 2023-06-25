@@ -229,7 +229,7 @@ class ApartmentChargeForm(forms.ModelForm):
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Перерасчёт подогрев воды:'
+        label='Перерасчёт отопление:'
     )
 
     recalculation_hot_water = forms.FloatField(
@@ -250,7 +250,7 @@ class ApartmentChargeForm(forms.ModelForm):
         widget=forms.TextInput(attrs=attrs),
         error_messages=error_messages,
         initial=0,
-        label='Перерасчёт канализация:'
+        label='Перерасчёт водоотведение:'
     )
 
     recalculation_solid_waste = forms.FloatField(
@@ -260,21 +260,30 @@ class ApartmentChargeForm(forms.ModelForm):
         label='Перерасчёт обращение с ТКО:'
     )
 
+    recalculation_maintenance = forms.FloatField(
+        widget=forms.TextInput(attrs=attrs),
+        error_messages=error_messages,
+        initial=0,
+        label='Перерасчёт содержание жилья:'
+    )
+
     class Meta:
         model = ApartmentCharge
         fields = ('money_deposited', 'fine', 'balance_start', 'recalculation_electricity',
                   'recalculation_heating_rub', 'recalculation_hot_water',
                   'recalculation_cold_water',
-                  'recalculation_sewage', 'recalculation_solid_waste', 'serialNumber')
+                  'recalculation_sewage', 'recalculation_solid_waste', 'recalculation_maintenance',
+                  'serialNumber')
         labels = {
             'money_deposited': 'Оплачено', 'fine': 'Пеня',
             'balance_start': 'Сальдо начало',
             'recalculation_electricity': 'Перерасчет электроэнергия',
-            'recalculation_heating_rub': 'Перерасчет подогрев воды',
+            'recalculation_heating_rub': 'Перерасчет отопление',
             'recalculation_hot_water': 'Перерасчет горячая вода',
             'recalculation_cold_water': 'Перерасчет холодная вода',
-            'recalculation_sewage': 'Перерасчет канализация',
+            'recalculation_sewage': 'Перерасчет водоотведение',
             'recalculation_solid_waste': 'Перерасчет обращение с ТКО',
+            'recalculation_maintenance': 'Перерасчёт содержание жилья',
         }
 
 

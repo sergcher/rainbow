@@ -44,6 +44,7 @@ class ApartmentCharge(models.Model):
     recalculation_cold_water = models.FloatField(null=True, blank=True)
     recalculation_sewage = models.FloatField(null=True, blank=True)
     recalculation_solid_waste = models.FloatField(null=True, blank=True)
+    recalculation_maintenance = models.FloatField(null=True, blank=True)
     balance_start = models.FloatField(null=True, blank=True)
     serialNumber = models.ForeignKey(to=Apartment, on_delete=models.CASCADE)
 

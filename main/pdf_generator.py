@@ -66,10 +66,10 @@ def generate_pdf():
                                             f"{apartment.owner}       № Лицевого счета {detail.personalAccount}")
         p.setFont("Calibri", 10)
         p.drawString(20, h - 87 - y_offset,
-                     'Адрес: 652873, обл.Кемеровская, г. Междуреченск, пр-кт Шахтеров, 55. кв. 1')
+                     f'Адрес: 652873, обл.Кемеровская, г. Междуреченск, пр-кт Шахтеров, 55. кв. 1   Единый лицевой счет ГИС ЖКХ {detail.account_number}')
         p.drawString(20, h - 99 - y_offset,
-                     f'Площадь общая/отапливаемая площадь/м2 {detail.totalArea}           '
-                     f'кол-во проживающих граждан      {detail.livedQt}')
+                     f'Площадь общая/м2 {detail.totalArea}           '
+                     f'кол-во проживающих/зарегистрированных граждан      {detail.livedQt}/{detail.registredQt}')
 
         # Drawing header row
         p.setFont("CalibriB", 10)
@@ -397,7 +397,10 @@ def generate_pdf():
 
         start, width = width + start, 40
         p.rect(start, h - offset - y_offset, width, height)
-        label = f'{apartment_counter.hot_water_value}'
+        if apartment_counter.hot_water_previous == 0 and apartment_counter.hot_water_current == 0:
+            label = f'{detail.livedQt}'
+        else:
+            label = f'{apartment_counter.hot_water_value}'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -471,7 +474,10 @@ def generate_pdf():
 
         start, width = width + start, 40
         p.rect(start, h - offset - y_offset, width, height)
-        label = f'{apartment_counter.cold_water_value}'
+        if apartment_counter.cold_water_previous == 0 and apartment_counter.cold_water_current == 0:
+            label = f'{detail.livedQt}'
+        else:
+            label = f'{apartment_counter.cold_water_value}'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)
@@ -545,7 +551,10 @@ def generate_pdf():
 
         start, width = width + start, 40
         p.rect(start, h - offset - y_offset, width, height)
-        label = f'{apartment_counter.wastewater_value}'
+        if apartment_counter.cold_water_previous == 0 and apartment_counter.cold_water_current == 0:
+            label = f'{detail.livedQt}'
+        else:
+            label = f'{apartment_counter.wastewater_value}'
         horizontal_space = start + horizontalAlign(len(label), width, fontSize)
         vertical_space = h - verticalAlign(height, 1, 1, offset) - y_offset
         p.drawString(horizontal_space, vertical_space, label)

@@ -59,16 +59,30 @@ def calculate_fees():
         heating = round_float(tariff.heating * total_area)
         # Отопление руб
         heating_rub = round_float(heating * tariff.heating_rub)
-        # Горячая вода
-        hot_water = round_float(counters.hot_water_value * tariff.hot_water * tariff.multiplying_factor)
-        # Холодная вода
-        cold_water = round_float(counters.cold_water_value * tariff.cold_water * tariff.multiplying_factor)
-        # Водоотведение
-        sewage = round_float(counters.wastewater_value * tariff.sewage)
+        # Горячая вода added condition when counters didn't establish
+        if counters.hot_water_previous == 0 and counters.hot_water_current == 0:
+            hot_water = round_float(apartment_detail.livedQt * tariff.hot_water * tariff.multiplying_factor)
+        else:
+            hot_water = round_float(counters.hot_water_value * tariff.hot_water * tariff.multiplying_factor)
+        # Холодная вода added condition when counters didn't establish
+        if counters.cold_water_previous == 0 and counters.cold_water_current == 0:
+            cold_water = round_float(apartment_detail.livedQt * tariff.cold_water * tariff.multiplying_factor)
+        else:
+            cold_water = round_float(counters.cold_water_value * tariff.cold_water * tariff.multiplying_factor)
+        # Водоотведение added condition when counters didn't establish
+        if counters.cold_water_previous == 0 and counters.cold_water_current == 0:
+            sewage = round_float(apartment_detail.livedQt * tariff.sewage)
+        else:
+            sewage = round_float(counters.wastewater_value * tariff.sewage)
         # Перерасчет
+        if charges.recalculation_maintenance is None:
+            re_maintenance = 0
+        else:
+            re_maintenance = charges.recalculation_maintenance
         recalculation = charges.recalculation_sewage + charges.recalculation_electricity + \
             charges.recalculation_cold_water + charges.recalculation_heating_rub + \
-            charges.recalculation_hot_water + charges.recalculation_solid_waste
+            charges.recalculation_hot_water + charges.recalculation_solid_waste + \
+            re_maintenance
         recalculation = round_float(recalculation)
         # Итого коммунальные услуги
         maintenance_total = round_float(
