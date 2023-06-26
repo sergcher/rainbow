@@ -63,10 +63,10 @@ def generate_pdf():
                      'БИК 043207612     р/сч 40703810626070100299    к/сч 30101810200000000612')
         p.rect(15, h - 102 - y_offset, 570, 36)
         p.drawString(20, h - 75 - y_offset, f"Плательщик/собственник помещения        "
-                                            f"{apartment.owner}       № Лицевого счета {detail.personalAccount}")
+                                            f"{apartment.owner}                         Единый лицевой счет ГИС ЖКХ {detail.account_number}")
         p.setFont("Calibri", 10)
         p.drawString(20, h - 87 - y_offset,
-                     f'Адрес: 652873, обл.Кемеровская, г. Междуреченск, пр-кт Шахтеров, 55. кв. 1   Единый лицевой счет ГИС ЖКХ {detail.account_number}')
+                     f'Адрес: 652873, обл.Кемеровская, г. Междуреченск, пр-кт Шахтеров, 55. кв. 1                  № Лицевого счета {detail.personalAccount}')
         p.drawString(20, h - 99 - y_offset,
                      f'Площадь общая/м2 {detail.totalArea}           '
                      f'кол-во проживающих/зарегистрированных граждан      {detail.livedQt}/{detail.registredQt}')

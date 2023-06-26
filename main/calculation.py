@@ -1,6 +1,7 @@
 from main.models import (Apartment, ApartmentCharge, ApartmentCounter,
                          ApartmentDetail, ApartmentFee)
 from tariff.models import Tariff
+import math
 
 
 def calculate_area(livedQt, totalArea):
@@ -23,8 +24,25 @@ def calculate_area(livedQt, totalArea):
     return [area_by_norm, area_over_norm]
 
 
-def round_float(value):
-    return round(value, 2)
+# def round_float(value):
+#     return round(value, 2)
+
+def round_float(value, round_precision=0.01):
+    delta = 0.001
+
+    if value > 0:
+        x = int(value / round_precision * 10 + delta) - int(value / round_precision) * 10
+    else:
+        x = int(value / round_precision * 10 - delta) - int(value / round_precision) * 10
+
+    result = round(value / round_precision) * round_precision
+
+    if x == 5:
+        result = int(value / round_precision + 1) * round_precision
+    if round_precision == 0.001:
+        return round(result, 3)
+    else:
+        return round(result, 2)
 
 
 def calculate_fees():
@@ -56,7 +74,7 @@ def calculate_fees():
         # Электричество
         electricity = round_float(counters.electricity_value * tariff.electricity)
         # Отопление Гкал
-        heating = round_float(tariff.heating * total_area)
+        heating = round_float(tariff.heating * total_area, round_precision=0.001)
         # Отопление руб
         heating_rub = round_float(heating * tariff.heating_rub)
         # Горячая вода added condition when counters didn't establish

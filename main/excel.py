@@ -228,7 +228,7 @@ def export_excel_apartment_total_file():
 
     # Перерасчет/недопоставка услуг
     value = ApartmentFee.objects.aggregate(Sum('recalculation'))['recalculation__sum']
-    data = ['Пеня', value]
+    data = ['Перерасчет/ недопоставка услуг', value]
     ws.append(data)
 
     # Начислено
