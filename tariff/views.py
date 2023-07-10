@@ -13,6 +13,8 @@ from tariff.forms import TariffForm
 from tariff.models import Tariff
 from users.forms import UserLoginForm
 
+from django.contrib.auth.decorators import login_required
+
 
 class TariffBaseView(View):
     model = Tariff
@@ -40,6 +42,7 @@ class TariffListView(TariffBaseView, TitleMixin, ListView):
         return context
 
 
+@login_required
 def add_tariff(request):
     if request.method == "POST":
         tariff_form = TariffForm(request.POST)
@@ -61,6 +64,7 @@ def add_tariff(request):
     })
 
 
+@login_required
 def edit_tariff(request, pk):
     tariff = get_object_or_404(Tariff, pk=pk)
     if request.method == "POST":
@@ -85,6 +89,7 @@ def edit_tariff(request, pk):
     })
 
 
+@login_required
 def remove_tariff(request, pk):
     tariff = get_object_or_404(Tariff, pk=pk)
     if request.method == "POST":

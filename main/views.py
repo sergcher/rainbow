@@ -11,8 +11,10 @@ from main.pdf_generator import generate_pdf
 from users.forms import UserLoginForm
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def settings(request):
     form = SettingsForm(instance=Settings.objects.get(id=1))
     if request.method == 'POST':
@@ -46,6 +48,7 @@ def index(request):
     return render(request, 'main/index.html', context)
 
 
+@login_required
 def update(request, id):
     form = ApartmentDetailForm(instance=ApartmentDetail.objects.get(serialNumber=id))
     counterform = ApartmentCounterForm(instance=ApartmentCounter.objects.get(serialNumber=id))

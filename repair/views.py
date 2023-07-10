@@ -16,6 +16,7 @@ from repair.forms import CapitalRepairForm
 from repair.models import CapitalRepair
 from repair.pdf_repair import repair_generate_pdf
 from users.forms import UserLoginForm
+from django.contrib.auth.decorators import login_required
 
 
 def repair_list(request):
@@ -26,6 +27,7 @@ def repair_list(request):
     })
 
 
+@login_required
 def edit_repair(request, pk):
     repair = get_object_or_404(CapitalRepair, pk=pk)
     if request.method == "POST":
